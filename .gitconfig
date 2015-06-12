@@ -1,0 +1,21 @@
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+[user]
+	name = Paulo Romeira
+	email = paulofromeira@gmail.com
+[diff]
+	tool = vimdiff
+[alias]
+	co = checkout
+	st = status
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	br = branch
+	ci = commit
+	pth = log --oneline --all --graph --decorate
+[core]
+    editor = vim
+[color]
+    status = always
