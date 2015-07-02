@@ -8,7 +8,8 @@ set backspace=indent,eol,start
 " Pathogen load.
 call pathogen#infect()
 " TO DO: comment
-syntax on
+" syntax on
+syntax enable
 filetype plugin indent on
 
 " Set line numbers.
@@ -30,3 +31,15 @@ nnoremap j gj
 " Ex command autocomplete options
 set wildmenu
 set wildmode=full
+
+set history=200
+
+" Set <C-p> and <C-n> to behave like up and down arrows (that can filter the
+" history)
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
+if has('gui_running')
+    set background=dark
+    colorscheme solarized
+endif
