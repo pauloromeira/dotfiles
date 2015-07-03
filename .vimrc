@@ -32,7 +32,7 @@ nnoremap j gj
 set wildmenu
 set wildmode=full
 
-set history=200
+set history=5000
 
 " Set <C-p> and <C-n> to behave like up and down arrows (that can filter the
 " history)
@@ -43,3 +43,6 @@ if has('gui_running')
     set background=dark
     colorscheme solarized
 endif
+
+" Alternate buffers without having to save
+set hidden

@@ -14,6 +14,11 @@ alias ty='$(which python3) ~/type.py'
 alias peekd='dirs -l +1'
 alias vi='vim'
 alias mvi='mvim'
+alias ip='ifconfig|grep broadcast'
+alias top='top -o cpu'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 
 ### Added by the Heroku Toolbelt
 PATH="/usr/local/heroku/bin:$PATH"
