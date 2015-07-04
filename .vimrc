@@ -2,11 +2,12 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+" Pathogen load.
+call pathogen#infect()
+
 " Allow backspacing over everything in insert mode.
 set backspace=indent,eol,start
 
-" Pathogen load.
-call pathogen#infect()
 " TO DO: comment
 " syntax on
 syntax enable
@@ -46,3 +47,10 @@ endif
 
 " Alternate buffers without having to save
 set hidden
+
+" Simplify shortcut for changing window
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
