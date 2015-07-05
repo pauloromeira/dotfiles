@@ -2,16 +2,31 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" Pathogen load.
-call pathogen#infect()
+" --- Vundle ---
+" set the runtime path to include Vundle and initialize
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Plugins
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'SirVer/ultisnips' 
+Plugin 'honza/vim-snippets'
+Plugin 'scrooloose/nerdtree'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-unimpaired'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+" --- // ---
 
 " Allow backspacing over everything in insert mode.
 set backspace=indent,eol,start
 
-" TO DO: comment
-" syntax on
 syntax enable
-filetype plugin indent on
 
 " Set line numbers.
 set number
@@ -54,3 +69,5 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+" UltiSnips
+let g:UltiSnipsEditSplit="vertical"
