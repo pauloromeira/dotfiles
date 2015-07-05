@@ -71,3 +71,4 @@ map <C-l> <C-w>l
 
 " UltiSnips
 let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsListSnippets="<S-tab>"
