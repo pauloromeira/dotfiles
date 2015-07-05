@@ -4,7 +4,7 @@
 	smudge = git media smudge %f
 [user]
 	name = Paulo Romeira
-	email = paulofromeira@gmail.com
+	email = paulo@pauloromeira.com
 [diff]
 	tool = vimdiff
 [alias]
