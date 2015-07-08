@@ -14,16 +14,23 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " {{{2 Def
-Plugin 'SirVer/ultisnips' 
+
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'bling/vim-airline'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'kien/ctrlp.vim'
+Plugin 'majutsushi/tagbar'
 Plugin 'pauloromeira/vim-snippets'
 Plugin 'scrooloose/nerdtree'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-fugitive'
-Plugin 'bling/vim-airline'
-Plugin 'majutsushi/tagbar'
+Plugin 'scrooloose/syntastic'
+Plugin 'SirVer/ultisnips' 
 Plugin 'tmhedberg/SimpylFold'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+" Plugin 'Valloric/YouCompleteMe'
 
 " {{{2 End
 call vundle#end() " required
@@ -32,6 +39,7 @@ filetype plugin indent on " required
 " {{{2 Config
 " UltiSnips
 let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsListSnippets="<S-tab>"
 let g:UltiSnipsSnippetsDir="~/.vim/custom-snippets/UltiSnips"
 set rtp+=~/.vim/custom-snippets " Include custom snippets directory in runtime path
@@ -43,10 +51,10 @@ nmap <F8> :TagbarToggle<CR>
 nmap <F7> :NERDTreeToggle<CR>
 " SimplyFold
 if has('autocmd')
-    autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
-    autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+    au BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+    au BufWinLeave *.py setlocal foldexpr< foldmethod<
     " Starts unfolded
-    autocmd BufRead * normal zR
+    au BufRead * normal zR
 endif
 " Solarized Colorscheme
 if has('gui_running') " Only GUI
@@ -58,7 +66,15 @@ endif
 
 syntax enable
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode.
-set number " Set line numbers.
+" Set lines numbering
+set number
+set relativenumber
+nnoremap <silent><Leader>n :set relativenumber!<cr>
+if has('autocmd')
+    au InsertEnter * :set norelativenumber
+    au InsertLeave * :set relativenumber
+endif
+
 set nrformats= " Treat numbers with leading zeros as decimals instead of octals (<C-a> and <C-x>).
 set history=5000
 set hidden " Alternate buffers without having to save
