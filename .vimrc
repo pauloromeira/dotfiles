@@ -15,7 +15,7 @@ Plugin 'gmarik/Vundle.vim'
 
 " {{{2 Def
 Plugin 'SirVer/ultisnips' 
-Plugin 'honza/vim-snippets'
+Plugin 'pauloromeira/vim-snippets'
 Plugin 'scrooloose/nerdtree'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-commentary'
@@ -33,6 +33,8 @@ filetype plugin indent on " required
 " UltiSnips
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsListSnippets="<S-tab>"
+let g:UltiSnipsSnippetsDir="~/.vim/vim-custom-snippets/UltiSnips"
+exe 'set rtp+=' . expand('~/.vim/vim-custom-snippets')
 " Airline
 set laststatus=2
 " Tagbar
