@@ -45,8 +45,13 @@ nmap <F7> :NERDTreeToggle<CR>
 if has('autocmd')
     autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
     autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
-    " Start unfolded
+    " Starts unfolded
     autocmd BufRead * normal zR
+endif
+" Solarized Colorscheme
+if has('gui_running') " Only GUI
+    set background=dark
+    colorscheme solarized
 endif
 
 " {{{1 Preferences
@@ -57,11 +62,6 @@ set number " Set line numbers.
 set nrformats= " Treat numbers with leading zeros as decimals instead of octals (<C-a> and <C-x>).
 set history=5000
 set hidden " Alternate buffers without having to save
-" Set colorscheme only for gui
-if has('gui_running')
-    set background=dark
-    colorscheme solarized
-endif
 " Python space/tab rules.
 set tabstop =4
 set softtabstop =4
