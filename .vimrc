@@ -33,8 +33,8 @@ filetype plugin indent on " required
 " UltiSnips
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsListSnippets="<S-tab>"
-let g:UltiSnipsSnippetsDir="~/.vim/vim-custom-snippets/UltiSnips"
-set rtp+=~/.vim/vim-custom-snippets " Include custom snippets directory in runtime path
+let g:UltiSnipsSnippetsDir="~/.vim/custom-snippets/UltiSnips"
+set rtp+=~/.vim/custom-snippets " Include custom snippets directory in runtime path
 " Airline
 set laststatus=2
 " Tagbar
