@@ -1,69 +1,26 @@
-" vim: foldmethod=marker
 " Use Vim settings, rather than Vi settings.
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 let mapleader="\<Space>"
+" vim: foldmethod=marker
 
-" {{{1 Plugins
 
-" {{{2 Init
-" Set the runtime path to include Vundle and initialize
+" Plugins {{{1 "
+
+" Initialize {{{2 "
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" Let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'gmarik/Vundle.vim' " Let Vundle manage Vundle - required
 
-" {{{2 Def & Config
-
+" Definitions {{{2 "
 Plugin 'altercation/vim-colors-solarized'
-if has('gui_running') " Only for GUI
-    set background=dark
-    colorscheme solarized
-endif
-
 Plugin 'bling/vim-airline'
-set laststatus=2
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-
 Plugin 'majutsushi/tagbar'
-nmap <F8> :TagbarToggle<CR>
-
 Plugin 'scrooloose/nerdtree'
-nmap <F7> :NERDTreeToggle<CR>
-
 Plugin 'SirVer/ultisnips'
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
-let g:UltiSnipsListSnippets="<C-l>"
-let g:UltiSnipsSnippetsDir="~/.vim/custom-snippets/UltiSnips"
-set rtp+=~/.vim/custom-snippets " Include custom snippets directory in runtime path
-
 Plugin 'tmhedberg/SimpylFold'
-if has('autocmd')
-    au BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
-    au BufWinLeave *.py setlocal foldexpr< foldmethod<
-endif
-
 Plugin 'scrooloose/syntastic'
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-
-Plugin 'Valloric/YouCompleteMe'
-let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
-let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
-let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
-let g:ycm_complete_in_comments = 1 " Completion in comments
-let g:ycm_complete_in_strings = 1 " Completion in string
-
 Plugin 'easymotion/vim-easymotion'
 Plugin 'kien/ctrlp.vim'
 Plugin 'pauloromeira/vim-snippets'
@@ -75,9 +32,11 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-rsi'
 Plugin 'vim-scripts/IndexedSearch'
 Plugin 'michaeljsmith/vim-indent-object' " ii / ai
+if !has('gui_running')
+    Plugin 'Valloric/YouCompleteMe'
+endif
 
-
-" To test
+" To Test {{{2 "
 " Plugin 'mileszs/ack.vim' " ou 'rking/ag.vim' 
 " Plugin 'vim-scripts/LustyExplorer'
 " Automatically find root project directory
@@ -88,12 +47,55 @@ Plugin 'michaeljsmith/vim-indent-object' " ii / ai
 " Plug 'vim-scripts/SmartCase'
 " Plug 'vim-scripts/gitignore'
 
-" {{{2 End
+" End {{{2 "
 call vundle#end() " required
 filetype plugin indent on " required
 
-" {{{1 Preferences
+" Settings {{{1 "
+" (  Solarized  )
+if has('gui_running') " Only for GUI
+    set background=dark
+    colorscheme solarized
+endif
+" (  Airline  )
+set laststatus=2
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+" (  Tagbar  )
+nmap <F8> :TagbarToggle<CR>
+" (  NERDTree  )
+nmap <F7> :NERDTreeToggle<CR>
+" (  UltiSnipets  )
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+let g:UltiSnipsListSnippets="<C-l>"
+let g:UltiSnipsSnippetsDir="~/.vim/custom-snippets/UltiSnips"
+set rtp+=~/.vim/custom-snippets " Include custom snippets directory in runtime path
+" (  SimpylFold  )
+if has('autocmd')
+    au BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+    au BufWinLeave *.py setlocal foldexpr< foldmethod<
+endif
+" (  Syntastic  )
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" (  YouCompleteMe  )
+if !has('gui_running')
+    let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
+    let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
+    let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
+    let g:ycm_complete_in_comments = 1 " Completion in comments
+    let g:ycm_complete_in_strings = 1 " Completion in string
+endif
 
+" {{{1 Preferences
 syntax enable
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode.
 " Set lines numbering
@@ -132,6 +134,7 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+map <D-S-]> gt
 " Change <C-p> and <C-n> behave to filter the history
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
