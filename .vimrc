@@ -5,15 +5,15 @@ let mapleader="\<Space>"
 " vim: foldmethod=marker
 
 
-" Plugins {{{1 "
+" Plugins  "
 
-" Initialize {{{2 "
+" Initialize  "
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim' " Let Vundle manage Vundle - required
 
-" Definitions {{{2 "
+" Definitions  "
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
 Plugin 'majutsushi/tagbar'
@@ -23,7 +23,7 @@ Plugin 'tmhedberg/SimpylFold'
 Plugin 'scrooloose/syntastic'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'kien/ctrlp.vim'
-Plugin 'pauloromeira/vim-snippets'
+Plugin 'honza/vim-snippets'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
@@ -32,12 +32,14 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-rsi'
 Plugin 'vim-scripts/IndexedSearch'
 Plugin 'michaeljsmith/vim-indent-object' " ii / ai
+Plugin 'jeetsukumaran/vim-indentwise'
+
 if !has('gui_running')
     Plugin 'Valloric/YouCompleteMe'
 endif
 
-" To Test {{{2 "
-" Plugin 'mileszs/ack.vim' " ou 'rking/ag.vim' 
+" To Test  "
+" Plugin 'mileszs/ack.vim' " ou 'rking/ag.vim'
 " Plugin 'vim-scripts/LustyExplorer'
 " Automatically find root project directory
 " Plugin 'airblade/vim-rooter'
@@ -46,21 +48,23 @@ endif
 " " Better search tools
 " Plug 'vim-scripts/SmartCase'
 " Plug 'vim-scripts/gitignore'
+" Plugin 'nathanaelkane/vim-indent-guides'
+" Plugin 'vim-scripts/repeatable-motions.vim'
 
-" End {{{2 "
+" End  "
 call vundle#end() " required
 filetype plugin indent on " required
 
-" Settings {{{1 "
+" Settings  "
 " (  Solarized  )
-if has('gui_running') " Only for GUI
-    set background=dark
-    colorscheme solarized
-endif
+set background=dark
+colorscheme solarized
 " (  Airline  )
 set laststatus=2
+let g:airline_powerline_fonts=1
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+
 " (  Tagbar  )
 nmap <F8> :TagbarToggle<CR>
 " (  NERDTree  )
@@ -93,9 +97,11 @@ if !has('gui_running')
     let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
     let g:ycm_complete_in_comments = 1 " Completion in comments
     let g:ycm_complete_in_strings = 1 " Completion in string
+    let g:ycm_add_preview_to_completeopt = 1
+    let g:ycm_autoclose_preview_window_after_completion = 1
 endif
 
-" {{{1 Preferences
+" Preferences  "
 syntax enable
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode.
 " Set lines numbering
@@ -123,18 +129,18 @@ if has('autocmd')
     " au WinLeave * :set nocursorline nocursorcolumn
     " Starts unfolded
     au BufRead,BufNewFile * normal zR
+    au BufWritePost .vimrc source $MYVIMRC " reload vimrc after change
 endif
 " Ex command autocomplete options
 set wildmenu
 set wildmode=full
 
-" {{{1  Mappings
+" Mappings  "
 " Simplify shortcut for changing window
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-map <D-S-]> gt
 " Change <C-p> and <C-n> behave to filter the history
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
@@ -154,3 +160,8 @@ vmap <Leader>d "+d
 vmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>y "+y
+nmap <Leader>v :tabedit $MYVIMRC<CR>
+" Also possible to use 'n<Tab>' to go to a specific tab
+nmap <Tab> gt
+nmap <S-Tab> gT
+nmap <C-d> :q<CR>
