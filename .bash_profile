@@ -3,7 +3,7 @@ export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/bin/virtualenvwrapper_lazy.sh
 
 # Aliases
-alias ll='ls -lG'
+alias ll='ls -lGh'
 alias la='ll -A'
 alias tree='tree -C'
 alias rm='rm -i'
