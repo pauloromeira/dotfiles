@@ -110,7 +110,7 @@ set backspace=indent,eol,start " Allow backspacing over everything in insert mod
 set number relativenumber
 set nrformats= " Treat numbers with leading zeros as decimals instead of octals (<C-a> and <C-x>).
 set history=5000
-set hidden " Alternate buffers without having to save
+" set hidden " Alternate buffers without having to save
 " Python space/tab rules.
 set tabstop =4
 set softtabstop =4
@@ -161,8 +161,13 @@ vmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>y "+y
 
-nmap <Leader>v :tabedit $MYVIMRC<CR>
-nmap <silent> <C-d> :q<CR>
+nmap <Leader>q :confirm q<CR>
+nmap <Leader><S-q> :confirm qall<CR>
+nmap <Leader>s :update<CR>
+nmap <Leader><S-s> :wall<CR>
+nmap <Leader>ev :tabedit $MYVIMRC<CR>
+nmap <Leader>eb :tabedit ~/.bash_profile<CR>
+
 " Tab mapping
 " Also possible to use 'n<Tab>' to go to a specific tab
 nnoremap <Tab> gt
