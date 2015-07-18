@@ -110,7 +110,7 @@ set number relativenumber
 set nrformats= " Treat numbers with leading zeros as decimals instead of octals (<C-a> and <C-x>).
 set history=5000
 set hidden " Alternate buffers without having to save
-" " Python space/tab rules.
+" Python space/tab rules.
 set tabstop =4
 set softtabstop =4
 set shiftwidth =4
@@ -131,6 +131,8 @@ if has('autocmd')
     " Starts unfolded
     au BufRead,BufNewFile * normal zR
     au BufWritePost .vimrc source $MYVIMRC " reload vimrc after change
+    " This beauty remembers where you were the last time you edited the file, and returns to the same position.
+    au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 endif
 " Ex command autocomplete options
 set wildmenu
@@ -149,7 +151,7 @@ cnoremap <C-n> <Down>
 nnoremap k gk
 nnoremap j gj
 " Leader cmds
-nnoremap <Leader>n :set relativenumber!<CR>
+nnoremap <silent> <Leader>n :set relativenumber!<CR>
 " Copy & paste to system clipboard
 nmap <Leader>d "+d
 nmap <Leader>P "+P
@@ -160,10 +162,13 @@ vmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>y "+y
 nmap <Leader>v :tabedit $MYVIMRC<CR>
+" Buffer delete
+nmap <silent> <C-d> :q<CR>
 " Also possible to use 'n<Tab>' to go to a specific tab
-nmap <Tab> gt
-nmap <S-Tab> gT
-nmap <C-d> :q<CR>
+nnoremap <Tab> gt
+nnoremap <S-Tab> gT
+nmap <Leader><Tab> :tabnew<CR>
+nmap <Leader><S-Tab> :tabclose<CR>
+" Change the jump-motions, since <Tab> affects the ctrl-i
 nnoremap <C-p> <C-o>
-" <Tab> affects the ctrl-i :(
 nnoremap <C-n> <C-i>
