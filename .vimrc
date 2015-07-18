@@ -100,7 +100,8 @@ if !has('gui_running')
     let g:ycm_add_preview_to_completeopt = 1
     let g:ycm_autoclose_preview_window_after_completion = 1
 endif
-
+" (  CtrlP  )
+let g:ctrlp_map = '<C-o>'
 " Preferences  "
 syntax enable
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode.
@@ -149,8 +150,6 @@ nnoremap k gk
 nnoremap j gj
 " Leader cmds
 nnoremap <Leader>n :set relativenumber!<CR>
-nnoremap <Leader>o :CtrlP<CR>
-nnoremap <Leader>i :CtrlPBuffer<CR>
 " Copy & paste to system clipboard
 nmap <Leader>d "+d
 nmap <Leader>P "+P
@@ -165,3 +164,6 @@ nmap <Leader>v :tabedit $MYVIMRC<CR>
 nmap <Tab> gt
 nmap <S-Tab> gT
 nmap <C-d> :q<CR>
+nnoremap <C-p> <C-o>
+" <Tab> affects the ctrl-i :(
+nnoremap <C-n> <C-i>
