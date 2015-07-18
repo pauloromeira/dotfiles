@@ -102,6 +102,7 @@ if !has('gui_running')
 endif
 " (  CtrlP  )
 let g:ctrlp_map = '<C-o>'
+
 " Preferences  "
 syntax enable
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode.
@@ -150,8 +151,6 @@ cnoremap <C-n> <Down>
 " Go up and down one position in a wrapped line.
 nnoremap k gk
 nnoremap j gj
-" Leader cmds
-nnoremap <silent> <Leader>n :set relativenumber!<CR>
 " Copy & paste to system clipboard
 nmap <Leader>d "+d
 nmap <Leader>P "+P
@@ -161,14 +160,19 @@ vmap <Leader>d "+d
 vmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>y "+y
+
 nmap <Leader>v :tabedit $MYVIMRC<CR>
-" Buffer delete
 nmap <silent> <C-d> :q<CR>
+" Tab mapping
 " Also possible to use 'n<Tab>' to go to a specific tab
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
-nmap <Leader><Tab> :tabnew<CR>
-nmap <Leader><S-Tab> :tabclose<CR>
+nmap <silent> [<Tab> :tabm -1<CR>
+nmap <silent> ]<Tab> :tabm +1<CR>
+nmap <silent> [<S-Tab> :tabm 0<CR>
+nmap <silent> ]<S-Tab> :tabm<CR>
+nmap <silent> y<Tab> :tabnew<CR>
+nmap <silent> d<Tab> :tabclose<CR>
 " Change the jump-motions, since <Tab> affects the ctrl-i
 nnoremap <C-p> <C-o>
 nnoremap <C-n> <C-i>
