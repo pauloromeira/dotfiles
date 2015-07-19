@@ -40,6 +40,8 @@ endif
 
 " To Test  "
 " Plugin 'mileszs/ack.vim' " ou 'rking/ag.vim'
+" Plugin 'airblade/vim-gitgutter'
+" Plugin 'terryma/vim-multiple-cursors'
 " Plugin 'vim-scripts/LustyExplorer'
 " Automatically find root project directory
 " Plugin 'airblade/vim-rooter'
@@ -50,6 +52,7 @@ endif
 " Plug 'vim-scripts/gitignore'
 " Plugin 'nathanaelkane/vim-indent-guides'
 " Plugin 'vim-scripts/repeatable-motions.vim'
+" Plugin 'keyboard_cat.vim' " Pretend you can type really fast.
 
 " End  "
 call vundle#end() " required
@@ -82,14 +85,6 @@ if has('autocmd')
     au BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
     au BufWinLeave *.py setlocal foldexpr< foldmethod<
 endif
-" (  Syntastic  )
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
 " (  YouCompleteMe  )
 if !has('gui_running')
     let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
@@ -100,8 +95,6 @@ if !has('gui_running')
     let g:ycm_add_preview_to_completeopt = 1
     let g:ycm_autoclose_preview_window_after_completion = 1
 endif
-" (  CtrlP  )
-let g:ctrlp_map = '<C-o>'
 
 " Preferences  "
 syntax enable
@@ -110,7 +103,7 @@ set backspace=indent,eol,start " Allow backspacing over everything in insert mod
 set number relativenumber
 set nrformats= " Treat numbers with leading zeros as decimals instead of octals (<C-a> and <C-x>).
 set history=5000
-" set hidden " Alternate buffers without having to save
+set hidden " Alternate buffers without having to save
 " Python space/tab rules.
 set tabstop =4
 set softtabstop =4
@@ -127,8 +120,8 @@ if has('autocmd')
     " Enable Spell Checking for markdown files
     au BufRead,BufNewFile *.md setlocal spell
     au BufRead,BufNewFile *.markdown setlocal spell
-    " au WinEnter * :set cursorline cursorcolumn
-    " au WinLeave * :set nocursorline nocursorcolumn
+    au WinEnter * :set cursorline
+    au WinLeave * :set nocursorline
     " Starts unfolded
     au BufRead,BufNewFile * normal zR
     au BufWritePost .vimrc source $MYVIMRC " reload vimrc after change
@@ -168,16 +161,29 @@ nmap <Leader><S-s> :wall<CR>
 nmap <Leader>ev :tabedit $MYVIMRC<CR>
 nmap <Leader>eb :tabedit ~/.bash_profile<CR>
 
-" Tab mapping
-" Also possible to use 'n<Tab>' to go to a specific tab
-nnoremap <Tab> gt
-nnoremap <S-Tab> gT
-nmap <silent> [<Tab> :tabm -1<CR>
-nmap <silent> ]<Tab> :tabm +1<CR>
-nmap <silent> [<S-Tab> :tabm 0<CR>
-nmap <silent> ]<S-Tab> :tabm<CR>
-nmap <silent> y<Tab> :tabnew<CR>
+" Tab mappings
+" Go to tabs
+nmap [<Tab> gT
+nmap ]<Tab> gt
+nmap <silent> [<S-tab> :tabfirst<CR>
+nmap <silent> ]<S-tab> :tablast<CR>
+nmap 1<Tab> 1gt
+nmap 2<Tab> 2gt
+nmap 3<Tab> 3gt
+nmap 4<Tab> 4gt
+nmap 5<Tab> 5gt
+nmap 6<Tab> 6gt
+nmap 7<Tab> 7gt
+nmap 8<Tab> 8gt
+nmap 9<Tab> 9gt
+" Shift tabs
+nmap <silent> <<Tab> :tabm -1<CR>
+nmap <silent> ><Tab> :tabm +1<CR>
+nmap <silent> <<S-Tab> :tabm 0<CR>
+nmap <silent> ><S-Tab> :tabm<CR>
+" (C)reate (n)ew
+nmap <silent> <C-n> :tabnew<CR>
+" (d)elete <tab>
 nmap <silent> d<Tab> :tabclose<CR>
-" Change the jump-motions, since <Tab> affects the ctrl-i
-nnoremap <C-p> <C-o>
-nnoremap <C-n> <C-i>
+" (t)his <tab> only
+nmap <silent> t<Tab> :tabonly<CR>
