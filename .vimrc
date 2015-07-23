@@ -5,15 +5,15 @@ let mapleader="\<Space>"
 " vim: foldmethod=marker
 
 
-" Plugins  "
+" Plugins "
 
-" Initialize  "
+" Initialize "
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim' " Let Vundle manage Vundle - required
 
-" Definitions  "
+" Definitions "
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
 Plugin 'majutsushi/tagbar'
@@ -38,7 +38,7 @@ if !has('gui_running')
     Plugin 'Valloric/YouCompleteMe'
 endif
 
-" To Test  "
+" To Test "
 " Plugin 'mileszs/ack.vim' " ou 'rking/ag.vim'
 " Plugin 'airblade/vim-gitgutter'
 " Plugin 'terryma/vim-multiple-cursors'
@@ -54,11 +54,11 @@ endif
 " Plugin 'vim-scripts/repeatable-motions.vim'
 " Plugin 'keyboard_cat.vim' " Pretend you can type really fast.
 
-" End  "
+" End "
 call vundle#end() " required
 filetype plugin indent on " required
 
-" Settings  "
+" Settings "
 " (  Solarized  )
 set background=dark
 colorscheme solarized
@@ -96,7 +96,17 @@ if !has('gui_running')
     let g:ycm_autoclose_preview_window_after_completion = 1
 endif
 
-" Preferences  "
+" Functions "
+function! CircularShift(pos, shift, first_pos, last_pos)
+    let total_pos = a:last_pos - a:first_pos + 1
+    let new_pos = (a:pos + a:shift) % total_pos
+    if new_pos < a:first_pos
+        let new_pos += total_pos
+    endif
+    return new_pos
+endfunction
+
+" Preferences "
 syntax enable
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode.
 " Set lines numbering
@@ -132,58 +142,63 @@ endif
 set wildmenu
 set wildmode=full
 
-" Mappings  "
+" Mappings "
 " Simplify shortcut for changing window
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
 " Change <C-p> and <C-n> behave to filter the history
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
+" Expands %% to the current file path
+cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " Go up and down one position in a wrapped line.
 nnoremap k gk
 nnoremap j gj
-" Copy & paste to system clipboard
-nmap <Leader>d "+d
-nmap <Leader>P "+P
-nmap <Leader>p "+p
-nmap <Leader>y "+y
-vmap <Leader>d "+d
-vmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>y "+y
 
-nmap <Leader>q :confirm q<CR>
-nmap <Leader><S-q> :confirm qall<CR>
-nmap <Leader>s :update<CR>
-nmap <Leader><S-s> :wall<CR>
-nmap <Leader>ev :tabedit $MYVIMRC<CR>
-nmap <Leader>eb :tabedit ~/.bash_profile<CR>
+nnoremap <Leader>d "+d
+nnoremap <Leader>P "+P
+nnoremap <Leader>p "+p
+nnoremap <Leader>y "+y
+vnoremap <Leader>d "+d
+vnoremap <Leader>P "+P
+vnoremap <Leader>p "+p
+vnoremap <Leader>y "+y
+
+nnoremap <Leader>q :confirm q<CR>
+nnoremap <Leader><S-q> :confirm qall<CR>
+nnoremap <Leader>s :update<CR>
+nnoremap <Leader><S-s> :wall<CR>
+nnoremap <Leader>ev :tabedit $MYVIMRC<CR>
+nnoremap <Leader>eb :tabedit ~/.bash_profile<CR>
+nnoremap <Leader>ec :tabedit ~/Estudos/checkpoints.txt<CR>
 
 " Tab mappings
 " Go to tabs
-nmap [<Tab> gT
-nmap ]<Tab> gt
-nmap <silent> [<S-tab> :tabfirst<CR>
-nmap <silent> ]<S-tab> :tablast<CR>
-nmap 1<Tab> 1gt
-nmap 2<Tab> 2gt
-nmap 3<Tab> 3gt
-nmap 4<Tab> 4gt
-nmap 5<Tab> 5gt
-nmap 6<Tab> 6gt
-nmap 7<Tab> 7gt
-nmap 8<Tab> 8gt
-nmap 9<Tab> 9gt
+nnoremap <silent> [<Tab> :<C-U>exe "tabnext"
+            \ CircularShift(tabpagenr(), -v:count1, 1, tabpagenr('$'))<CR>
+nnoremap <silent> ]<Tab> :<C-U>exe "tabnext"
+            \ CircularShift(tabpagenr(), v:count1, 1, tabpagenr('$'))<CR>
+nnoremap <silent> [<S-tab> :tabfirst<CR>
+nnoremap <silent> ]<S-tab> :tablast<CR>
+nnoremap 1<Tab> 1gt
+nnoremap 2<Tab> 2gt
+nnoremap 3<Tab> 3gt
+nnoremap 4<Tab> 4gt
+nnoremap 5<Tab> 5gt
+nnoremap 6<Tab> 6gt
+nnoremap 7<Tab> 7gt
+nnoremap 8<Tab> 8gt
+nnoremap 9<Tab> 9gt
 " Shift tabs
-nmap <silent> <<Tab> :tabm -1<CR>
-nmap <silent> ><Tab> :tabm +1<CR>
-nmap <silent> <<S-Tab> :tabm 0<CR>
-nmap <silent> ><S-Tab> :tabm<CR>
+nnoremap <silent> <<Tab> :<C-U>exe "tabm -".v:count1<CR>
+nnoremap <silent> ><Tab> :<C-U>exe "tabm +".v:count1<CR>
+nnoremap <silent> <<S-Tab> :tabm 0<CR>
+nnoremap <silent> ><S-Tab> :tabm<CR>
 " (C)reate (n)ew
-nmap <silent> <C-n> :tabnew<CR>
+nnoremap <silent> <C-n> :tabnew<CR>
 " (d)elete <tab>
-nmap <silent> d<Tab> :tabclose<CR>
+nnoremap <silent> d<Tab> :tabclose<CR>
 " (t)his <tab> only
-nmap <silent> t<Tab> :tabonly<CR>
+nnoremap <silent> t<Tab> :tabonly<CR>
