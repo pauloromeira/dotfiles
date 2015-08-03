@@ -1,14 +1,15 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                  Initialize                                  "
+" .vimrc of Paulo Romeira                                                 {{{1 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" vim: set foldmethod=marker foldlevel=0:
 set nocompatible " Use Vim settings, rather than Vi settings.
-let mapleader="\<Space>"
+let mapleader=" "
 filetype off
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                   Plugins                                    "
+"                                   Plugins                               {{{1 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 let firstrun=0
 if !filereadable(expand("~/.vim/autoload/plug.vim"))
   let firstrun=1
@@ -68,18 +69,8 @@ if firstrun == 1
   :PlugInstall
 endif
 
-" Functions "
-function! CircularShift(pos, shift, first_pos, last_pos)
-  let total_pos = a:last_pos - a:first_pos + 1
-  let new_pos = (a:pos + a:shift) % total_pos
-  if new_pos < a:first_pos
-    let new_pos += total_pos
-  endif
-  return new_pos
-endfunction
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                 Vim Behavior                                 "
+"                                 Vim Behavior                            {{{1 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode.
@@ -105,7 +96,7 @@ if has('autocmd')
   " au WinLeave * :set nocursorline
   " Starts unfolded
   au BufRead,BufNewFile * normal zR
-  au BufWritePost .vimrc source $MYVIMRC " reload vimrc after change
+  " au BufWritePost .vimrc source $MYVIMRC " reload vimrc after change
   " This beauty remembers where you were the last time you edited the file, and returns to the same position.
   au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 endif
@@ -118,8 +109,11 @@ set wildmode=full
 " set nowritebackup
 " set noswapfile
 
+set nostartofline " Keep the cursor on the same column
+set ignorecase smartcase
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                  Appearance                                  "
+"                                  Appearance                             {{{1 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
 set t_Co=256 " 256 colors in terminal
@@ -137,8 +131,9 @@ endfor
 
 let &colorcolumn=join(range(81,999),",")
 " set cursorline
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                  Formatting                                  "
+"                                  Formatting                             {{{1 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 filetype plugin indent on
@@ -147,7 +142,7 @@ autocmd filetype c,asm,python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType make setlocal noexpandtab
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                Plugin Helpers                                "
+"                                Plugin Helpers                           {{{1 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " (  Airline  )
@@ -183,7 +178,7 @@ if !has('gui_running')
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                   Mappings                                   "
+"                                   Mappings                              {{{1 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Simplify shortcut for changing window
@@ -220,6 +215,15 @@ nnoremap <Leader>eb :tabedit ~/.bash_profile<CR>
 nnoremap <Leader>ec :tabedit ~/Estudos/checkpoints.txt<CR>
 
 " Tab mappings
+function! CircularShift(pos, shift, first_pos, last_pos)
+  let total_pos = a:last_pos - a:first_pos + 1
+  let new_pos = (a:pos + a:shift) % total_pos
+  if new_pos < a:first_pos
+    let new_pos += total_pos
+  endif
+  return new_pos
+endfunction
+
 " Go to tabs
 nnoremap <silent> [<Tab> :<C-U>exe "tabnext"
       \ CircularShift(tabpagenr(), -v:count1, 1, tabpagenr('$'))<CR>
@@ -236,7 +240,7 @@ nnoremap 6<Tab> 6gt
 nnoremap 7<Tab> 7gt
 nnoremap 8<Tab> 8gt
 nnoremap 9<Tab> 9gt
-" Shift tabs
+" Tab moves
 nnoremap <silent> <<Tab> :<C-U>exe "tabm -".v:count1<CR>
 nnoremap <silent> ><Tab> :<C-U>exe "tabm +".v:count1<CR>
 nnoremap <silent> <<S-Tab> :tabm 0<CR>
@@ -247,3 +251,10 @@ nnoremap <silent> <C-n> :tabnew<CR>
 nnoremap <silent> d<Tab> :tabclose<CR>
 " (t)his <tab> only
 nnoremap <silent> t<Tab> :tabonly<CR>
+
+" Make Y behave like other capitals
+nnoremap Y y$
+" qq to record, Q to replay
+nmap Q @q
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
