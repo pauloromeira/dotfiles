@@ -1,7 +1,7 @@
-" .vimrc of Paulo Romeira                                                 {{{1 "
+" .vimrc of Paulo Romeira                                                  {{{1
+" vim: set foldmethod=marker foldlevel=0:
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" vim: set foldmethod=marker foldlevel=0:
 set nocompatible " Use Vim settings, rather than Vi settings.
 let mapleader=" "
 filetype off
@@ -10,9 +10,9 @@ filetype off
 "                                   Plugins                               {{{1 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let firstrun=0
+let s:firstrun=0
 if !filereadable(expand("~/.vim/autoload/plug.vim"))
-  let firstrun=1
+  let s:firstrun=1
   silent !mkdir -p ~/.vim/autoload
   silent !curl -fLo ~/.vim/autoload/plug.vim
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -26,12 +26,13 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
 Plug 'bling/vim-airline'
 Plug 'majutsushi/tagbar'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
       \ | Plug 'pauloromeira/vim-custom-snippets'
 Plug 'tmhedberg/SimpylFold'
 Plug 'scrooloose/syntastic'
-Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion', { 'on': ['<Plug>(easymotion-w)',
+      \ '<Plug>(easymotion-s)'] }
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -42,30 +43,28 @@ Plug 'tpope/vim-rsi'
 Plug 'vim-scripts/IndexedSearch'
 Plug 'michaeljsmith/vim-indent-object' " ii / ai
 Plug 'jeetsukumaran/vim-indentwise'
+Plug 'natw/keyboard_cat.vim', { 'on': 'PlayMeOff' } " Pretend you can type fast.
 
 if !has('gui_running')
   Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 endif
 
 " To Test "
-" Plugin 'mileszs/ack.vim' " ou 'rking/ag.vim'
-" Plugin 'airblade/vim-gitgutter'
-" Plugin 'terryma/vim-multiple-cursors'
-" Plugin 'vim-scripts/LustyExplorer'
-" Automatically find root project directory
-" Plugin 'airblade/vim-rooter'
-" Navitate freely between tmux and vim
-" Plug 'christoomey/vim-tmux-navigator'
+" Plug 'mileszs/ack.vim' " ou 'rking/ag.vim'
+" Plug 'airblade/vim-gitgutter'
+" Plug 'terryma/vim-multiple-cursors'
+" Plug 'vim-scripts/LustyExplorer'
+" Plug 'airblade/vim-rooter' " Automatically find root project directory
+" Plug 'christoomey/vim-tmux-navigator' " Navitate freely between tmux and vim
 " " Better search tools
 " Plug 'vim-scripts/SmartCase'
 " Plug 'vim-scripts/gitignore'
-" Plugin 'nathanaelkane/vim-indent-guides'
-" Plugin 'vim-scripts/repeatable-motions.vim'
-" Plugin 'keyboard_cat.vim' " Pretend you can type really fast.
+" Plug 'nathanaelkane/vim-indent-guides'
+" Plug 'vim-scripts/repeatable-motions.vim'
 
 " End "
 call plug#end() " required
-if firstrun == 1
+if s:firstrun == 1
   :PlugInstall
 endif
 
@@ -80,7 +79,6 @@ set undolevels=1000
 set hidden " Alternate buffers without having to save
 set number relativenumber
 set showcmd
-" highlight ColorColumn ctermbg=100 guibg=#2c2d27
 set scrolloff=10 " scroll the window so we can always see 10 lines around the cursor
 set textwidth=80 " wrap at 80 characters
 " set hlsearch
@@ -96,7 +94,7 @@ if has('autocmd')
   " au WinLeave * :set nocursorline
   " Starts unfolded
   au BufRead,BufNewFile * normal zR
-  " au BufWritePost .vimrc source $MYVIMRC " reload vimrc after change
+  au BufWritePost .vimrc source $MYVIMRC " reload vimrc after change
   " This beauty remembers where you were the last time you edited the file, and returns to the same position.
   au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 endif
@@ -115,6 +113,7 @@ set ignorecase smartcase
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Appearance                             {{{1 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 syntax enable
 set t_Co=256 " 256 colors in terminal
 set background=dark
@@ -131,6 +130,7 @@ endfor
 
 let &colorcolumn=join(range(81,999),",")
 " set cursorline
+" hi CursorLine ctermbg=black guibg=black
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Formatting                             {{{1 "
@@ -145,37 +145,44 @@ autocmd FileType make setlocal noexpandtab
 "                                Plugin Helpers                           {{{1 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" (  Airline  )
+" Airline
 set laststatus=2
 let g:airline_powerline_fonts=1
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-" (  Tagbar  )
+
+" Tagbar
 nmap <F8> :TagbarToggle<CR>
-" (  NERDTree  )
+
+" NERDTree
 nmap <F7> :NERDTreeToggle<CR>
-" (  UltiSnipets  )
+
+" UltiSnipets
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 let g:UltiSnipsListSnippets="<C-l>"
 let g:UltiSnipsSnippetsDir="~/.vim/plugged/vim-custom-snippets/UltiSnips"
-" (  SimpylFold  )
+
+" SimpylFold
 if has('autocmd')
   au BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
   au BufWinLeave *.py setlocal foldexpr< foldmethod<
 endif
-" (  YouCompleteMe  )
-if !has('gui_running')
-  let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
-  let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
-  let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
-  let g:ycm_complete_in_comments = 1 " Completion in comments
-  let g:ycm_complete_in_strings = 1 " Completion in string
-  let g:ycm_add_preview_to_completeopt = 1
-  let g:ycm_autoclose_preview_window_after_completion = 1
-endif
+
+" YouCompleteMe
+let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
+let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
+let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
+let g:ycm_complete_in_comments = 1 " Completion in comments
+let g:ycm_complete_in_strings = 1 " Completion in string
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+" EasyMotion (just to load the plugin)
+nmap <Leader><Leader>w <Plug>(easymotion-w)
+nmap <Leader><Leader>s <Plug>(easymotion-s)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Mappings                              {{{1 "
@@ -197,6 +204,7 @@ cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " nnoremap j gj
 " nnoremap gj j
 
+" Leader mappings
 nnoremap <Leader>d "+d
 nnoremap <Leader>P "+P
 nnoremap <Leader>p "+p
@@ -205,7 +213,6 @@ vnoremap <Leader>d "+d
 vnoremap <Leader>P "+P
 vnoremap <Leader>p "+p
 vnoremap <Leader>y "+y
-
 nnoremap <Leader>q :confirm q<CR>
 nnoremap <Leader><S-q> :confirm qall<CR>
 nnoremap <Leader>s :update<CR>
