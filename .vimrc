@@ -1,5 +1,5 @@
 " .vimrc of Paulo Romeira                                                  {{{1
-" vim: set foldmethod=marker foldlevel=0:
+" vim: set foldmethod=marker:
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nocompatible " Use Vim settings, rather than Vi settings.
@@ -44,6 +44,7 @@ Plug 'vim-scripts/IndexedSearch'
 Plug 'michaeljsmith/vim-indent-object' " ii / ai
 Plug 'jeetsukumaran/vim-indentwise'
 Plug 'natw/keyboard_cat.vim', { 'on': 'PlayMeOff' } " Pretend you can type fast.
+Plug 'pauloromeira/restore_view.vim'
 
 if !has('gui_running')
   Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
@@ -90,13 +91,9 @@ if has('autocmd')
   " Enable Spell Checking for markdown files
   au BufRead,BufNewFile *.md setlocal spell
   au BufRead,BufNewFile *.markdown setlocal spell
+  au BufWritePost .vimrc source $MYVIMRC " reload vimrc after change
   " au WinEnter * :set cursorline
   " au WinLeave * :set nocursorline
-  " Starts unfolded
-  au BufRead,BufNewFile * normal zR
-  au BufWritePost .vimrc source $MYVIMRC " reload vimrc after change
-  " This beauty remembers where you were the last time you edited the file, and returns to the same position.
-  au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 endif
 " Ex command autocomplete options
 set wildmenu
@@ -139,7 +136,7 @@ let &colorcolumn=join(range(81,999),",")
 filetype plugin indent on
 set shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent
 autocmd filetype c,asm,python setlocal shiftwidth=4 tabstop=4 softtabstop=4
-autocmd FileType make setlocal noexpandtab
+autocmd filetype make setlocal noexpandtab
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                Plugin Helpers                           {{{1 "
@@ -166,10 +163,8 @@ let g:UltiSnipsListSnippets="<C-l>"
 let g:UltiSnipsSnippetsDir="~/.vim/plugged/vim-custom-snippets/UltiSnips"
 
 " SimpylFold
-if has('autocmd')
-  au BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
-  au BufWinLeave *.py setlocal foldexpr< foldmethod<
-endif
+let g:SimpylFold_docstring_preview = 1 " docstring on preview
+" let g:SimpylFold_fold_docstring = 0 " don't fold docstrings
 
 " YouCompleteMe
 let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
@@ -183,6 +178,9 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 " EasyMotion (just to load the plugin)
 nmap <Leader><Leader>w <Plug>(easymotion-w)
 nmap <Leader><Leader>s <Plug>(easymotion-s)
+
+" restore_view
+set viewoptions=cursor,folds,slash,unix
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Mappings                              {{{1 "
