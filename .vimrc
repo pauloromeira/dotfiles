@@ -1,14 +1,14 @@
-" .vimrc of Paulo Romeira                                                  {{{1
+" .vimrc of Paulo Romeira                                                 {{{1
 " vim: set foldmethod=marker:
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nocompatible " Use Vim settings, rather than Vi settings.
 let mapleader=" "
 filetype off
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                   Plugins                               {{{1 "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                   Plugins                              {{{1 "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let s:firstrun=0
 if !filereadable(expand("~/.vim/autoload/plug.vim"))
@@ -29,7 +29,6 @@ Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
       \ | Plug 'pauloromeira/vim-custom-snippets'
-Plug 'tmhedberg/SimpylFold'
 Plug 'scrooloose/syntastic'
 Plug 'easymotion/vim-easymotion', { 'on': ['<Plug>(easymotion-w)',
       \ '<Plug>(easymotion-s)'] }
@@ -42,9 +41,12 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-rsi'
 Plug 'vim-scripts/IndexedSearch'
 Plug 'michaeljsmith/vim-indent-object' " ii / ai
-Plug 'jeetsukumaran/vim-indentwise'
-Plug 'natw/keyboard_cat.vim', { 'on': 'PlayMeOff' } " Pretend you can type fast.
+Plug 'natw/keyboard_cat.vim', { 'on': 'PlayMeOff' } " Pretend you can type fast
 Plug 'pauloromeira/restore_view.vim'
+Plug 'klen/python-mode', { 'for': 'python' }
+
+" Plug 'tmhedberg/SimpylFold' " Python folding (depend upon restore_view)
+" Plug 'jeetsukumaran/vim-indentwise' " Indent motions
 
 if !has('gui_running')
   Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
@@ -69,19 +71,19 @@ if s:firstrun == 1
   :PlugInstall
 endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                 Vim Behavior                            {{{1 "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 Vim Behavior                           {{{1 "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set backspace=indent,eol,start " Allow backspacing over everything in insert mode.
-set nrformats= " Treat numbers with leading zeros as decimals instead of octals (<C-a> and <C-x>).
+set backspace=indent,eol,start " Sane backspacing in insert mode
+set nrformats= " Treat numbers with leading zeros as decimals instead of octals
 set history=2000
 set undolevels=1000
 set hidden " Alternate buffers without having to save
 set number relativenumber
 set showcmd
-set scrolloff=10 " scroll the window so we can always see 10 lines around the cursor
-set textwidth=80 " wrap at 80 characters
+set scrolloff=10 " Scroll so we can always see 10 lines around the cursor
+set textwidth=79 " Wrap at 79 characters
 " set hlsearch
 set incsearch
 " Autocmd settings
@@ -92,8 +94,6 @@ if has('autocmd')
   au BufRead,BufNewFile *.md setlocal spell
   au BufRead,BufNewFile *.markdown setlocal spell
   au BufWritePost .vimrc source $MYVIMRC " reload vimrc after change
-  " au WinEnter * :set cursorline
-  " au WinLeave * :set nocursorline
 endif
 " Ex command autocomplete options
 set wildmenu
@@ -107,9 +107,9 @@ set wildmode=full
 set nostartofline " Keep the cursor on the same column
 set ignorecase smartcase
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                  Appearance                             {{{1 "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Appearance                            {{{1 "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 syntax enable
 set t_Co=256 " 256 colors in terminal
@@ -125,22 +125,25 @@ for scheme in [ 'solarized', 'gruvbox', 'desert' ]
   endtry
 endfor
 
-let &colorcolumn=join(range(81,999),",")
+let &colorcolumn=join(range(80,999),",")
+
 " set cursorline
 " hi CursorLine ctermbg=black guibg=black
+" au WinEnter * :set cursorline
+" au WinLeave * :set nocursorline
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                  Formatting                             {{{1 "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Formatting                            {{{1 "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 filetype plugin indent on
 set shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent
 autocmd filetype c,asm,python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd filetype make setlocal noexpandtab
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                Plugin Helpers                           {{{1 "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                Plugin Helpers                          {{{1 "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Airline
 set laststatus=2
@@ -162,10 +165,6 @@ let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 let g:UltiSnipsListSnippets="<C-l>"
 let g:UltiSnipsSnippetsDir="~/.vim/plugged/vim-custom-snippets/UltiSnips"
 
-" SimpylFold
-let g:SimpylFold_docstring_preview = 1 " docstring on preview
-" let g:SimpylFold_fold_docstring = 0 " don't fold docstrings
-
 " YouCompleteMe
 let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
 let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
@@ -182,9 +181,15 @@ nmap <Leader><Leader>s <Plug>(easymotion-s)
 " restore_view
 set viewoptions=cursor,folds,slash,unix
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                   Mappings                              {{{1 "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Syntastic
+" let g:pymode_lint_write = 0 " :h syntastic-pymode
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "passive_filetypes": ["python"] } " redundant because of python mode
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                   Mappings                             {{{1 "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Simplify shortcut for changing window
 noremap <C-h> <C-w>h
@@ -262,4 +267,4 @@ nnoremap Y y$
 " qq to record, Q to replay
 nmap Q @q
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
