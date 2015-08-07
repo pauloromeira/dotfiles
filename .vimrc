@@ -3,26 +3,33 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nocompatible " Use Vim settings, rather than Vi settings.
-let mapleader = " "
+let mapleader = "\<Space>"
 filetype off
-let s:tempdir="~/.vim/temp"
+let s:vimhome = $HOME."/.vim"
+let s:tempdir = s:vimhome."/temp"
+let s:plugdir = s:vimhome."/plugged"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Plugins                              {{{1 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let s:firstrun=0
-if !filereadable(expand("~/.vim/autoload/plug.vim"))
-  let s:firstrun=1
-  silent execute "!mkdir -p ".s:tempdir."/{undo,backup,swap,view}"
-  silent !mkdir -p ~/.vim/autoload
-  silent !curl -fLo ~/.vim/autoload/plug.vim
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        \ || wget -O ~/.vim/autoload/plug.vim
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+let s:firstrun = 0
+let s:plugfile = s:vimhome."/autoload/plug.vim"
+if !filereadable(s:plugfile)
+  let s:firstrun = 1
+  " Make directories
+  silent execute "!mkdir -p ".
+        \ s:vimhome."/autoload ".
+        \ s:tempdir."/{undo,backup,swap,view}"
+  " Download Vim-plug
+  let s:plugurl =
+        \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  silent execute
+        \ "!curl -fLo ".s:plugfile." ".s:plugurl.
+        \ " || wget -O ".s:plugfile." ".s:plugurl
 endif
 
-call plug#begin('~/.vim/plugged')
+call plug#begin(s:plugdir)
 
 Plug 'altercation/vim-colors-solarized' " Colorscheme
 Plug 'morhetz/gruvbox' " Colorscheme
@@ -80,7 +87,7 @@ endif
 " Plug 'mhinz/vim-signify' " Shows VCS (not only git)  diff in the sign column
 " Plug 'osyo-manga/vim-over' " Preview in the command line
 
-" End "
+
 call plug#end() " required
 if s:firstrun == 1
   :PlugInstall
@@ -114,12 +121,12 @@ set wildmenu
 set wildmode=full
 
 " Centralize views, swapfiles, backups and undo history
-let &viewdir=expand(s:tempdir . '/view//')
-let &directory=expand(s:tempdir . '/swap//')
-let &backupdir=expand(s:tempdir . '/backup//')
+let &viewdir = s:tempdir.'/view//'
+let &directory = s:tempdir.'/swap//'
+let &backupdir = s:tempdir.'/backup//'
 set backup
 if has("persistent_undo")
-  let &undodir=expand(s:tempdir . '/undo//')
+  let &undodir = s:tempdir.'/undo//'
   set undofile
   set undolevels=1000 " maximum number of changes that can be undone
   set undoreload=10000 " maximum number lines to save for undo on a buffer reload
@@ -149,7 +156,7 @@ endfor
 
 let &colorcolumn=join(range(80,999),",")
 
-" set cursorline
+set cursorline
 " hi CursorLine ctermbg=black guibg=black
 " au WinEnter * :set cursorline
 " au WinLeave * :set nocursorline
@@ -189,7 +196,7 @@ let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 let g:UltiSnipsListSnippets="<C-l>"
-let g:UltiSnipsSnippetsDir="~/.vim/plugged/vim-custom-snippets/UltiSnips"
+let g:UltiSnipsSnippetsDir=s:plugdir."/vim-custom-snippets/UltiSnips"
 
 " YouCompleteMe
 let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
@@ -242,6 +249,7 @@ vnoremap <Leader>d "+d
 vnoremap <Leader>P "+P
 vnoremap <Leader>p "+p
 vnoremap <Leader>y "+y
+
 nnoremap <Leader>q :confirm q<CR>
 nnoremap <Leader><S-q> :confirm qall<CR>
 nnoremap <Leader>s :update<CR>
