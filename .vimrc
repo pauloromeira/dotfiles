@@ -3,16 +3,19 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nocompatible " Use Vim settings, rather than Vi settings.
-let mapleader=" "
+let mapleader = " "
 filetype off
+let s:tempdir="~/.vim/temp"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Plugins                              {{{1 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+
 let s:firstrun=0
 if !filereadable(expand("~/.vim/autoload/plug.vim"))
   let s:firstrun=1
+  silent execute "!mkdir -p ".s:tempdir."/{undo,backup,swap,view}"
   silent !mkdir -p ~/.vim/autoload
   silent !curl -fLo ~/.vim/autoload/plug.vim
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -22,9 +25,10 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'altercation/vim-colors-solarized'
-Plug 'morhetz/gruvbox'
-Plug 'bling/vim-airline'
+Plug 'altercation/vim-colors-solarized' " Colorscheme
+Plug 'morhetz/gruvbox' " Colorscheme
+Plug 'powerline/fonts', { 'do': './install.sh' }
+      \ | Plug 'bling/vim-airline' " Status tabline
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -44,26 +48,39 @@ Plug 'michaeljsmith/vim-indent-object' " ii / ai
 Plug 'natw/keyboard_cat.vim', { 'on': 'PlayMeOff' } " Pretend you can type fast
 Plug 'pauloromeira/restore_view.vim'
 Plug 'klen/python-mode', { 'for': 'python' }
+Plug 'tommcdo/vim-exchange' " Easy text exchange operator for Vim
+Plug 'bling/vim-bufferline' " Show the list of buffers in the command bar
+Plug 'airblade/vim-gitgutter' " Shows a git diff in the 'gutter' (sign column)
+Plug 'mbbill/undotree'
 
-" Plug 'tmhedberg/SimpylFold' " Python folding (depend upon restore_view)
-" Plug 'jeetsukumaran/vim-indentwise' " Indent motions
 
 if !has('gui_running')
   Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 endif
 
+
 " To Test "
 " Plug 'mileszs/ack.vim' " ou 'rking/ag.vim'
-" Plug 'airblade/vim-gitgutter'
 " Plug 'terryma/vim-multiple-cursors'
 " Plug 'vim-scripts/LustyExplorer'
 " Plug 'airblade/vim-rooter' " Automatically find root project directory
 " Plug 'christoomey/vim-tmux-navigator' " Navitate freely between tmux and vim
-" " Better search tools
 " Plug 'vim-scripts/SmartCase'
 " Plug 'vim-scripts/gitignore'
-" Plug 'nathanaelkane/vim-indent-guides'
 " Plug 'vim-scripts/repeatable-motions.vim'
+" Plug 'davidhalter/jedi-vim' " Autocompletion for python. Obs: unset pymode autocompletion: let g:pymode_rope = 0
+" Plug 'vim-scripts/sessionman.vim' " Save editing session
+" Plug 'nathanaelkane/vim-indent-guides'
+" Plug 'kana/vim-textobj-user' " Create your own text objects without pain
+" Plug 'godlygeek/tabular' " Align text
+" Plug 'junegunn/vim-easy-align' " Align text
+
+" Deactivated but still cool "
+" Plug 'tmhedberg/SimpylFold' " Python folding (depend upon restore_view)
+" Plug 'jeetsukumaran/vim-indentwise' " Indent motions
+" Plug 'flazz/vim-colorschemes'
+" Plug 'mhinz/vim-signify' " Shows VCS (not only git)  diff in the sign column
+" Plug 'osyo-manga/vim-over' " Preview in the command line
 
 " End "
 call plug#end() " required
@@ -79,10 +96,10 @@ set backspace=indent,eol,start " Sane backspacing in insert mode
 set nrformats= " Treat numbers with leading zeros as decimals instead of octals
 set history=2000
 set undolevels=1000
-set hidden " Alternate buffers without having to save
+set hidden " Allow buffer switching without saving
 set number relativenumber
 set showcmd
-set scrolloff=10 " Scroll so we can always see 10 lines around the cursor
+set scrolloff=3 " Scroll so we can always see 3 lines around the cursor
 set textwidth=79 " Wrap at 79 characters
 " set hlsearch
 set incsearch
@@ -99,10 +116,16 @@ endif
 set wildmenu
 set wildmode=full
 
-" Disable backup and swap files
-" set nobackup
-" set nowritebackup
-" set noswapfile
+" Centralize views, swapfiles, backups and undo history
+let &viewdir=expand(s:tempdir . '/view//')
+let &directory=expand(s:tempdir . '/swap//')
+let &backupdir=expand(s:tempdir . '/backup//')
+set backup
+if has("persistent_undo")
+  let &undodir=expand(s:tempdir . '/undo//')
+  set undofile
+endif
+
 
 set nostartofline " Keep the cursor on the same column
 set ignorecase smartcase
@@ -114,6 +137,7 @@ set ignorecase smartcase
 syntax enable
 set t_Co=256 " 256 colors in terminal
 set background=dark
+set shortmess=atI " Don’t show the intro message when starting Vim
 
 " Use the first available colorscheme in this list
 for scheme in [ 'solarized', 'gruvbox', 'desert' ]
@@ -138,8 +162,8 @@ let &colorcolumn=join(range(80,999),",")
 
 filetype plugin indent on
 set shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent
-autocmd filetype c,asm,python setlocal shiftwidth=4 tabstop=4 softtabstop=4
-autocmd filetype make setlocal noexpandtab
+" autocmd filetype c,asm,python setlocal shiftwidth=4 tabstop=4 softtabstop=4
+" autocmd filetype make setlocal noexpandtab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                Plugin Helpers                          {{{1 "
@@ -156,6 +180,9 @@ nmap <F8> :TagbarToggle<CR>
 
 " NERDTree
 nmap <F7> :NERDTreeToggle<CR>
+
+" Undotree
+nmap <F6> :UndotreeToggle<CR>
 
 " UltiSnipets
 let g:UltiSnipsEditSplit="vertical"
