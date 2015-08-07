@@ -11,7 +11,6 @@ let s:tempdir="~/.vim/temp"
 "                                   Plugins                              {{{1 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
 let s:firstrun=0
 if !filereadable(expand("~/.vim/autoload/plug.vim"))
   let s:firstrun=1
@@ -51,8 +50,7 @@ Plug 'klen/python-mode', { 'for': 'python' }
 Plug 'tommcdo/vim-exchange' " Easy text exchange operator for Vim
 Plug 'bling/vim-bufferline' " Show the list of buffers in the command bar
 Plug 'airblade/vim-gitgutter' " Shows a git diff in the 'gutter' (sign column)
-Plug 'mbbill/undotree'
-
+Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 
 if !has('gui_running')
   Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
@@ -95,7 +93,6 @@ endif
 set backspace=indent,eol,start " Sane backspacing in insert mode
 set nrformats= " Treat numbers with leading zeros as decimals instead of octals
 set history=2000
-set undolevels=1000
 set hidden " Allow buffer switching without saving
 set number relativenumber
 set showcmd
@@ -124,8 +121,9 @@ set backup
 if has("persistent_undo")
   let &undodir=expand(s:tempdir . '/undo//')
   set undofile
+  set undolevels=1000 " maximum number of changes that can be undone
+  set undoreload=10000 " maximum number lines to save for undo on a buffer reload
 endif
-
 
 set nostartofline " Keep the cursor on the same column
 set ignorecase smartcase
@@ -183,6 +181,7 @@ nmap <F7> :NERDTreeToggle<CR>
 
 " Undotree
 nmap <F6> :UndotreeToggle<CR>
+let g:undotree_WindowLayout = 4
 
 " UltiSnipets
 let g:UltiSnipsEditSplit="vertical"
