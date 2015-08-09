@@ -3,8 +3,8 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nocompatible " Use Vim settings, rather than Vi settings.
-let mapleader = "\<Space>"
 filetype off
+let mapleader = "\<Space>"
 let s:vimhome = $HOME."/.vim"
 let s:tempdir = s:vimhome."/temp"
 let s:plugdir = s:vimhome."/plugged"
@@ -31,17 +31,16 @@ endif
 
 call plug#begin(s:plugdir)
 
-Plug 'altercation/vim-colors-solarized' " Colorscheme
-Plug 'morhetz/gruvbox' " Colorscheme
 Plug 'powerline/fonts', { 'do': './install.sh' }
       \ | Plug 'bling/vim-airline' " Status tabline
+Plug 'pauloromeira/tabline.vim'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
       \ | Plug 'pauloromeira/vim-custom-snippets'
 Plug 'scrooloose/syntastic'
 Plug 'easymotion/vim-easymotion', { 'on': ['<Plug>(easymotion-w)',
-      \ '<Plug>(easymotion-s)'] }
+      \ '<Plug>(easymotion-b)', '<Plug>(easymotion-s)'] }
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -58,14 +57,32 @@ Plug 'tommcdo/vim-exchange' " Easy text exchange operator for Vim
 Plug 'bling/vim-bufferline' " Show the list of buffers in the command bar
 Plug 'airblade/vim-gitgutter' " Shows a git diff in the 'gutter' (sign column)
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+Plug 'osyo-manga/vim-hopping', { 'on': '<Plug>(hopping-start)' } " Killer way to search and replace
+
+" Colorschemes
+Plug 'morhetz/gruvbox'
+" Plug 'w0ng/vim-hybrid'
+" Plug 'altercation/vim-colors-solarized'
+" Plug 'nanotech/jellybeans.vim'
+" Plug 'tomasr/molokai'
 
 if !has('gui_running')
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+  function! BuildYCM(info)
+    " info is a dictionary with 3 fields
+    " - name:   name of the plugin
+    " - status: 'installed', 'updated', or 'unchanged'
+    " - force:  set on PlugInstall! or PlugUpdate!
+    if a:info.status == 'installed' || a:info.force
+      !./install.sh
+    endif
+  endfunction
+  Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 endif
 
 
 " To Test "
 " Plug 'mileszs/ack.vim' " ou 'rking/ag.vim'
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 " Plug 'terryma/vim-multiple-cursors'
 " Plug 'vim-scripts/LustyExplorer'
 " Plug 'airblade/vim-rooter' " Automatically find root project directory
@@ -75,10 +92,16 @@ endif
 " Plug 'vim-scripts/repeatable-motions.vim'
 " Plug 'davidhalter/jedi-vim' " Autocompletion for python. Obs: unset pymode autocompletion: let g:pymode_rope = 0
 " Plug 'vim-scripts/sessionman.vim' " Save editing session
+" Plug 'tpope/vim-obsession' " Save editing session
 " Plug 'nathanaelkane/vim-indent-guides'
 " Plug 'kana/vim-textobj-user' " Create your own text objects without pain
 " Plug 'godlygeek/tabular' " Align text
 " Plug 'junegunn/vim-easy-align' " Align text
+" Alternative to YouCompleteMe + UltiSnipets:
+" Plug 'Shougo/neocomplete'
+" Plug 'Shougo/neosnippet'
+" Plug 'Shougo/neosnippet-snippets'
+
 
 " Deactivated but still cool "
 " Plug 'tmhedberg/SimpylFold' " Python folding (depend upon restore_view)
@@ -104,7 +127,7 @@ set hidden " Allow buffer switching without saving
 set number relativenumber
 set showcmd
 set scrolloff=3 " Scroll so we can always see 3 lines around the cursor
-set textwidth=79 " Wrap at 79 characters
+" set textwidth=79 " Wrap at 79 characters
 " set hlsearch
 set incsearch
 " Autocmd settings
@@ -145,7 +168,14 @@ set background=dark
 set shortmess=atI " Don’t show the intro message when starting Vim
 
 " Use the first available colorscheme in this list
-for scheme in [ 'solarized', 'gruvbox', 'desert' ]
+for scheme in [
+      \ 'gruvbox',
+      \ 'jellybeans',
+      \ 'hybrid',
+      \ 'solarized',
+      \ 'molokai',
+      \'desert'
+      \ ]
   try
     execute 'colorscheme '.scheme
     break
@@ -157,9 +187,11 @@ endfor
 let &colorcolumn=join(range(80,999),",")
 
 set cursorline
+if has('autocmd')
+  au WinEnter * :set cursorline
+  au WinLeave * :set nocursorline
+endif
 " hi CursorLine ctermbg=black guibg=black
-" au WinEnter * :set cursorline
-" au WinLeave * :set nocursorline
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Formatting                            {{{1 "
@@ -179,6 +211,19 @@ set laststatus=2
 let g:airline_powerline_fonts=1
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+let g:airline_mode_map = {
+    \ '__' : '-',
+    \ 'n'  : 'N',
+    \ 'i'  : 'I',
+    \ 'R'  : 'R',
+    \ 'c'  : 'C',
+    \ 'v'  : 'V',
+    \ 'V'  : 'V',
+    \ '' : 'V',
+    \ 's'  : 'S',
+    \ 'S'  : 'S',
+    \ '' : 'S',
+    \ }
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
@@ -209,6 +254,7 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 
 " EasyMotion (just to load the plugin)
 nmap <Leader><Leader>w <Plug>(easymotion-w)
+nmap <Leader><Leader>b <Plug>(easymotion-b)
 nmap <Leader><Leader>s <Plug>(easymotion-s)
 
 " restore_view
@@ -217,8 +263,22 @@ set viewoptions=cursor,folds,slash,unix
 " Syntastic
 " let g:pymode_lint_write = 0 " :h syntastic-pymode
 let g:syntastic_mode_map = {
-    \ "mode": "active",
-    \ "passive_filetypes": ["python"] } " redundant because of python mode
+      \ "mode": "active",
+      \ "passive_filetypes": ["python"] } " redundant because of python mode
+
+" bufferline
+let g:bufferline_echo = 0 " Do not echo to the command bar
+let g:bufferline_active_buffer_left = ''
+let g:bufferline_active_buffer_right = ''
+
+" vim-hopping
+nmap <Space>/ <Plug>(hopping-start)
+let g:hopping#keymapping = {
+      \ "\<C-n>" : "<Over>(hopping-next)",
+      \ "\<C-p>" : "<Over>(hopping-prev)",
+      \ "\<C-u>" : "<Over>(scroll-u)",
+      \ "\<C-d>" : "<Over>(scroll-d)"
+      \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Mappings                             {{{1 "
@@ -234,11 +294,17 @@ cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 " Expands %% to the current file path
 cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-" Change display and real lines mappings.
-" nnoremap k gk
-" nnoremap gk k
-" nnoremap j gj
-" nnoremap gj j
+" Invert display lines and real lines mappings.
+nnoremap k gk
+nnoremap gk k
+nnoremap j gj
+nnoremap gj j
+nnoremap 0 g0
+nnoremap g0 0
+nnoremap $ g$
+nnoremap g$ $
+nnoremap ^ g^
+nnoremap g^ ^
 
 " Leader mappings
 nnoremap <Leader>d "+d
@@ -300,5 +366,15 @@ nnoremap <silent> t<Tab> :tabonly<CR>
 nnoremap Y y$
 " qq to record, Q to replay
 nmap Q @q
+
+" Resize windows with arrowkeys
+nnoremap <Up> <C-w>5+
+nnoremap <Down> <C-w>5-
+nnoremap <Left> <C-w>5<
+nnoremap <Right> <C-w>5>
+nnoremap <S-Up> <C-w>+
+nnoremap <S-Down> <C-w>-
+nnoremap <S-Left> <C-w><
+nnoremap <S-Right> <C-w>>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
