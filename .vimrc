@@ -41,9 +41,9 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'scrooloose/syntastic'
 Plug 'easymotion/vim-easymotion', { 'on': ['<Plug>(easymotion-w)',
       \ '<Plug>(easymotion-b)', '<Plug>(easymotion-s)'] }
-Plug 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim', { 'on': 'CtrlP' }
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive' " Gateway to git
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
@@ -57,7 +57,11 @@ Plug 'tommcdo/vim-exchange' " Easy text exchange operator for Vim
 Plug 'bling/vim-bufferline' " Show the list of buffers in the command bar
 Plug 'airblade/vim-gitgutter' " Shows a git diff in the 'gutter' (sign column)
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-Plug 'osyo-manga/vim-hopping', { 'on': '<Plug>(hopping-start)' } " Killer way to search and replace
+Plug 'osyo-manga/vim-hopping', { 'on': '<Plug>(hopping-start)' } " Search and replace
+Plug 'rking/ag.vim' " faster than ack
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'airblade/vim-rooter', { 'on': '<Plug>RooterChangeToRootDirectory' }
+Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' } " Align text
 
 " Colorschemes
 Plug 'morhetz/gruvbox'
@@ -81,37 +85,36 @@ endif
 
 
 " To Test "
-" Plug 'mileszs/ack.vim' " ou 'rking/ag.vim'
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-" Plug 'terryma/vim-multiple-cursors'
-" Plug 'vim-scripts/LustyExplorer'
-" Plug 'airblade/vim-rooter' " Automatically find root project directory
-" Plug 'christoomey/vim-tmux-navigator' " Navitate freely between tmux and vim
-" Plug 'vim-scripts/SmartCase'
-" Plug 'vim-scripts/gitignore'
-" Plug 'vim-scripts/repeatable-motions.vim'
-" Plug 'davidhalter/jedi-vim' " Autocompletion for python. Obs: unset pymode autocompletion: let g:pymode_rope = 0
-" Plug 'vim-scripts/sessionman.vim' " Save editing session
 " Plug 'tpope/vim-obsession' " Save editing session
-" Plug 'nathanaelkane/vim-indent-guides'
+" Plug 'vim-scripts/sessionman.vim' " Save editing session
+" Plug 'xolox/vim-misc' | Plug 'xolox/vim-session' " Save editing session
 " Plug 'kana/vim-textobj-user' " Create your own text objects without pain
-" Plug 'godlygeek/tabular' " Align text
-" Plug 'junegunn/vim-easy-align' " Align text
 " Alternative to YouCompleteMe + UltiSnipets:
 " Plug 'Shougo/neocomplete'
 " Plug 'Shougo/neosnippet'
 " Plug 'Shougo/neosnippet-snippets'
+" Plug 'davidhalter/jedi-vim' " Autocompletion for python. Obs: unset pymode autocompletion: let g:pymode_rope = 0
+" Plug 'Shougo/unite.vim'
+" runtime macros/matchit.vim " (nativo)
+" Plug 'christoomey/vim-tmux-navigator' " Navitate freely between tmux and vim
+" Plug 'vim-scripts/SmartCase'
+" Plug 'vim-scripts/gitignore'
 
 
 " Deactivated but still cool "
 " Plug 'tmhedberg/SimpylFold' " Python folding (depend upon restore_view)
 " Plug 'jeetsukumaran/vim-indentwise' " Indent motions
 " Plug 'flazz/vim-colorschemes'
-" Plug 'mhinz/vim-signify' " Shows VCS (not only git)  diff in the sign column
+" Plug 'mhinz/vim-signify' " Shows VCS (not only git) diff in the sign column
+" Plug 'mileszs/ack.vim' " replaced by ag.vim
 " Plug 'osyo-manga/vim-over' " Preview in the command line
+" Plug 'terryma/vim-multiple-cursors' " is it working properly?
+" Plug 'nathanaelkane/vim-indent-guides' " Visually displays indent levels
+" Plug 'vim-scripts/ZoomWin' " Zoom into and out of a window (BUG)
+" Plug 'godlygeek/tabular' " Align text (using junegunn/vim-easy-align)
 
 
-call plug#end() " required
+call plug#end()
 if s:firstrun == 1
   :PlugInstall
 endif
@@ -127,7 +130,6 @@ set hidden " Allow buffer switching without saving
 set number relativenumber
 set showcmd
 set scrolloff=3 " Scroll so we can always see 3 lines around the cursor
-" set textwidth=79 " Wrap at 79 characters
 " set hlsearch
 set incsearch
 " Autocmd settings
@@ -165,14 +167,14 @@ set ignorecase smartcase
 syntax enable
 set t_Co=256 " 256 colors in terminal
 set background=dark
-set shortmess=atI " Don’t show the intro message when starting Vim
+set shortmess=I " Don’t show the intro message when starting Vim
 
 " Use the first available colorscheme in this list
 for scheme in [
       \ 'gruvbox',
-      \ 'jellybeans',
-      \ 'hybrid',
       \ 'solarized',
+      \ 'hybrid',
+      \ 'jellybeans',
       \ 'molokai',
       \'desert'
       \ ]
@@ -198,7 +200,14 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 filetype plugin indent on
-set shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
+set expandtab
+set autoindent
+set copyindent " copy the previous indentation on autoindenting
+
+" set textwidth=79 " Wrap at 79 characters
 " autocmd filetype c,asm,python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 " autocmd filetype make setlocal noexpandtab
 
@@ -226,13 +235,13 @@ let g:airline_mode_map = {
     \ }
 
 " Tagbar
-nmap <F8> :TagbarToggle<CR>
+nmap <silent> <F8> :TagbarToggle<CR>
 
 " NERDTree
-nmap <F7> :NERDTreeToggle<CR>
+nmap <silent> <F7> :NERDTreeToggle<CR>
 
 " Undotree
-nmap <F6> :UndotreeToggle<CR>
+nmap <silent> <F6> :UndotreeToggle<CR>
 let g:undotree_WindowLayout = 4
 
 " UltiSnipets
@@ -252,7 +261,7 @@ let g:ycm_complete_in_strings = 1 " Completion in string
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 
-" EasyMotion (just to load the plugin)
+" EasyMotion (just to lazy load the plugin)
 nmap <Leader><Leader>w <Plug>(easymotion-w)
 nmap <Leader><Leader>b <Plug>(easymotion-b)
 nmap <Leader><Leader>s <Plug>(easymotion-s)
@@ -280,6 +289,20 @@ let g:hopping#keymapping = {
       \ "\<C-d>" : "<Over>(scroll-d)"
       \ }
 
+" CtrlP (just to lazy load the plugin)
+nmap <silent> <C-p> :CtrlP<CR>
+
+" vim-rooter
+let g:rooter_manual_only = 1
+let g:rooter_disable_map = 1
+nmap <silent> <Leader>cd <Plug>RooterChangeToRootDirectory
+
+" vim-easy-align
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Mappings                             {{{1 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -292,7 +315,7 @@ noremap <C-l> <C-w>l
 " Change <C-p> and <C-n> behave to filter the history
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
-" Expands %% to the current file path
+" Expand %% to the current file path
 cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " Invert display lines and real lines mappings.
 nnoremap k gk
@@ -316,13 +339,14 @@ vnoremap <Leader>P "+P
 vnoremap <Leader>p "+p
 vnoremap <Leader>y "+y
 
-nnoremap <Leader>q :confirm q<CR>
-nnoremap <Leader><S-q> :confirm qall<CR>
+nnoremap <silent> <Leader>q :confirm q<CR>
+nnoremap <silent> <Leader><S-q> :confirm qall<CR>
 nnoremap <Leader>s :update<CR>
 nnoremap <Leader><S-s> :wall<CR>
 nnoremap <Leader>ev :tabedit $MYVIMRC<CR>
 nnoremap <Leader>eb :tabedit ~/.bash_profile<CR>
 nnoremap <Leader>ec :tabedit ~/Estudos/checkpoints.txt<CR>
+nnoremap <Leader>en :tabedit ~/notes.txt<CR>
 
 " Tab mappings
 function! CircularShift(pos, shift, first_pos, last_pos)
@@ -350,16 +374,13 @@ nnoremap 6<Tab> 6gt
 nnoremap 7<Tab> 7gt
 nnoremap 8<Tab> 8gt
 nnoremap 9<Tab> 9gt
-" Tab moves
+" Tab operations
 nnoremap <silent> <<Tab> :<C-U>exe "tabm -".v:count1<CR>
 nnoremap <silent> ><Tab> :<C-U>exe "tabm +".v:count1<CR>
 nnoremap <silent> <<S-Tab> :tabm 0<CR>
 nnoremap <silent> ><S-Tab> :tabm<CR>
-" (C)reate (n)ew
-nnoremap <silent> <C-n> :tabnew<CR>
-" (d)elete <tab>
+nnoremap <silent> y<Tab> :tabnew<CR>
 nnoremap <silent> d<Tab> :tabclose<CR>
-" (t)his <tab> only
 nnoremap <silent> t<Tab> :tabonly<CR>
 
 " Make Y behave like other capitals
