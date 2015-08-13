@@ -15,7 +15,7 @@ let s:plugdir = s:vimhome."/plugged"
 
 let s:firstrun = 0
 let s:plugfile = s:vimhome."/autoload/plug.vim"
-if !filereadable(s:plugfile)
+if !filereadable(s:plugfile) " Download manager if first run
   let s:firstrun = 1
   " Make directories
   silent execute "!mkdir -p ".
@@ -32,7 +32,7 @@ endif
 call plug#begin(s:plugdir)
 
 Plug 'powerline/fonts', { 'do': './install.sh' }
-      \ | Plug 'bling/vim-airline' " Status tabline
+Plug 'bling/vim-airline' " Status tabline
 Plug 'pauloromeira/tabline.vim'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
@@ -42,9 +42,10 @@ Plug 'scrooloose/syntastic'
 Plug 'easymotion/vim-easymotion', { 'on': ['<Plug>(easymotion-w)',
       \ '<Plug>(easymotion-b)', '<Plug>(easymotion-s)'] }
 Plug 'kien/ctrlp.vim', { 'on': 'CtrlP' }
-Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive' " Gateway to git
 Plug 'tpope/vim-repeat'
+      \ | Plug 'vim-scripts/visualrepeat' " Visual mode repetition
+Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-rsi'
@@ -53,7 +54,7 @@ Plug 'michaeljsmith/vim-indent-object' " ii / ai
 Plug 'natw/keyboard_cat.vim', { 'on': 'PlayMeOff' } " Pretend you can type fast
 Plug 'pauloromeira/restore_view.vim'
 Plug 'klen/python-mode', { 'for': 'python' }
-Plug 'tommcdo/vim-exchange' " Easy text exchange operator for Vim
+Plug 'tommcdo/vim-exchange', { 'on': '<Plug>(Exchange)' } " Easy text exchange
 Plug 'bling/vim-bufferline' " Show the list of buffers in the command bar
 Plug 'airblade/vim-gitgutter' " Shows a git diff in the 'gutter' (sign column)
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
@@ -61,7 +62,8 @@ Plug 'osyo-manga/vim-hopping', { 'on': '<Plug>(hopping-start)' } " Search and re
 Plug 'rking/ag.vim' " faster than ack
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'airblade/vim-rooter', { 'on': '<Plug>RooterChangeToRootDirectory' }
-Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' } " Align text
+Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)',
+      \ 'EasyAlign'] } " Align text
 
 " Colorschemes
 Plug 'morhetz/gruvbox'
@@ -88,29 +90,29 @@ endif
 " Plug 'tpope/vim-obsession' " Save editing session
 " Plug 'vim-scripts/sessionman.vim' " Save editing session
 " Plug 'xolox/vim-misc' | Plug 'xolox/vim-session' " Save editing session
-" Plug 'kana/vim-textobj-user' " Create your own text objects without pain
 " Alternative to YouCompleteMe + UltiSnipets:
 " Plug 'Shougo/neocomplete'
 " Plug 'Shougo/neosnippet'
 " Plug 'Shougo/neosnippet-snippets'
 " Plug 'davidhalter/jedi-vim' " Autocompletion for python. Obs: unset pymode autocompletion: let g:pymode_rope = 0
-" Plug 'Shougo/unite.vim'
 " runtime macros/matchit.vim " (nativo)
 " Plug 'christoomey/vim-tmux-navigator' " Navitate freely between tmux and vim
 " Plug 'vim-scripts/SmartCase'
 " Plug 'vim-scripts/gitignore'
+" Plug 'Shougo/unite.vim'
 
 
 " Deactivated but still cool "
+" Plug 'osyo-manga/vim-over' " Preview in the command line
+" Plug 'terryma/vim-multiple-cursors' " is it working properly?
+" Plug 'vim-scripts/ZoomWin' " Zoom into and out of a window (BUG)
+" Plug 'nathanaelkane/vim-indent-guides' " Visually displays indent levels
+" Plug 'kana/vim-textobj-user' " Create your own text objects without pain
 " Plug 'tmhedberg/SimpylFold' " Python folding (depend upon restore_view)
 " Plug 'jeetsukumaran/vim-indentwise' " Indent motions
 " Plug 'flazz/vim-colorschemes'
 " Plug 'mhinz/vim-signify' " Shows VCS (not only git) diff in the sign column
 " Plug 'mileszs/ack.vim' " replaced by ag.vim
-" Plug 'osyo-manga/vim-over' " Preview in the command line
-" Plug 'terryma/vim-multiple-cursors' " is it working properly?
-" Plug 'nathanaelkane/vim-indent-guides' " Visually displays indent levels
-" Plug 'vim-scripts/ZoomWin' " Zoom into and out of a window (BUG)
 " Plug 'godlygeek/tabular' " Align text (using junegunn/vim-easy-align)
 
 
@@ -303,6 +305,46 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+" vim-commentary (just to lazy load the plugin)
+map gc <Plug>Commentary
+nmap gcc <Plug>CommentaryLine
+
+" vim-exchange (just to lazy load the plugin)
+nmap cx <Plug>(Exchange)
+nmap cxx <Plug>(ExchangeLine)
+xmap X <Plug>(Exchange)
+
+" matchit.vim
+runtime macros/matchit.vim " (native)
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                           Functions and Commands                       {{{1 "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Userful for tab move mappings
+function! CircularShift(pos, shift, first_pos, last_pos)
+  let total_pos = a:last_pos - a:first_pos + 1
+  let new_pos = (a:pos + a:shift) % total_pos
+  if new_pos < a:first_pos
+    let new_pos += total_pos
+  endif
+  return new_pos
+endfunction
+
+" AutoSave (junegunn/dotfiles)
+function! s:autosave(enable)
+  augroup autosave
+    autocmd!
+    if a:enable
+      autocmd TextChanged,InsertLeave <buffer>
+            \  if empty(&buftype) && !empty(bufname(''))
+            \|   update
+            \| endif
+    endif
+  augroup END
+endfunction
+command! -bang AutoSave call s:autosave(<bang>1)
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Mappings                             {{{1 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -347,16 +389,6 @@ nnoremap <Leader>ev :tabedit $MYVIMRC<CR>
 nnoremap <Leader>eb :tabedit ~/.bash_profile<CR>
 nnoremap <Leader>ec :tabedit ~/Estudos/checkpoints.txt<CR>
 nnoremap <Leader>en :tabedit ~/notes.txt<CR>
-
-" Tab mappings
-function! CircularShift(pos, shift, first_pos, last_pos)
-  let total_pos = a:last_pos - a:first_pos + 1
-  let new_pos = (a:pos + a:shift) % total_pos
-  if new_pos < a:first_pos
-    let new_pos += total_pos
-  endif
-  return new_pos
-endfunction
 
 " Go to tabs
 nnoremap <silent> [<Tab> :<C-U>exe "tabnext"
