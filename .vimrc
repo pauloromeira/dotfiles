@@ -1,4 +1,4 @@
-" .vimrc of Paulo Romeira                                                 {{{1
+" .vimrc of Paulo Romeira {pauloromeira.com}                              {{{1
 " vim: set foldmethod=marker:
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -30,91 +30,94 @@ if !filereadable(s:plugfile) " Download manager if first run
 endif
 
 call plug#begin(s:plugdir)
+  Plug 'powerline/fonts', { 'do': './install.sh' }
+  Plug 'bling/vim-airline' " Status tabline
+  Plug 'pauloromeira/tabline.vim'
+  Plug 'majutsushi/tagbar'
+  Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
+  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+        \ | Plug 'pauloromeira/vim-custom-snippets'
+  Plug 'scrooloose/syntastic'
+  Plug 'easymotion/vim-easymotion', { 'on': ['<Plug>(easymotion-w)',
+        \ '<Plug>(easymotion-b)', '<Plug>(easymotion-s)'] }
+  Plug 'kien/ctrlp.vim', { 'on': 'CtrlP' }
+  Plug 'tpope/vim-fugitive' " Gateway to git
+  Plug 'tpope/vim-repeat'
+        \ | Plug 'vim-scripts/visualrepeat' " Visual mode repetition
+  Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-unimpaired'
+  Plug 'tpope/vim-rsi'
+  Plug 'vim-scripts/IndexedSearch'
+  Plug 'michaeljsmith/vim-indent-object' " ii / ai
+  Plug 'natw/keyboard_cat.vim', { 'on': 'PlayMeOff' } " Pretend you can type fast
+  Plug 'pauloromeira/restore_view.vim'
+  Plug 'klen/python-mode', { 'for': 'python' }
+  Plug 'tommcdo/vim-exchange', { 'on': '<Plug>(Exchange)' } " Easy text exchange
+  Plug 'bling/vim-bufferline' " Show the list of buffers in the command bar
+  Plug 'airblade/vim-gitgutter' " Shows a git diff in the 'gutter' (sign column)
+  Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+  Plug 'osyo-manga/vim-hopping', { 'on': '<Plug>(hopping-start)' } " Search and replace
+  Plug 'rking/ag.vim' " faster than ack
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+  Plug 'airblade/vim-rooter', { 'on': '<Plug>RooterChangeToRootDirectory' }
+  Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)',
+        \ 'EasyAlign'] } " Align text
+  Plug 'justinmk/vim-gtfo' " Go to Terminal or File manager (gof, got)
+  Plug 'kshenoy/vim-signature' " Place, toggle and display marks
+  Plug 'mhinz/vim-startify' " A fancy start screen for Vim (also manages sessions)
 
-Plug 'powerline/fonts', { 'do': './install.sh' }
-Plug 'bling/vim-airline' " Status tabline
-Plug 'pauloromeira/tabline.vim'
-Plug 'majutsushi/tagbar'
-Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-      \ | Plug 'pauloromeira/vim-custom-snippets'
-Plug 'scrooloose/syntastic'
-Plug 'easymotion/vim-easymotion', { 'on': ['<Plug>(easymotion-w)',
-      \ '<Plug>(easymotion-b)', '<Plug>(easymotion-s)'] }
-Plug 'kien/ctrlp.vim', { 'on': 'CtrlP' }
-Plug 'tpope/vim-fugitive' " Gateway to git
-Plug 'tpope/vim-repeat'
-      \ | Plug 'vim-scripts/visualrepeat' " Visual mode repetition
-Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-rsi'
-Plug 'vim-scripts/IndexedSearch'
-Plug 'michaeljsmith/vim-indent-object' " ii / ai
-Plug 'natw/keyboard_cat.vim', { 'on': 'PlayMeOff' } " Pretend you can type fast
-Plug 'pauloromeira/restore_view.vim'
-Plug 'klen/python-mode', { 'for': 'python' }
-Plug 'tommcdo/vim-exchange', { 'on': '<Plug>(Exchange)' } " Easy text exchange
-Plug 'bling/vim-bufferline' " Show the list of buffers in the command bar
-Plug 'airblade/vim-gitgutter' " Shows a git diff in the 'gutter' (sign column)
-Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-Plug 'osyo-manga/vim-hopping', { 'on': '<Plug>(hopping-start)' } " Search and replace
-Plug 'rking/ag.vim' " faster than ack
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-Plug 'airblade/vim-rooter', { 'on': '<Plug>RooterChangeToRootDirectory' }
-Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)',
-      \ 'EasyAlign'] } " Align text
+  " Colorschemes
+  Plug 'pauloromeira/vim-tomorrow-theme'
+  Plug 'morhetz/gruvbox'
+  Plug 'jonathanfilip/vim-lucius'
+  " Plug 'altercation/vim-colors-solarized'
+  " Plug 'w0ng/vim-hybrid'
+  " Plug 'nanotech/jellybeans.vim'
+  " Plug 'tomasr/molokai'
 
-" Colorschemes
-Plug 'morhetz/gruvbox'
-" Plug 'w0ng/vim-hybrid'
-" Plug 'altercation/vim-colors-solarized'
-" Plug 'nanotech/jellybeans.vim'
-" Plug 'tomasr/molokai'
-
-if !has('gui_running')
-  function! BuildYCM(info)
-    " info is a dictionary with 3 fields
-    " - name:   name of the plugin
-    " - status: 'installed', 'updated', or 'unchanged'
-    " - force:  set on PlugInstall! or PlugUpdate!
-    if a:info.status == 'installed' || a:info.force
-      !./install.sh
-    endif
-  endfunction
-  Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-endif
-
-
-" To Test "
-" Plug 'tpope/vim-obsession' " Save editing session
-" Plug 'vim-scripts/sessionman.vim' " Save editing session
-" Plug 'xolox/vim-misc' | Plug 'xolox/vim-session' " Save editing session
-" Alternative to YouCompleteMe + UltiSnipets:
-" Plug 'Shougo/neocomplete'
-" Plug 'Shougo/neosnippet'
-" Plug 'Shougo/neosnippet-snippets'
-" Plug 'davidhalter/jedi-vim' " Autocompletion for python. Obs: unset pymode autocompletion: let g:pymode_rope = 0
-" runtime macros/matchit.vim " (nativo)
-" Plug 'christoomey/vim-tmux-navigator' " Navitate freely between tmux and vim
-" Plug 'vim-scripts/SmartCase'
-" Plug 'vim-scripts/gitignore'
-" Plug 'Shougo/unite.vim'
+  if !has('gui_running')
+    function! BuildYCM(info)
+      " info is a dictionary with 3 fields
+      " - name:   name of the plugin
+      " - status: 'installed', 'updated', or 'unchanged'
+      " - force:  set on PlugInstall! or PlugUpdate!
+      if a:info.status == 'installed' || a:info.force
+        !./install.sh
+      endif
+    endfunction
+    Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+  endif
 
 
-" Deactivated but still cool "
-" Plug 'osyo-manga/vim-over' " Preview in the command line
-" Plug 'terryma/vim-multiple-cursors' " is it working properly?
-" Plug 'vim-scripts/ZoomWin' " Zoom into and out of a window (BUG)
-" Plug 'nathanaelkane/vim-indent-guides' " Visually displays indent levels
-" Plug 'kana/vim-textobj-user' " Create your own text objects without pain
-" Plug 'tmhedberg/SimpylFold' " Python folding (depend upon restore_view)
-" Plug 'jeetsukumaran/vim-indentwise' " Indent motions
-" Plug 'flazz/vim-colorschemes'
-" Plug 'mhinz/vim-signify' " Shows VCS (not only git) diff in the sign column
-" Plug 'mileszs/ack.vim' " replaced by ag.vim
-" Plug 'godlygeek/tabular' " Align text (using junegunn/vim-easy-align)
+  " To Test "
+  " Plug 'tpope/vim-obsession' " Save editing session
+  " Plug 'vim-scripts/sessionman.vim' " Save editing session
+  " Plug 'xolox/vim-misc' | Plug 'xolox/vim-session' " Save editing session
+  " Alternative to YouCompleteMe + UltiSnipets:
+  " Plug 'Shougo/neocomplete'
+  " Plug 'Shougo/neosnippet'
+  " Plug 'Shougo/neosnippet-snippets'
+  " Plug 'davidhalter/jedi-vim' " Autocompletion for python. Obs: unset pymode autocompletion: let g:pymode_rope = 0
+  " runtime macros/matchit.vim " (nativo)
+  " Plug 'christoomey/vim-tmux-navigator' " Navitate freely between tmux and vim
+  " Plug 'vim-scripts/SmartCase'
+  " Plug 'vim-scripts/gitignore'
+  " Plug 'Shougo/unite.vim'
 
+
+  " Deactivated but still cool "
+  " Plug 'osyo-manga/vim-over' " Preview in the command line
+  " Plug 'terryma/vim-multiple-cursors' " is it working properly?
+  " Plug 'vim-scripts/ZoomWin' " Zoom into and out of a window (BUG)
+  " Plug 'nathanaelkane/vim-indent-guides' " Visually displays indent levels
+  " Plug 'kana/vim-textobj-user' " Create your own text objects without pain
+  " Plug 'tmhedberg/SimpylFold' " Python folding (depend upon restore_view)
+  " Plug 'jeetsukumaran/vim-indentwise' " Indent motions
+  " Plug 'flazz/vim-colorschemes'
+  " Plug 'mhinz/vim-signify' " Shows VCS (not only git) diff in the sign column
+  " Plug 'mileszs/ack.vim' " replaced by ag.vim
+  " Plug 'godlygeek/tabular' " Align text (using junegunn/vim-easy-align)
 
 call plug#end()
 if s:firstrun == 1
@@ -141,7 +144,6 @@ if has('autocmd')
   " Enable Spell Checking for markdown files
   au BufRead,BufNewFile *.md setlocal spell
   au BufRead,BufNewFile *.markdown setlocal spell
-  au BufWritePost .vimrc source $MYVIMRC " reload vimrc after change
 endif
 " Ex command autocomplete options
 set wildmenu
@@ -161,6 +163,7 @@ endif
 
 set nostartofline " Keep the cursor on the same column
 set ignorecase smartcase
+set virtualedit=block " Allow cursor to be anywhere in Visual block mode.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Appearance                            {{{1 "
@@ -173,6 +176,8 @@ set shortmess=I " Don’t show the intro message when starting Vim
 
 " Use the first available colorscheme in this list
 for scheme in [
+      \ 'Tomorrow-Night',
+      \ 'lucius',
       \ 'gruvbox',
       \ 'solarized',
       \ 'hybrid',
@@ -237,13 +242,14 @@ let g:airline_mode_map = {
     \ }
 
 " Tagbar
-nmap <silent> <F8> :TagbarToggle<CR>
+nmap <silent> <Leader>tt :TagbarToggle<CR>
 
 " NERDTree
-nmap <silent> <F7> :NERDTreeToggle<CR>
+nmap <silent> <Leader>tn :NERDTreeToggle<CR>
 
 " Undotree
-nmap <silent> <F6> :UndotreeToggle<CR>
+nmap <silent> U :UndotreeToggle<CR> " Native 'U' is a weird command
+nmap <silent> <Leader>tu :UndotreeToggle<CR> " Follows the toggle convention
 let g:undotree_WindowLayout = 4
 
 " UltiSnipets
@@ -317,6 +323,22 @@ xmap X <Plug>(Exchange)
 " matchit.vim
 runtime macros/matchit.vim " (native)
 
+" vim-startify
+let g:startify_session_dir = s:tempdir.'/session'
+let g:startify_bookmarks = [] " always shown
+let g:ctrlp_reuse_window = 'startify'
+
+let g:startify_custom_header = [
+      \ '          (_)            ',
+      \ '   __   __ _  _ __ ___   ',
+      \ '   \ \ / /| || ''_ ` _ \  ',
+      \ '    \ V / | || | | | | | ',
+      \ '     \_/  |_||_| |_| |_| ',
+      \ '',
+      \ ''
+      \ ]
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           Functions and Commands                       {{{1 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -385,10 +407,14 @@ nnoremap <silent> <Leader>q :confirm q<CR>
 nnoremap <silent> <Leader><S-q> :confirm qall<CR>
 nnoremap <Leader>s :update<CR>
 nnoremap <Leader><S-s> :wall<CR>
-nnoremap <Leader>ev :tabedit $MYVIMRC<CR>
-nnoremap <Leader>eb :tabedit ~/.bash_profile<CR>
-nnoremap <Leader>ec :tabedit ~/Estudos/checkpoints.txt<CR>
-nnoremap <Leader>en :tabedit ~/notes.txt<CR>
+" Edit mappings
+nnoremap <Leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <Leader>eb :vsplit ~/.bash_profile<CR>
+nnoremap <Leader>ec :vsplit ~/Estudos/checkpoints.txt<CR>
+nnoremap <Leader>en :vsplit ~/notes.txt<CR>
+" Run mappings
+nnoremap <Leader>rv :source $MYVIMRC<CR>
+nnoremap <Leader>rr :source %<CR>
 
 " Go to tabs
 nnoremap <silent> [<Tab> :<C-U>exe "tabnext"
