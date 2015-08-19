@@ -28,8 +28,7 @@ hotkey.bind(mashs, 'h', grid.resizewindow_thinner)
 hotkey.bind(mashs, 'j', grid.resizewindow_taller)
 hotkey.bind(mashs, 'k', grid.resizewindow_shorter)
 hotkey.bind(mashs, 'l', grid.resizewindow_wider)
-
-hotkey.bind(mash, 'm', grid.maximize_window)
+hotkey.bind(mashs, 'm', grid.maximize_window)
 
 hotkey.bind(mash, 'c', toggle_caffeinate)
 hotkey.bind(mash, 't', test_func)

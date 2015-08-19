@@ -32,9 +32,8 @@ endif
 call plug#begin(s:plugdir)
   Plug 'powerline/fonts', { 'do': './install.sh' }
   Plug 'bling/vim-airline' " Status tabline
-  Plug 'pauloromeira/tabline.vim'
   Plug 'majutsushi/tagbar'
-  Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
+  Plug 'scrooloose/nerdtree' " , { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
         \ | Plug 'pauloromeira/vim-custom-snippets'
   Plug 'scrooloose/syntastic'
@@ -86,7 +85,7 @@ call plug#begin(s:plugdir)
         !./install.sh
       endif
     endfunction
-    Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+    " Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
   endif
 
 
@@ -118,6 +117,7 @@ call plug#begin(s:plugdir)
   " Plug 'mhinz/vim-signify' " Shows VCS (not only git) diff in the sign column
   " Plug 'mileszs/ack.vim' " replaced by ag.vim
   " Plug 'godlygeek/tabular' " Align text (using junegunn/vim-easy-align)
+  " Plug 'pauloromeira/tabline.vim' " using vim-airline's tabline
 
 call plug#end()
 if s:firstrun == 1
@@ -240,6 +240,17 @@ let g:airline_mode_map = {
     \ 'S'  : 'S',
     \ '' : 'S',
     \ }
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#tab_min_count = 2
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
 
 " Tagbar
 nmap <silent> <Leader>tt :TagbarToggle<CR>
@@ -266,8 +277,8 @@ let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
 let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
 let g:ycm_complete_in_comments = 1 " Completion in comments
 let g:ycm_complete_in_strings = 1 " Completion in string
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:ycm_add_preview_to_completeopt = 1
+" let g:ycm_autoclose_preview_window_after_completion = 1
 
 " EasyMotion (just to lazy load the plugin)
 nmap <Leader><Leader>w <Plug>(easymotion-w)
@@ -287,6 +298,8 @@ let g:syntastic_mode_map = {
 let g:bufferline_echo = 0 " Do not echo to the command bar
 let g:bufferline_active_buffer_left = ''
 let g:bufferline_active_buffer_right = ''
+let g:bufferline_rotate = 1
+let g:bufferline_fixed_index = -1 " always second
 
 " vim-hopping
 nmap <Space>/ <Plug>(hopping-start)
@@ -326,14 +339,15 @@ runtime macros/matchit.vim " (native)
 " vim-startify
 let g:startify_session_dir = s:tempdir.'/session'
 let g:startify_bookmarks = [] " always shown
-let g:ctrlp_reuse_window = 'startify'
+autocmd User Startified setlocal buftype= " Reuses startify window
 
 let g:startify_custom_header = [
-      \ '          (_)            ',
-      \ '   __   __ _  _ __ ___   ',
-      \ '   \ \ / /| || ''_ ` _ \  ',
-      \ '    \ V / | || | | | | | ',
-      \ '     \_/  |_||_| |_| |_| ',
+      \ '           _',
+      \ '          (_)',
+      \ '   __   __ _  _ __ ___',
+      \ '   \ \ / /| || ''_ ` _ \',
+      \ '    \ V / | || | | | | |',
+      \ '     \_/  |_||_| |_| |_|',
       \ '',
       \ ''
       \ ]
