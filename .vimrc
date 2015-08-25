@@ -5,6 +5,7 @@
 set nocompatible " Use Vim settings, rather than Vi settings.
 filetype off
 let mapleader = "\<Space>"
+let g:mapleader = "\<Space>"
 let s:vimhome = $HOME."/.vim"
 let s:tempdir = s:vimhome."/temp"
 let s:plugdir = s:vimhome."/plugged"
@@ -49,10 +50,10 @@ call plug#begin(s:plugdir)
   Plug 'tpope/vim-rsi'
   Plug 'vim-scripts/IndexedSearch'
   Plug 'michaeljsmith/vim-indent-object' " ii / ai
-  Plug 'natw/keyboard_cat.vim', { 'on': 'PlayMeOff' } " Pretend you can type fast
   Plug 'pauloromeira/restore_view.vim'
   Plug 'klen/python-mode', { 'for': 'python' }
-  Plug 'tommcdo/vim-exchange', { 'on': '<Plug>(Exchange)' } " Easy text exchange
+  Plug 'tommcdo/vim-exchange', { 'on': ['<Plug>(Exchange)',
+        \ '<Plug>(ExchangeLine)'] } " Easy text exchange
   Plug 'bling/vim-bufferline' " Show the list of buffers in the command bar
   Plug 'airblade/vim-gitgutter' " Shows a git diff in the 'gutter' (sign column)
   Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
@@ -75,6 +76,7 @@ call plug#begin(s:plugdir)
   " Plug 'nanotech/jellybeans.vim'
   " Plug 'tomasr/molokai'
 
+
   if !has('gui_running')
     function! BuildYCM(info)
       " info is a dictionary with 3 fields
@@ -88,6 +90,10 @@ call plug#begin(s:plugdir)
     " Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
   endif
 
+  " Fun
+  " Plug 'natw/keyboard_cat.vim', { 'on': 'PlayMeOff' } " Pretend you can type fast
+  " Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " Distraction-free writing
+  " Plug 'junegunn/limelight.vim', { 'on': 'Limelight' } " Focus tool
 
   " To Test "
   " Plug 'tpope/vim-obsession' " Save editing session
@@ -100,10 +106,11 @@ call plug#begin(s:plugdir)
   " Plug 'davidhalter/jedi-vim' " Autocompletion for python. Obs: unset pymode autocompletion: let g:pymode_rope = 0
   " runtime macros/matchit.vim " (nativo)
   " Plug 'christoomey/vim-tmux-navigator' " Navitate freely between tmux and vim
+  " Plug 'benmills/vimux' " Vim plugin to interact with tmux
   " Plug 'vim-scripts/SmartCase'
   " Plug 'vim-scripts/gitignore'
   " Plug 'Shougo/unite.vim'
-
+  " Plug 'editorconfig/editorconfig-vim'
 
   " Deactivated but still cool "
   " Plug 'osyo-manga/vim-over' " Preview in the command line
@@ -158,12 +165,16 @@ if has("persistent_undo")
   let &undodir = s:tempdir.'/undo//'
   set undofile
   set undolevels=1000 " maximum number of changes that can be undone
-  set undoreload=10000 " maximum number lines to save for undo on a buffer reload
+  set undoreload=10000 " maximum number lines to save for undo
 endif
 
 set nostartofline " Keep the cursor on the same column
 set ignorecase smartcase
 set virtualedit=block " Allow cursor to be anywhere in Visual block mode.
+set autoread " Reload a file when changed outside Vim
+set ttyfast " Faster redrawing
+set noshowmode " Don't output mode
+set title " Set terminal title
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Appearance                            {{{1 "
@@ -194,6 +205,7 @@ for scheme in [
 endfor
 
 let &colorcolumn=join(range(80,999),",")
+" set colorcolumn=80
 
 set cursorline
 if has('autocmd')
@@ -201,6 +213,11 @@ if has('autocmd')
   au WinLeave * :set nocursorline
 endif
 " hi CursorLine ctermbg=black guibg=black
+" Invisible characters
+set invlist
+set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
+" set showbreak=…
+let &showbreak="↪\ "
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Formatting                            {{{1 "
@@ -213,6 +230,7 @@ set softtabstop=2
 set expandtab
 set autoindent
 set copyindent " copy the previous indentation on autoindenting
+set smartindent
 
 " set textwidth=79 " Wrap at 79 characters
 " autocmd filetype c,asm,python setlocal shiftwidth=4 tabstop=4 softtabstop=4
@@ -381,15 +399,30 @@ function! s:autosave(enable)
 endfunction
 command! -bang AutoSave call s:autosave(<bang>1)
 
+" Window movement shortcuts (nicknisi/dotfiles)
+" move to the window in the direction shown, or create a new window
+function! WinMove(key)
+    let t:curwin = winnr()
+    exec "wincmd ".a:key
+    if (t:curwin == winnr())
+        if (match(a:key,'[jk]'))
+            wincmd v
+        else
+            wincmd s
+        endif
+        exec "wincmd ".a:key
+    endif
+endfunction
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Mappings                             {{{1 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Simplify shortcut for changing window
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
+" Simplify shortcut for changing/create window
+noremap <silent> <C-h> :call WinMove('h')<CR>
+noremap <silent> <C-j> :call WinMove('j')<CR>
+noremap <silent> <C-k> :call WinMove('k')<CR>
+noremap <silent> <C-l> :call WinMove('l')<CR>
 " Change <C-p> and <C-n> behave to filter the history
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
@@ -421,11 +454,12 @@ nnoremap <silent> <Leader>q :confirm q<CR>
 nnoremap <silent> <Leader><S-q> :confirm qall<CR>
 nnoremap <Leader>s :update<CR>
 nnoremap <Leader><S-s> :wall<CR>
+nnoremap <Leader>l :set list!<CR>
 " Edit mappings
-nnoremap <Leader>ev :vsplit $MYVIMRC<CR>
-nnoremap <Leader>eb :vsplit ~/.bash_profile<CR>
-nnoremap <Leader>ec :vsplit ~/Estudos/checkpoints.txt<CR>
-nnoremap <Leader>en :vsplit ~/notes.txt<CR>
+nnoremap <Leader>ev :e $MYVIMRC<CR>
+nnoremap <Leader>eb :e ~/.bash_profile<CR>
+nnoremap <Leader>ec :e ~/Estudos/checkpoints.txt<CR>
+nnoremap <Leader>en :e ~/notes.txt<CR>
 " Run mappings
 nnoremap <Leader>rv :source $MYVIMRC<CR>
 nnoremap <Leader>rr :source %<CR>
@@ -452,7 +486,7 @@ nnoremap <silent> ><Tab> :<C-U>exe "tabm +".v:count1<CR>
 nnoremap <silent> <<S-Tab> :tabm 0<CR>
 nnoremap <silent> ><S-Tab> :tabm<CR>
 nnoremap <silent> y<Tab> :tabnew<CR>
-nnoremap <silent> d<Tab> :tabclose<CR>
+nnoremap <silent> c<Tab> :tabclose<CR>
 nnoremap <silent> t<Tab> :tabonly<CR>
 
 " Make Y behave like other capitals
@@ -469,5 +503,9 @@ nnoremap <S-Up> <C-w>+
 nnoremap <S-Down> <C-w>-
 nnoremap <S-Left> <C-w><
 nnoremap <S-Right> <C-w>>
+
+" Scroll the viewport faster
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
