@@ -8,7 +8,7 @@
 
 EXEC=true # Set to false to see an output preview (don't execute)
 
-ROOT=$(pwd)
+BASE=$(pwd)
 case "$(uname -a)" in
   *[Dd]arwin* ) OS="osx" ;;
   *[Uu]buntu* ) OS="ubuntu" ;;
@@ -17,7 +17,7 @@ esac
 
 # Packages represent folders that contains files/dirs
 # to symlink and/or install.sh files to execute.
-PACKAGES=($ROOT $OS vim)
+PACKAGES=($BASE $OS vim)
 
 set -e
 
@@ -77,7 +77,7 @@ link_files() {
 }
 
 run_installation() {
-  info "running installation from $1"
+  info "running installation at $1"
   if [ -f $1/install.sh ]; then
     $EXEC && source $1/install.sh
     success "done $1/install.sh"
@@ -90,8 +90,8 @@ for package in ${PACKAGES[@]}; do
   echo ''
   boot "$(basename $package)"
 
-  if [[ $package != $ROOT ]]; then
-    package="$ROOT/$package"
+  if [[ $package != $BASE ]]; then
+    package="$BASE/$package"
   fi
   link_files $package
   run_installation $package
