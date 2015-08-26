@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+BASE=$(cd "$(dirname "$BASH_SOURCE")" && pwd)
 
 # TO DO: attach a date+count to the backup file
 # TO DO: dinamically construct packages array
@@ -8,7 +9,6 @@
 
 EXEC=true # Set to false to see an output preview (don't execute)
 
-BASE=$(pwd)
 case "$(uname -a)" in
   *[Dd]arwin* ) OS="osx" ;;
   *[Uu]buntu* ) OS="ubuntu" ;;
@@ -19,7 +19,7 @@ esac
 # to symlink and/or install.sh files to execute.
 PACKAGES=($BASE $OS vim)
 
-set -e
+# set -e
 
 #####################
 #  Status Messages  #
@@ -57,8 +57,7 @@ skip() {
 
 link_files() {
   info "linking files from $1"
-  for src in $(find -H "$1" -maxdepth 1 -name '*.symlink')
-  do
+  for src in $(find -H "$1" -maxdepth 1 -name '*.symlink'); do
     dst="$HOME/.$(basename "${src%.*}")"
 
     if [ -L "$dst" ] && [ "$(readlink $dst)" -ef "$src" ]; then
@@ -72,7 +71,7 @@ link_files() {
     fi
 
     $EXEC && ln -s "$src" "$dst"
-    success "linked $src to $dst"
+    success "linked $dst to $src"
   done
 }
 

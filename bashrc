@@ -1,4 +1,4 @@
-BASE=$(dirname $BASH_SOURCE)
+BASE=$(cd "$(dirname "$BASH_SOURCE")" && pwd)
 
 # Aliases
 alias l='ls -lGh'

@@ -5,9 +5,8 @@ My configuration files for OSX and Ubuntu.
 ## Install
 
 ```sh
-git clone https://github.com/pauloromeira/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
-source bootstrap.sh
+git clone https://github.com/pauloromeira/dotfiles.git \
+~/.dotfiles && source ~/.dotfiles/bootstrap.sh
 ```
 
 ## Credits
