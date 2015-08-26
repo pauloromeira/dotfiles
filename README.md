@@ -4,6 +4,7 @@ My configuration files for OSX and Ubuntu.
 
 ## Install
 
+Just copy-paste all and hit enter.
 ```sh
 git clone https://github.com/pauloromeira/dotfiles.git \
 ~/.dotfiles && source ~/.dotfiles/bootstrap.sh
