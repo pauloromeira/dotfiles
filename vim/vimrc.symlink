@@ -51,7 +51,7 @@ call plug#begin(s:plugdir)
   Plug 'vim-scripts/IndexedSearch'
   Plug 'michaeljsmith/vim-indent-object' " ii / ai
   Plug 'pauloromeira/restore_view.vim'
-  Plug 'klen/python-mode', { 'for': 'python' }
+  " Plug 'klen/python-mode', { 'for': 'python' }
   Plug 'tommcdo/vim-exchange', { 'on': ['<Plug>(Exchange)',
         \ '<Plug>(ExchangeLine)'] } " Easy text exchange
   Plug 'bling/vim-bufferline' " Show the list of buffers in the command bar
@@ -84,7 +84,7 @@ call plug#begin(s:plugdir)
       " - status: 'installed', 'updated', or 'unchanged'
       " - force:  set on PlugInstall! or PlugUpdate!
       if a:info.status == 'installed' || a:info.force
-        !./install.sh
+        !./install.py
       endif
     endfunction
     " Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
@@ -214,7 +214,7 @@ if has('autocmd')
 endif
 " hi CursorLine ctermbg=black guibg=black
 " Invisible characters
-set invlist
+set nolist
 set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 " set showbreak=…
 let &showbreak="↪\ "
@@ -492,7 +492,7 @@ nnoremap <silent> t<Tab> :tabonly<CR>
 " Make Y behave like other capitals
 nnoremap Y y$
 " qq to record, Q to replay
-nmap Q @q
+nnoremap Q @q
 
 " Resize windows with arrowkeys
 nnoremap <Up> <C-w>5+
