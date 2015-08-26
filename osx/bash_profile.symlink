@@ -3,3 +3,24 @@ BASE=$(dirname $(readlink $BASH_SOURCE))
 # Run cross-platform bash config
 BASHRC=$BASE/../bashrc
 [ -f "$BASHRC" ] && source "$BASHRC"
+
+# Python virtualenvs
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper_lazy.sh
+
+# Aliases
+alias upg='brew update && brew upgrade && brew cleanup && brew cask cleanup'
+alias mvi='mvim'
+alias ip='ifconfig|grep broadcast'
+alias top='top -o cpu'
+
+### Added by the Heroku Toolbelt
+PATH="/usr/local/heroku/bin:$PATH"
+# Setting PATH for Python 2.7
+PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
+# Setting PATH for Python 3.4
+PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
+# PostgreSQL
+PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:${PATH}"
+
+export PATH
