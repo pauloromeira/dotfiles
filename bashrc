@@ -1,6 +1,6 @@
 # Aliases
 alias l='ls -lGh'
-alias la='ll -A'
+alias la='l -A'
 alias tree='tree -C'
 alias rm='rm -i'
 alias py='python'
