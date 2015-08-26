@@ -1,0 +1,5 @@
+BASE=$(dirname $(readlink $BASH_SOURCE))
+
+# Run cross-platform bash config
+BASHRC=$BASE/../bashrc
+[ -f "$BASHRC" ] && source "$BASHRC"

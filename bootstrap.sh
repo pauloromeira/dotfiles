@@ -6,7 +6,7 @@
 # TO DO: argument to see an output preview (don't do anything)
 # TO DO: generate log
 
-EXEC=false # Set to false to see an output preview (don't execute)
+EXEC=true # Set to false to see an output preview (don't execute)
 
 ROOT=$(pwd)
 case "$(uname -a)" in
@@ -26,7 +26,7 @@ set -e
 #####################
 
 boot() {
-  printf "\r  [ \033[00;35m++\033[0m ] $1\n"
+  printf "\r[ \033[00;35m--\033[0m ] $1\n"
 }
 
 info() {
