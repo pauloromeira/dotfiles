@@ -1,0 +1,15 @@
+cmake
+ctags
+git
+ruby 2.2.3
+caskroom/cask/brew-cask
+lua 5.2.4_1
+node 0.12.7
+sqlite 3.8.11.1
+the_silver_searcher
+tmux
+tree
+unrar
+vim
+youtube-dl
+zsh

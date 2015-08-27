@@ -24,5 +24,4 @@ alias sudo='sudo ' # Allows running sudo with aliases
 # Setting ag as the default source for fzf
 # export FZF_DEFAULT_COMMAND='ag -la'
 
-EXTRA=$BASE/bashrc-extra
-[ -f "$EXTRA" ] && source "$EXTRA"
+[ -f "$BASE/bashrc-extra" ] && source "$BASE/bashrc-extra"

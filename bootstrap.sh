@@ -6,6 +6,7 @@ BASE=$(cd "$(dirname "$BASH_SOURCE")" && pwd)
 # TO DO: optionally pass specific packages by argument
 # TO DO: argument to see an output preview (don't do anything)
 # TO DO: generate log
+# TO DO: create bootstrap_minimum.sh (just calling bootstrap.sh with args)
 
 EXEC=true # Set to false to see an output preview (don't execute)
 
@@ -17,6 +18,7 @@ esac
 
 # Packages represent folders that contains files/dirs
 # to symlink and/or install.sh files to execute.
+# TO DO: add subpackages (subdirs), but let the parent packages handle
 PACKAGES=($BASE $OS vim)
 
 # set -e
@@ -42,8 +44,7 @@ success() {
 }
 
 fail() {
-  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
-  echo ''
+  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n\n"
   exit
 }
 
@@ -77,24 +78,21 @@ link_files() {
 
 run_installation() {
   info "running installation at $1"
-  if [ -f $1/install.sh ]; then
-    $EXEC && source $1/install.sh
+  if [ -f "$1/install.sh" ]; then
+    $EXEC && source "$1/install.sh"
     success "done $1/install.sh"
   fi
 }
 
-echo 'bootstrapping...'
+printf 'bootstrapping...\n'
 
 for package in ${PACKAGES[@]}; do
-  echo ''
-  boot "$(basename $package)"
-
-  if [[ $package != $BASE ]]; then
+  boot "$(basename "$package")"
+  if [ "$package" != "$BASE" ]; then
     package="$BASE/$package"
   fi
-  link_files $package
-  run_installation $package
+  link_files "$package"
+  run_installation "$package"
 done
 
-echo ''
-echo 'done.'
+printf '\ndone.'

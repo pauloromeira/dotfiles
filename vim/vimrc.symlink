@@ -457,7 +457,7 @@ nnoremap <Leader><S-s> :wall<CR>
 nnoremap <Leader>l :set list!<CR>
 " Edit mappings
 nnoremap <Leader>ev :e $MYVIMRC<CR>
-nnoremap <Leader>eb :e ~/.bash_profile<CR>
+nnoremap <Leader>eb :e ~/.dotfiles/bashrc<CR>
 nnoremap <Leader>ec :e ~/Estudos/checkpoints.txt<CR>
 nnoremap <Leader>en :e ~/notes.txt<CR>
 " Run mappings
