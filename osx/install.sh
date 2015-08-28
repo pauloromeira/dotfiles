@@ -16,3 +16,5 @@ printf '\nInstalling brew formulae...\n'
 brew install $(cut -d' ' -f1 "$DOT_OSX/formulae.brew")
 # printf '\nInstalling brew cask formulae... \n'
 # brew cask install $(cut -d' ' -f1 "$DOT_OSX/formulae.cask.brew")
+
+pip install virtualenv virtualenvwrapper

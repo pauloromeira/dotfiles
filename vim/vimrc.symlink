@@ -69,8 +69,9 @@ call plug#begin(s:plugdir)
 
   " Colorschemes
   Plug 'pauloromeira/vim-tomorrow-theme'
-  Plug 'morhetz/gruvbox'
   Plug 'jonathanfilip/vim-lucius'
+  Plug 'morhetz/gruvbox'
+  " Plug 'kristijanhusak/vim-hybrid-material'
   " Plug 'altercation/vim-colors-solarized'
   " Plug 'w0ng/vim-hybrid'
   " Plug 'nanotech/jellybeans.vim'

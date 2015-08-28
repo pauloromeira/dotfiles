@@ -12,10 +12,6 @@ alias top='top -o cpu'
 
 ### Added by the Heroku Toolbelt
 PATH="/usr/local/heroku/bin:$PATH"
-# Setting PATH for Python 2.7
-PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
-# Setting PATH for Python 3.4
-PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
 # PostgreSQL
 PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:${PATH}"
 

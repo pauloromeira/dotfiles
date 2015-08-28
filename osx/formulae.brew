@@ -1,6 +1,8 @@
 cmake
 ctags
 git
+python
+python3
 ruby 2.2.3
 caskroom/cask/brew-cask
 lua 5.2.4_1
