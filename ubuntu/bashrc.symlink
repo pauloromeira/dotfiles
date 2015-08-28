@@ -1,6 +1,3 @@
-DOT_UBUNTU=$(cd "$(dirname "$(readlink "$BASH_SOURCE")")" && pwd)
-DOT=$(dirname "$DOT_UBUNTU")
-
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -10,6 +7,9 @@ case $- in
     *i*) ;;
       *) return;;
 esac
+
+DOT_UBUNTU=$(cd "$(dirname "$(readlink "$BASH_SOURCE")")" && pwd)
+DOT=$(dirname "$DOT_UBUNTU")
 
 # Run cross-platform profile
 [ -f "$DOT/profile" ] && source "$DOT/profile"
@@ -105,6 +105,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-
-# Custom aliases
+# Aliases
 alias upg='sudo apt-get update && sudo apt-get -y upgrade'
+
+# Run system specific profile
+[ -f "$DOT/profile-extra" ] && source "$DOT/profile-extra"

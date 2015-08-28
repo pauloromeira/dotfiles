@@ -26,5 +26,3 @@ source /usr/local/bin/virtualenvwrapper_lazy.sh
 # Fuzzy finder (https://github.com/junegunn/fzf)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# Run system specific profile
-[ -f "$DOT/profile-extra" ] && source "$DOT/profile-extra"

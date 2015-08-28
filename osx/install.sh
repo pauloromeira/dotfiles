@@ -14,5 +14,5 @@ printf 'Installing Homebrew...\n'
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 printf '\nInstalling brew formulae...\n'
 brew install $(cut -d' ' -f1 "$DOT_OSX/formulae.brew")
-printf '\nInstalling brew cask formulae... \n'
-brew cask install $(cut -d' ' -f1 "$DOT_OSX/formulae.cask.brew")
+# printf '\nInstalling brew cask formulae... \n'
+# brew cask install $(cut -d' ' -f1 "$DOT_OSX/formulae.cask.brew")

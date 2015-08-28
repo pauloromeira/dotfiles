@@ -20,3 +20,6 @@ PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
 PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:${PATH}"
 
 export PATH
+
+# Run system specific profile
+[ -f "$DOT/profile-extra" ] && source "$DOT/profile-extra"

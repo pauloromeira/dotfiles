@@ -59,7 +59,7 @@ link_files() {
   for src in $(find -H "$1" -maxdepth 1 -name '*.symlink'); do
     dst="$HOME/.$(basename "${src%.*}")"
 
-    if [ -L "$dst" ] && [ "$(readlink $dst)" -ef "$src" ]; then
+    if [ -L "$dst" ] && [ "$(readlink "$dst")" -ef "$src" ]; then
       skip "skipped $dst"
       continue
     fi
