@@ -1,15 +1,13 @@
-#!/usr/bin/env bash
-local BASE=$(cd "$(dirname "$BASH_SOURCE")" && pwd)
+DOT=$(cd "$(dirname "$BASH_SOURCE")" && pwd)
 
 # TO DO: attach a date+count to the backup file
 # TO DO: dinamically construct packages array
 # TO DO: optionally pass specific packages by argument
+# TO DO: create options passed by arguments (essential, basic, full, etc)
 # TO DO: argument to see an output preview (don't do anything)
 # TO DO: generate log
-# TO DO: create bootstrap_minimum.sh (just calling bootstrap.sh with args)
 
 EXEC=true # Set to false to see an output preview (don't execute)
-
 case "$(uname -a)" in
   *[Dd]arwin* ) OS="osx" ;;
   *[Uu]buntu* ) OS="ubuntu" ;;
@@ -19,7 +17,7 @@ esac
 # Packages represent folders that contains files/dirs
 # to symlink and/or install.sh files to execute.
 # TO DO: add subpackages (subdirs), but let the parent packages handle
-PACKAGES=($BASE $OS vim)
+PACKAGES=($DOT $OS vim)
 
 # set -e
 
@@ -88,8 +86,8 @@ printf 'bootstrapping...\n'
 
 for package in ${PACKAGES[@]}; do
   boot "$(basename "$package")"
-  if [ "$package" != "$BASE" ]; then
-    package="$BASE/$package"
+  if [ "$package" != "$DOT" ]; then
+    package="$DOT/$package"
   fi
   link_files "$package"
   run_installation "$package"

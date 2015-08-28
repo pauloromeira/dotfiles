@@ -1,4 +1,4 @@
-BASE=$(cd "$(dirname "$BASH_SOURCE")" && pwd)
+DOT=$(cd "$(dirname "$BASH_SOURCE")" && pwd)
 
 # Aliases
 alias l='ls -lGh'
@@ -19,10 +19,12 @@ alias rsync-mv='rsync -rvhz --info=progress2 --size-only --remove-source-files -
 alias ds='du -s .[!.]* * | sort -rn | cut -f2 | tr "\n" "\0" | xargs -0 du -hsc'
 alias sudo='sudo ' # Allows running sudo with aliases
 
+# Python virtualenvs
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper_lazy.sh
+
 # Fuzzy finder (https://github.com/junegunn/fzf)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-# Setting ag as the default source for fzf
-# export FZF_DEFAULT_COMMAND='ag -la'
 
 # Run system specific profile
-[ -f "$BASE/profile-extra" ] && source "$BASE/profile-extra"
+[ -f "$DOT/profile-extra" ] && source "$DOT/profile-extra"

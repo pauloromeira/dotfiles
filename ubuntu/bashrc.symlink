@@ -1,3 +1,6 @@
+DOT_UBUNTU=$(cd "$(dirname "$(readlink "$BASH_SOURCE")")" && pwd)
+DOT=$(dirname "$DOT_UBUNTU")
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -8,10 +11,8 @@ case $- in
       *) return;;
 esac
 
-BASE=$(dirname $(readlink $BASH_SOURCE))
-
 # Run cross-platform profile
-[ -f "$BASE/../profile" ] && source "$BASE/../profile"
+[ -f "$DOT/profile" ] && source "$DOT/profile"
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options

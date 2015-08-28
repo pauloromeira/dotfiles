@@ -1,11 +1,8 @@
-BASE=$(dirname $(readlink $BASH_SOURCE))
+DOT_OSX=$(cd "$(dirname "$(readlink "$BASH_SOURCE")")" && pwd)
+DOT=$(dirname "$DOT_OSX")
 
 # Run cross-platform profile
-[ -f "$BASE/../profile" ] && source "$BASE/../profile"
-
-# Python virtualenvs
-export WORKON_HOME=$HOME/.virtualenvs
-source /usr/local/bin/virtualenvwrapper_lazy.sh
+[ -f "$DOT/profile" ] && source "$DOT/profile"
 
 # Aliases
 alias upg='brew update && brew upgrade && brew cleanup && brew cask cleanup'
