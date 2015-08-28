@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-BASE=$(cd "$(dirname "$BASH_SOURCE")" && pwd)
+local BASE=$(cd "$(dirname "$BASH_SOURCE")" && pwd)
 
 # TO DO: attach a date+count to the backup file
 # TO DO: dinamically construct packages array

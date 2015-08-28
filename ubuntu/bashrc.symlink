@@ -10,8 +10,8 @@ esac
 
 BASE=$(dirname $(readlink $BASH_SOURCE))
 
-# Run cross-platform bash config
-[ -f "$BASE/../bashrc" ] && source "$BASE/../bashrc"
+# Run cross-platform profile
+[ -f "$BASE/../profile" ] && source "$BASE/../profile"
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options

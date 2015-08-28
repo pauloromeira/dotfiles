@@ -1,7 +1,7 @@
 BASE=$(dirname $(readlink $BASH_SOURCE))
 
-# Run cross-platform bash config
-[ -f "$BASE/../bashrc" ] && source "$BASE/../bashrc"
+# Run cross-platform profile
+[ -f "$BASE/../profile" ] && source "$BASE/../profile"
 
 # Python virtualenvs
 export WORKON_HOME=$HOME/.virtualenvs
