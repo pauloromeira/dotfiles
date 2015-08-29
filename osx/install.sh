@@ -1,20 +1,19 @@
-DOT_OSX=$(cd "$(dirname "$BASH_SOURCE")" && pwd)
+BASE=$(cd "$(dirname "$BASH_SOURCE")" && pwd)
 
 # TO DO: do not install cask formulae, unless explictly asked
+# TO DO: some formulae installation accept arguments
 # TO DO: install brew formulae from specific versions, but warns about
 #   outdated formulae
-# TO DO: setup python and virtualenv(wrapper) or create another install.sh
-#   on the root if the process is the same for ubuntu.
+# TO DO: create hooks at the root directory to run code before/after
+  # packages (e.g. for pip install, since it's the same for unix systems)
 # TO DO: install textual (not in cask)
-# TO DO: install Xcode
 # TO DO: skip commented formulae on .brew extensions
-# TO DO: install fzf (maybe in the root directory of dotfiles (for osx and ubuntu)
 
 printf 'Installing Homebrew...\n'
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 printf '\nInstalling brew formulae...\n'
-brew install $(cut -d' ' -f1 "$DOT_OSX/formulae.brew")
+brew install $(cut -d' ' -f1 "$BASE/formulae.brew")
 # printf '\nInstalling brew cask formulae... \n'
-# brew cask install $(cut -d' ' -f1 "$DOT_OSX/formulae.cask.brew")
+# brew cask install $(cut -d' ' -f1 "$BASE/formulae.cask.brew")
 
 pip install virtualenv virtualenvwrapper

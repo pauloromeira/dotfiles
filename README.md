@@ -7,7 +7,7 @@ My configuration files for OSX and Ubuntu.
 Just copy-paste all and hit enter.
 ```sh
 git clone https://github.com/pauloromeira/dotfiles.git \
-~/.dotfiles && source ~/.dotfiles/bootstrap.sh
+~/.dotfiles && ~/.dotfiles/bootstrap.sh
 ```
 
 ## Credits

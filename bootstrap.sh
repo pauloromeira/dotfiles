@@ -1,31 +1,14 @@
-DOT=$(cd "$(dirname "$BASH_SOURCE")" && pwd)
+BASE=$(cd "$(dirname "$BASH_SOURCE")" && pwd)
 
-# TO DO: attach a date+count to the backup file
-# TO DO: dinamically construct packages array
-# TO DO: optionally pass specific packages by argument
-# TO DO: create options passed by arguments (essential, basic, full, etc)
-# TO DO: argument to see an output preview (don't do anything)
-# TO DO: generate log
+#############
+#  Messages #
+#############
 
-EXEC=true # Set to false to see an output preview (don't execute)
-case "$(uname -a)" in
-  *[Dd]arwin* ) OS="osx" ;;
-  *[Uu]buntu* ) OS="ubuntu" ;;
-  *           ) OS= ;;
-esac
+user () {
+  printf "\r  [ \033[0;36m??\033[0m ] $1"
+}
 
-# Packages represent folders that contains files/dirs
-# to symlink and/or install.sh files to execute.
-# TO DO: add subpackages (subdirs), but let the parent packages handle
-PACKAGES=($DOT $OS vim)
-
-# set -e
-
-#####################
-#  Status Messages  #
-#####################
-
-boot() {
+group() {
   printf "\r[ \033[00;35m--\033[0m ] $1\n"
 }
 
@@ -50,9 +33,45 @@ skip() {
   printf "\r  [ \033[00;30m>>\033[0m ] $1\n"
 }
 
-#############################
-#  Link & Install Packages  #
-#############################
+####################
+#  Gathering Info  #
+####################
+
+# TO DO: create options passed by arguments (essential, basic, full, etc)
+# TO DO: argument to see an output preview (don't do anything)
+# TO DO: generate log
+
+EXEC=true # Set to false to see an output preview (don't execute)
+DOT="$BASE"
+case "$(uname -a)" in
+  *[Dd]arwin* ) OS="osx" ;;
+  *[Uu]buntu* ) OS="ubuntu" ;;
+  *           ) 
+    user "unknown operating system. use configurations from:\n\
+         [o]sx, [u]buntu, [n]one, [a]bort: "
+    read -n 1 action
+    printf "\n"
+    case "$action" in
+      o ) OS="osx" ;;
+      u ) OS="ubuntu" ;;
+      n ) OS="unknown" ;;
+      a ) fail "no operating system was setted"
+    esac
+    ;;
+esac
+
+# Packages represent folders that contains files/dirs
+# to symlink and/or install.sh files to execute.
+# TO DO: dinamically construct packages array
+# TO DO: optionally pass specific packages by argument
+# TO DO: allow subpackages
+PACKAGES=(vim)
+
+# set -e
+
+###################
+#  Link & Install #
+###################
 
 link_files() {
   info "linking files from $1"
@@ -64,6 +83,7 @@ link_files() {
       continue
     fi
 
+    # TO DO: attach a date+count to the backup file
     if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]; then
       $EXEC && mv "$dst" "${dst}.backup"
       warning "moved $dst to ${dst}.backup"
@@ -77,20 +97,28 @@ link_files() {
 run_installation() {
   info "running installation at $1"
   if [ -f "$1/install.sh" ]; then
-    $EXEC && source "$1/install.sh"
+    $EXEC && "$1/install.sh"
     success "done $1/install.sh"
   fi
 }
 
-printf 'bootstrapping...\n'
-
-for package in ${PACKAGES[@]}; do
-  boot "$(basename "$package")"
-  if [ "$package" != "$DOT" ]; then
-    package="$DOT/$package"
+boot_package() {
+  local package="$1"
+  group "$(basename "$package")"
+  if [ "${package:0:1}" != "/" ]; then
+    package="$BASE/$package"
   fi
   link_files "$package"
   run_installation "$package"
+}
+
+printf 'bootstrapping...\n'
+
+boot_package "$DOT"
+[ "$OS" != "unknown" ] && boot_package "$OS"
+
+for package in ${PACKAGES[@]}; do
+  boot_package "$package"
 done
 
-printf '\ndone.'
+printf '\ndone.\n'

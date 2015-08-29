@@ -31,6 +31,9 @@ if !filereadable(s:plugfile) " Download manager if first run
 endif
 
 call plug#begin(s:plugdir)
+  " TO DO: find a way to install this plugin automatically
+  Plug 'Valloric/YouCompleteMe'
+
   Plug 'powerline/fonts', { 'do': './install.sh' }
   Plug 'bling/vim-airline' " Status tabline
   Plug 'majutsushi/tagbar'
@@ -59,6 +62,7 @@ call plug#begin(s:plugdir)
   Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
   Plug 'osyo-manga/vim-hopping', { 'on': '<Plug>(hopping-start)' } " Search and replace
   Plug 'rking/ag.vim' " faster than ack
+  " TO DO: install fzf at dotfiles bootstrap
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
   Plug 'airblade/vim-rooter', { 'on': '<Plug>RooterChangeToRootDirectory' }
   Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)',
@@ -76,20 +80,6 @@ call plug#begin(s:plugdir)
   " Plug 'w0ng/vim-hybrid'
   " Plug 'nanotech/jellybeans.vim'
   " Plug 'tomasr/molokai'
-
-
-  if !has('gui_running')
-    function! BuildYCM(info)
-      " info is a dictionary with 3 fields
-      " - name:   name of the plugin
-      " - status: 'installed', 'updated', or 'unchanged'
-      " - force:  set on PlugInstall! or PlugUpdate!
-      if a:info.status == 'installed' || a:info.force
-        !./install.py
-      endif
-    endfunction
-    " Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-  endif
 
   " Fun
   " Plug 'natw/keyboard_cat.vim', { 'on': 'PlayMeOff' } " Pretend you can type fast
