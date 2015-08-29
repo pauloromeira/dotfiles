@@ -3,11 +3,11 @@ ctags
 git
 python
 python3
-ruby 2.2.3
+ruby
 caskroom/cask/brew-cask
-lua 5.2.4_1
-node 0.12.7
-sqlite 3.8.11.1
+lua
+node
+sqlite
 the_silver_searcher
 tmux
 tree

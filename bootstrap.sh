@@ -38,6 +38,7 @@ skip() {
 ####################
 
 # TO DO: create options passed by arguments (essential, basic, full, etc)
+  # those options can be set in a config file (e.g. essential=(dot, os, vim))
 # TO DO: argument to see an output preview (don't do anything)
 # TO DO: generate log
 

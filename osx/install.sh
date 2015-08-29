@@ -8,12 +8,40 @@ BASE=$(cd "$(dirname "$BASH_SOURCE")" && pwd)
   # packages (e.g. for pip install, since it's the same for unix systems)
 # TO DO: install textual (not in cask)
 # TO DO: skip commented formulae on .brew extensions
+# TO DO: create a utils script to provide common functions to install scripts
+  # e.g. info messages / interaction / log (maybe requirements installation)
+
+
+# TO DO: create a layer of abstraction to run package management installations
+  # e.g. search for .brew.packman files and install requirements list with brew
+  # (maybe this can be a new software!)
+packages_batch() {
+  manager="$1"
+  command="$2"
+  ext=""
+
+  IFS=' ' read -ra MANAGER_NAMES <<< "$manager"
+  for manager_name in "${MANAGER_NAMES[@]}"; do
+    ext=".$manager_name$ext"
+  done
+
+  while read -r pkg; do
+    echo "$pkg"
+    "$manager" "$command" "$pkg"
+  done < "$BASE/packages$ext"
+}
 
 printf 'Installing Homebrew...\n'
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-printf '\nInstalling brew formulae...\n'
-brew install $(cut -d' ' -f1 "$BASE/formulae.brew")
-# printf '\nInstalling brew cask formulae... \n'
-# brew cask install $(cut -d' ' -f1 "$BASE/formulae.cask.brew")
 
-pip install virtualenv virtualenvwrapper
+printf '\nInstalling brew formulae...\n'
+packages_batch brew install 
+
+# printf '\nInstalling brew cask formulae... \n'
+# packages_batch "brew cask" install
+
+printf '\nInstalling python packages...\n'
+packages_batch pip install
+
+printf '\nInstalling lua packages...\n'
+packages_batch luarocks install
