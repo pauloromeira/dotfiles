@@ -25,7 +25,7 @@ success() {
 }
 
 fail() {
-  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n\n"
+  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
   exit
 }
 
@@ -46,16 +46,17 @@ DOT="$BASE"
 case "$(uname -a)" in
   *[Dd]arwin* ) OS="osx" ;;
   *[Uu]buntu* ) OS="ubuntu" ;;
-  *           ) 
+  * )
     user "unknown operating system. use configurations from:\n\
-         [o]sx, [u]buntu, [n]one, [a]bort: "
+         [o]sx, [u]buntu, [s]kip, [a]bort: "
     read -n 1 action
     printf "\n"
     case "$action" in
       o ) OS="osx" ;;
       u ) OS="ubuntu" ;;
-      n ) OS="unknown" ;;
-      a ) fail "no operating system was setted"
+      s ) OS= ;;
+      a ) warning "bootstrap aborted"; exit ;;
+      * ) fail "no operating system was setted" ;;
     esac
     ;;
 esac
@@ -115,7 +116,7 @@ boot_package() {
 printf 'bootstrapping...\n'
 
 boot_package "$DOT"
-[ "$OS" != "unknown" ] && boot_package "$OS"
+[ -n "$OS" ] && boot_package "$OS"
 
 for package in ${PACKAGES[@]}; do
   boot_package "$package"
