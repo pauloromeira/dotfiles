@@ -50,7 +50,7 @@ call plug#begin(s:plugdir)
   Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-unimpaired'
-  Plug 'tpope/vim-rsi'
+  Plug 'tpope/vim-rsi' " Readline style insertion
   Plug 'vim-scripts/IndexedSearch'
   Plug 'michaeljsmith/vim-indent-object' " ii / ai
   Plug 'pauloromeira/restore_view.vim'
@@ -69,7 +69,10 @@ call plug#begin(s:plugdir)
         \ 'EasyAlign'] } " Align text
   Plug 'justinmk/vim-gtfo' " Go to Terminal or File manager (gof, got)
   Plug 'kshenoy/vim-signature' " Place, toggle and display marks
-  Plug 'mhinz/vim-startify' " A fancy start screen for Vim (also manages sessions)
+  Plug 'mhinz/vim-startify' " A fancy start screen for Vim (also session manager)
+  " TO DO: install node/npm on ubuntu
+  Plug 'suan/vim-instant-markdown', { 'do': 'npm -g install instant-markdown-d',
+        \ 'for': 'markdown' } " Preview markdown files
 
   " Colorschemes
   Plug 'pauloromeira/vim-tomorrow-theme'
@@ -102,6 +105,10 @@ call plug#begin(s:plugdir)
   " Plug 'vim-scripts/gitignore'
   " Plug 'Shougo/unite.vim'
   " Plug 'editorconfig/editorconfig-vim'
+  " Plug 'Rykka/riv.vim' " Take Notes in rst
+  " Plug 'Rykka/InstantRst' " Preview markdown files
+  " Plug 'AndrewRadev/splitjoin.vim' " Switch between single-line and a multi-line statement
+  " Plug 'AndrewRadev/switch.vim' 
 
   " Deactivated but still cool "
   " Plug 'osyo-manga/vim-over' " Preview in the command line
@@ -268,8 +275,10 @@ nmap <silent> <Leader>tt :TagbarToggle<CR>
 nmap <silent> <Leader>tn :NERDTreeToggle<CR>
 
 " Undotree
-nmap <silent> U :UndotreeToggle<CR> " Native 'U' is a weird command
-nmap <silent> <Leader>tu :UndotreeToggle<CR> " Follows the toggle convention
+" Native 'U' is a weird command
+nmap <silent> U :UndotreeToggle<CR>
+" Follows the 'toggle' convention
+nmap <silent> <Leader>tu :UndotreeToggle<CR>
 let g:undotree_WindowLayout = 4
 
 " UltiSnipets
@@ -361,6 +370,9 @@ let g:startify_custom_header = [
       \ ''
       \ ]
 
+" TO DO: single mapping to preview files based on extension
+" vim-instant-markdown
+let g:instant_markdown_autostart = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           Functions and Commands                       {{{1 "

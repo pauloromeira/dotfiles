@@ -18,24 +18,18 @@ BASE=$(cd "$(dirname "$BASH_SOURCE")" && pwd)
 packages_batch() {
   manager="$1"
   command="$2"
-  ext=""
-
-  IFS=' ' read -ra MANAGER_NAMES <<< "$manager"
-  for manager_name in "${MANAGER_NAMES[@]}"; do
-    ext=".$manager_name$ext"
-  done
 
   while read -r pkg; do
     echo "$pkg"
     "$manager" "$command" "$pkg"
-  done < "$BASE/packages$ext"
+  done < "$BASE/packages/${manager// /.}.packages"
 }
 
 printf 'Installing Homebrew...\n'
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 printf '\nInstalling brew formulae...\n'
-packages_batch brew install 
+packages_batch brew install
 
 # printf '\nInstalling brew cask formulae... \n'
 # packages_batch "brew cask" install
