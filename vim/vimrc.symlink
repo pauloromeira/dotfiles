@@ -108,7 +108,7 @@ call plug#begin(s:plugdir)
   " Plug 'Rykka/riv.vim' " Take Notes in rst
   " Plug 'Rykka/InstantRst' " Preview markdown files
   " Plug 'AndrewRadev/splitjoin.vim' " Switch between single-line and a multi-line statement
-  " Plug 'AndrewRadev/switch.vim' 
+  " Plug 'AndrewRadev/switch.vim'
 
   " Deactivated but still cool "
   " Plug 'osyo-manga/vim-over' " Preview in the command line
@@ -413,7 +413,7 @@ function! WinMove(key)
         else
             wincmd s
         endif
-        exec "wincmd ".a:key
+        exec "wincmd ".a:key." | Startify"
     endif
 endfunction
 
@@ -488,7 +488,7 @@ nnoremap <silent> <<Tab> :<C-U>exe "tabm -".v:count1<CR>
 nnoremap <silent> ><Tab> :<C-U>exe "tabm +".v:count1<CR>
 nnoremap <silent> <<S-Tab> :tabm 0<CR>
 nnoremap <silent> ><S-Tab> :tabm<CR>
-nnoremap <silent> y<Tab> :tabnew<CR>
+nnoremap <silent> y<Tab> :tabnew \| Startify<CR>
 nnoremap <silent> c<Tab> :tabclose<CR>
 nnoremap <silent> t<Tab> :tabonly<CR>
 
