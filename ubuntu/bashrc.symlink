@@ -109,4 +109,4 @@ fi
 alias upg='sudo apt-get update && sudo apt-get -y upgrade'
 
 # Run system specific profile
-[ -f "$DOT/profile-extra" ] && source "$DOT/profile-extra"
+[ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"

@@ -109,6 +109,8 @@ call plug#begin(s:plugdir)
   " Plug 'Rykka/InstantRst' " Preview markdown files
   " Plug 'AndrewRadev/splitjoin.vim' " Switch between single-line and a multi-line statement
   " Plug 'AndrewRadev/switch.vim'
+  " Plug 'vim-scripts/ReplaceWithRegister'
+  " Plug 'christoomey/vim-titlecase'
 
   " Deactivated but still cool "
   " Plug 'osyo-manga/vim-over' " Preview in the command line
@@ -413,6 +415,7 @@ function! WinMove(key)
         else
             wincmd s
         endif
+        " TO DO: close window/tab when pressing 'q' on Startify
         exec "wincmd ".a:key." | Startify"
     endif
 endfunction
