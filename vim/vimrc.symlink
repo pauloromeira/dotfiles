@@ -9,26 +9,11 @@ let g:mapleader = "\<Space>"
 let s:vimhome = $HOME."/.vim"
 let s:tempdir = s:vimhome."/temp"
 let s:plugdir = s:vimhome."/plugged"
+let g:localdir = s:vimhome."/local"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Plugins                              {{{1 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let s:firstrun = 0
-let s:plugfile = s:vimhome."/autoload/plug.vim"
-if !filereadable(s:plugfile) " Download manager if first run
-  let s:firstrun = 1
-  " Make directories
-  silent execute "!mkdir -p ".
-        \ s:vimhome."/autoload ".
-        \ s:tempdir."/{undo,backup,swap,view}"
-  " Download Vim-plug
-  let s:plugurl =
-        \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-  silent execute
-        \ "!curl -fLo ".s:plugfile." ".s:plugurl.
-        \ " || wget -O ".s:plugfile." ".s:plugurl
-endif
 
 call plug#begin(s:plugdir)
   " TO DO: find a way to install this plugin automatically
@@ -39,7 +24,6 @@ call plug#begin(s:plugdir)
   Plug 'majutsushi/tagbar'
   Plug 'scrooloose/nerdtree' " , { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-        \ | Plug 'pauloromeira/vim-custom-snippets'
   Plug 'scrooloose/syntastic'
   Plug 'easymotion/vim-easymotion', { 'on': ['<Plug>(easymotion-w)',
         \ '<Plug>(easymotion-b)', '<Plug>(easymotion-s)'] }
@@ -53,7 +37,6 @@ call plug#begin(s:plugdir)
   Plug 'tpope/vim-rsi' " Readline style insertion
   Plug 'vim-scripts/IndexedSearch'
   Plug 'michaeljsmith/vim-indent-object' " ii / ai
-  Plug 'pauloromeira/restore_view.vim'
   " Plug 'klen/python-mode', { 'for': 'python' }
   Plug 'tommcdo/vim-exchange', { 'on': ['<Plug>(Exchange)',
         \ '<Plug>(ExchangeLine)'] } " Easy text exchange
@@ -69,13 +52,19 @@ call plug#begin(s:plugdir)
         \ 'EasyAlign'] } " Align text
   Plug 'justinmk/vim-gtfo' " Go to Terminal or File manager (gof, got)
   Plug 'kshenoy/vim-signature' " Place, toggle and display marks
-  Plug 'mhinz/vim-startify' " A fancy start screen for Vim (also session manager)
   " TO DO: install node/npm on ubuntu
   Plug 'suan/vim-instant-markdown', { 'do': 'npm -g install instant-markdown-d',
         \ 'for': 'markdown' } " Preview markdown files
+  Plug 'mhinz/vim-startify' " A fancy start screen for Vim (also session manager)
+
+  " Locals
+  Plug g:localdir.'/vim-tomorrow-theme'
+  Plug g:localdir.'/vim-custom-snippets'
+  Plug g:localdir.'/restore_view.vim'
+  Plug g:localdir.'/vim-startmode'
+  " Plug g:localdir.'/tabline.vim' " using vim-airline's tabline
 
   " Colorschemes
-  Plug 'pauloromeira/vim-tomorrow-theme'
   Plug 'jonathanfilip/vim-lucius'
   Plug 'morhetz/gruvbox'
   " Plug 'kristijanhusak/vim-hybrid-material'
@@ -124,12 +113,8 @@ call plug#begin(s:plugdir)
   " Plug 'mhinz/vim-signify' " Shows VCS (not only git) diff in the sign column
   " Plug 'mileszs/ack.vim' " replaced by ag.vim
   " Plug 'godlygeek/tabular' " Align text (using junegunn/vim-easy-align)
-  " Plug 'pauloromeira/tabline.vim' " using vim-airline's tabline
 
 call plug#end()
-if s:firstrun == 1
-  :PlugInstall
-endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Vim Behavior                           {{{1 "
@@ -173,8 +158,6 @@ set ignorecase smartcase
 set virtualedit=block " Allow cursor to be anywhere in Visual block mode.
 set autoread " Reload a file when changed outside Vim
 set ttyfast " Faster redrawing
-set noshowmode " Don't output mode
-set title " Set terminal title
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Appearance                            {{{1 "
@@ -218,6 +201,8 @@ set nolist
 set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 " set showbreak=…
 let &showbreak="↪\ "
+set noshowmode " Don't output mode
+set title " Set terminal title
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Formatting                            {{{1 "
@@ -289,7 +274,7 @@ let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 let g:UltiSnipsListSnippets="<C-l>"
-let g:UltiSnipsSnippetsDir=s:plugdir."/vim-custom-snippets/UltiSnips"
+let g:UltiSnipsSnippetsDir=g:localdir."/vim-custom-snippets/UltiSnips"
 
 " YouCompleteMe
 let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
@@ -425,26 +410,26 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Simplify shortcut for changing/create window
-noremap <silent> <C-h> :call WinMove('h')<CR>
-noremap <silent> <C-j> :call WinMove('j')<CR>
-noremap <silent> <C-k> :call WinMove('k')<CR>
-noremap <silent> <C-l> :call WinMove('l')<CR>
+nnoremap <silent> <C-h> :call WinMove('h')<CR>
+nnoremap <silent> <C-j> :call WinMove('j')<CR>
+nnoremap <silent> <C-k> :call WinMove('k')<CR>
+nnoremap <silent> <C-l> :call WinMove('l')<CR>
 " Change <C-p> and <C-n> behave to filter the history
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 " Expand %% to the current file path
 cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " Invert display lines and real lines mappings.
-nnoremap k gk
-nnoremap gk k
-nnoremap j gj
-nnoremap gj j
-nnoremap 0 g0
-nnoremap g0 0
-nnoremap $ g$
-nnoremap g$ $
-nnoremap ^ g^
-nnoremap g^ ^
+" noremap k gk
+" noremap gk k
+" noremap j gj
+" noremap gj j
+" noremap 0 g0
+" noremap g0 0
+" noremap $ g$
+" noremap g$ $
+" noremap ^ g^
+" noremap g^ ^
 
 " Leader mappings
 nnoremap <Leader>d "+d
