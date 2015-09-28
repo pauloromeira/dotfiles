@@ -1,5 +1,6 @@
 BASE=$(cd "$(dirname "$BASH_SOURCE")" && pwd)
 
+# TO DO: load karabiner settings
 # TO DO: do not install cask formulae, unless explictly asked
 # TO DO: some formulae installation accept arguments
 # TO DO: install brew formulae from specific versions, but warns about
