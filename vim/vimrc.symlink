@@ -50,7 +50,6 @@ call plug#begin(s:plugdir)
   Plug 'airblade/vim-rooter', { 'on': '<Plug>RooterChangeToRootDirectory' }
   Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)',
         \ 'EasyAlign'] } " Align text
-  Plug 'justinmk/vim-gtfo' " Go to Terminal or File manager (gof, got)
   Plug 'kshenoy/vim-signature' " Place, toggle and display marks
   " TO DO: install node/npm on ubuntu
   Plug 'suan/vim-instant-markdown', { 'do': 'npm -g install instant-markdown-d',
@@ -113,6 +112,7 @@ call plug#begin(s:plugdir)
   " Plug 'mhinz/vim-signify' " Shows VCS (not only git) diff in the sign column
   " Plug 'mileszs/ack.vim' " replaced by ag.vim
   " Plug 'godlygeek/tabular' " Align text (using junegunn/vim-easy-align)
+  " Plug 'justinmk/vim-gtfo' " Go to Terminal or File manager (gof, got)
 
 call plug#end()
 
@@ -360,6 +360,9 @@ let g:startify_custom_header = [
 " TO DO: single mapping to preview files based on extension
 " vim-instant-markdown
 let g:instant_markdown_autostart = 0
+
+" vim-gitgutter
+let g:gitgutter_max_signs = 1000
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           Functions and Commands                       {{{1 "
