@@ -92,5 +92,7 @@ for package in ${PACKAGES[@]}; do
   boot_package "$package"
 done
 
-# TO DO: discard changes in git working directory (some installations append garbage to profile)
+# Clear installation garbage appended to profile
+git checkout "$BASE"
+
 printf '\ndone.\n'
