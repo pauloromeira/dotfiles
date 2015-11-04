@@ -15,12 +15,8 @@ source "$ROOT/utils.sh"
 info 'Updating apt-get packages...'
 sudo apt-get update
 
-
 info 'Installing apt-get packages...'
 packages_batch "sudo apt-get" install
 
-# Install N
+info 'Installing N (node version management)'
 curl -L http://git.io/n-install | bash
-
-# Install NVM (alternative to N)
-# curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
