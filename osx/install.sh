@@ -1,4 +1,7 @@
 BASE=$(cd "$(dirname "$BASH_SOURCE")" && pwd)
+ROOT=$(dirname "$BASE")
+
+source "$ROOT/utils.sh"
 
 # TO DO: load karabiner settings
 # TO DO: do not install cask formulae, unless explictly asked
@@ -12,31 +15,17 @@ BASE=$(cd "$(dirname "$BASH_SOURCE")" && pwd)
 # TO DO: create a utils script to provide common functions to install scripts
   # e.g. info messages / interaction / log (maybe requirements installation)
 
-
-# TO DO: create a layer of abstraction to run package management installations
-  # e.g. search for .brew.packman files and install requirements list with brew
-  # (maybe this can be a new software!)
-packages_batch() {
-  manager="$1"
-  command="$2"
-
-  while read -r pkg; do
-    echo "$pkg"
-    "$manager" "$command" "$pkg"
-  done < "$BASE/packages/${manager// /.}.packages"
-}
-
-printf 'Installing Homebrew...\n'
+info 'Installing Homebrew...'
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-printf '\nInstalling brew formulae...\n'
+info 'Installing brew formulae...'
 packages_batch brew install
 
-# printf '\nInstalling brew cask formulae... \n'
+# info 'Installing brew cask formulae... '
 # packages_batch "brew cask" install
 
-printf '\nInstalling python packages...\n'
+info 'Installing python packages...'
 packages_batch pip install
 
-printf '\nInstalling lua packages...\n'
+info 'Installing lua packages...'
 packages_batch luarocks install
