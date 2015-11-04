@@ -28,4 +28,4 @@ source /usr/local/bin/virtualenvwrapper_lazy.sh
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # N (node version management) (https://github.com/tj/n).
-export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
+export N_PREFIX="$HOME/.n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"

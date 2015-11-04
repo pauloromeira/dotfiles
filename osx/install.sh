@@ -31,4 +31,4 @@ info 'Installing lua packages...'
 packages_batch luarocks install
 
 info 'Installing N (node version management)'
-curl -L http://git.io/n-install | bash
+curl -L http://git.io/n-install | N_PREFIX="$HOME/.n" bash -s -- -y

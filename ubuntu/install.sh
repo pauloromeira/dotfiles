@@ -18,5 +18,6 @@ sudo apt-get update
 info 'Installing apt-get packages...'
 packages_batch "sudo apt-get" install
 
+# TO DO: put this in a post-install script (for both osx and ubuntu)
 info 'Installing N (node version management)'
-curl -L http://git.io/n-install | bash
+curl -L http://git.io/n-install | N_PREFIX="$HOME/.n" bash -s -- -y
