@@ -221,6 +221,9 @@ set smartindent
 " autocmd filetype c,asm,python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 " autocmd filetype make setlocal noexpandtab
 
+" File Types
+autocmd FileType javascript setlocal shiftwidth=4 tabstop=4 softtabstop=4
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                Plugin Helpers                          {{{1 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -507,7 +510,7 @@ nnoremap <silent> ><Tab> :<C-U>exe "tabm +".v:count1<CR>
 nnoremap <silent> <<S-Tab> :tabm 0<CR>
 nnoremap <silent> ><S-Tab> :tabm<CR>
 nnoremap <silent> y<Tab> :tabnew \| Startify<CR>
-nnoremap <silent> c<Tab> :tabclose<CR>
+nnoremap <silent> d<Tab> :tabclose<CR>
 nnoremap <silent> t<Tab> :tabonly<CR>
 
 " Make Y behave like other capitals
