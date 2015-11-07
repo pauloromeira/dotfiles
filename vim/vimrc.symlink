@@ -44,7 +44,7 @@ call plug#begin(s:plugdir)
   Plug 'airblade/vim-gitgutter' " Shows a git diff in the 'gutter' (sign column)
   Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
   Plug 'osyo-manga/vim-hopping', { 'on': '<Plug>(hopping-start)' } " Search and replace
-  Plug 'rking/ag.vim' " faster than ack
+  Plug 'mileszs/ack.vim'
   " TO DO: install fzf at dotfiles bootstrap
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
   Plug 'airblade/vim-rooter', { 'on': '<Plug>RooterChangeToRootDirectory' }
@@ -110,7 +110,7 @@ call plug#begin(s:plugdir)
   " Plug 'jeetsukumaran/vim-indentwise' " Indent motions
   " Plug 'flazz/vim-colorschemes'
   " Plug 'mhinz/vim-signify' " Shows VCS (not only git) diff in the sign column
-  " Plug 'mileszs/ack.vim' " replaced by ag.vim
+  " Plug 'rking/ag.vim' " alternative to ack.vim
   " Plug 'godlygeek/tabular' " Align text (using junegunn/vim-easy-align)
   " Plug 'justinmk/vim-gtfo' " Go to Terminal or File manager (gof, got)
 
@@ -343,8 +343,35 @@ runtime macros/matchit.vim " (native)
 
 " vim-startify
 let g:startify_session_dir = s:tempdir.'/session'
-let g:startify_bookmarks = [] " always shown
-autocmd User Startified setlocal buftype= " Reuses startify window
+let g:startify_bookmarks = [ 
+      \ {'v': '~/.vimrc'}, 
+      \ {'p': '~/.dotfiles/profile'}, 
+      \ {'c': '~/Estudos/checkpoints.txt'}, 
+      \ {'n': '~/notes.txt'} 
+      \ ]
+let g:startify_files_number = 5
+let g:startify_change_to_dir = 1
+let g:startify_change_to_vcs_root = 1
+let g:startify_relative_path          = 1
+let g:startify_session_delete_buffers = 1
+autocmd User Startified setlocal cursorline
+let g:startify_list_order = [
+      \ ['   Last files:'],
+      \ 'files',
+      \ ['   Last files in the current directory:'],
+      \ 'dir',
+      \ ['   Sessions:'],
+      \ 'sessions',
+      \ ['   Bookmarks:'],
+      \ 'bookmarks',
+      \ ]
+hi StartifyBracket ctermfg=240
+hi StartifyFile    ctermfg=180
+hi StartifyHeader  ctermfg=114
+hi StartifyNumber  ctermfg=144
+hi StartifyPath    ctermfg=245
+hi StartifySlash   ctermfg=240
+hi StartifySpecial ctermfg=240
 
 let g:startify_custom_header = [
       \ '           _',
@@ -363,6 +390,11 @@ let g:instant_markdown_autostart = 0
 
 " vim-gitgutter
 let g:gitgutter_max_signs = 1000
+
+" ack.vim
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           Functions and Commands                       {{{1 "
@@ -449,11 +481,6 @@ nnoremap <silent> <Leader><S-q> :confirm qall<CR>
 nnoremap <Leader>s :update<CR>
 nnoremap <Leader><S-s> :wall<CR>
 nnoremap <Leader>l :set list!<CR>
-" Edit mappings
-nnoremap <Leader>ev :e $MYVIMRC<CR>
-nnoremap <Leader>ep :e ~/.dotfiles/profile<CR>
-nnoremap <Leader>ec :e ~/Estudos/checkpoints.txt<CR>
-nnoremap <Leader>en :e ~/notes.txt<CR>
 " Run mappings
 nnoremap <Leader>rv :source $MYVIMRC<CR>
 nnoremap <Leader>rr :source %<CR>
