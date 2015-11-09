@@ -321,9 +321,15 @@ let g:hopping#keymapping = {
 
 " CtrlP (just to lazy load the plugin)
 nmap <silent> <C-p> :CtrlP<CR>
-" Exclude .gitignore files (https://github.com/kien/ctrlp.vim/issues/273)
-let g:ctrlp_user_command = ['.git/', 
-      \ 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+" TODO (romeira): Ag not working well with .gitignore {08/11/15 22:24}
+" if executable('ag')
+"     " Use ag in CtrlP for listing files, lightning fast and respects .gitignore
+"     let g:ctrlp_user_command = "ag %s -l --hidden -g '' --ignore '\.git/' --silent"
+" else
+    " Exclude .gitignore files (https://github.com/kien/ctrlp.vim/issues/273)
+    let g:ctrlp_user_command = ['.git/',
+          \ 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+" endif
 
 " vim-rooter
 let g:rooter_manual_only = 1
@@ -393,6 +399,12 @@ let g:instant_markdown_autostart = 0
 
 " vim-gitgutter
 let g:gitgutter_max_signs = 2000
+
+" ack.vim
+" TODO (romeira): Ag not working well with .gitignore {08/11/15 22:24}
+" if executable('ag')
+"   let g:ackprg = 'ag --vimgrep --silent'
+" endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           Functions and Commands                       {{{1 "
