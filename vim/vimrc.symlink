@@ -451,6 +451,9 @@ function! WinMove(key)
     endif
 endfunction
 
+" fugitive
+set diffopt+=vertical " Splits Gdiff vertically
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Mappings                             {{{1 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
