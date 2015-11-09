@@ -99,6 +99,7 @@ call plug#begin(s:plugdir)
   " Plug 'AndrewRadev/switch.vim'
   " Plug 'vim-scripts/ReplaceWithRegister'
   " Plug 'christoomey/vim-titlecase'
+  " Plug 'tpope/vim-vinegar' " http://vimcasts.org/blog/2013/01/oil-and-vinegar-split-windows-and-project-drawer/
 
   " Deactivated but still cool "
   " Plug 'osyo-manga/vim-over' " Preview in the command line
@@ -320,6 +321,9 @@ let g:hopping#keymapping = {
 
 " CtrlP (just to lazy load the plugin)
 nmap <silent> <C-p> :CtrlP<CR>
+" Exclude .gitignore files (https://github.com/kien/ctrlp.vim/issues/273)
+let g:ctrlp_user_command = ['.git/', 
+      \ 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " vim-rooter
 let g:rooter_manual_only = 1
@@ -352,12 +356,11 @@ let g:startify_bookmarks = [
       \ {'c': '~/Estudos/checkpoints.txt'}, 
       \ {'n': '~/notes.txt'} 
       \ ]
-let g:startify_files_number = 5
-let g:startify_change_to_dir = 1
-let g:startify_change_to_vcs_root = 1
-let g:startify_relative_path          = 1
+let g:startify_files_number = 7
+let g:startify_relative_path = 1
 let g:startify_session_delete_buffers = 1
 autocmd User Startified setlocal cursorline
+autocmd User Startified setlocal buftype= " Reuses startify window
 let g:startify_list_order = [
       \ ['   Last files:'],
       \ 'files',
@@ -375,10 +378,7 @@ hi StartifyNumber  ctermfg=144
 hi StartifyPath    ctermfg=245
 hi StartifySlash   ctermfg=240
 hi StartifySpecial ctermfg=240
-
 let g:startify_custom_header = [
-      \ '           _',
-      \ '          (_)',
       \ '   __   __ _  _ __ ___',
       \ '   \ \ / /| || ''_ ` _ \',
       \ '    \ V / | || | | | | |',
@@ -392,12 +392,7 @@ let g:startify_custom_header = [
 let g:instant_markdown_autostart = 0
 
 " vim-gitgutter
-let g:gitgutter_max_signs = 1000
-
-" ack.vim
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
+let g:gitgutter_max_signs = 2000
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           Functions and Commands                       {{{1 "
