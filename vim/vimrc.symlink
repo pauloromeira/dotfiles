@@ -403,9 +403,9 @@ let g:gitgutter_max_signs = 2000
 
 " ack.vim
 " TODO (romeira): Ag not working well with .gitignore {08/11/15 22:24}
-" if executable('ag')
-"   let g:ackprg = 'ag --vimgrep --silent'
-" endif
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep --silent'
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           Functions and Commands                       {{{1 "
