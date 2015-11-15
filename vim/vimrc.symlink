@@ -25,8 +25,7 @@ call plug#begin(s:plugdir)
   Plug 'scrooloose/nerdtree' " , { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   Plug 'scrooloose/syntastic'
-  Plug 'easymotion/vim-easymotion', { 'on': ['<Plug>(easymotion-w)',
-        \ '<Plug>(easymotion-b)', '<Plug>(easymotion-s)'] }
+  Plug 'easymotion/vim-easymotion' , { 'on': '<Plug>(easymotion-s)' }
   Plug 'kien/ctrlp.vim', { 'on': 'CtrlP' }
   Plug 'tpope/vim-fugitive' " Gateway to git
   Plug 'tpope/vim-repeat'
@@ -289,10 +288,11 @@ let g:ycm_complete_in_strings = 1 " Completion in string
 " let g:ycm_add_preview_to_completeopt = 1
 " let g:ycm_autoclose_preview_window_after_completion = 1
 
-" EasyMotion (just to lazy load the plugin)
-nmap <Leader><Leader>w <Plug>(easymotion-w)
-nmap <Leader><Leader>b <Plug>(easymotion-b)
-nmap <Leader><Leader>s <Plug>(easymotion-s)
+" EasyMotion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+nmap s <Plug>(easymotion-s)
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_enter_jump_first = 1
 
 " restore_view
 set viewoptions=cursor,folds,slash,unix
