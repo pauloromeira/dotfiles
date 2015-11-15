@@ -500,9 +500,9 @@ nnoremap <Leader>rv :source $MYVIMRC<CR>
 nnoremap <Leader>rr :source %<CR>
 
 " Go to tabs
-nnoremap <silent> [<Tab> :<C-U>exe "tabnext"
+nnoremap <silent> [<Tab> :exe "tabnext"
       \ CircularShift(tabpagenr(), -v:count1, 1, tabpagenr('$'))<CR>
-nnoremap <silent> ]<Tab> :<C-U>exe "tabnext"
+nnoremap <silent> ]<Tab> :exe "tabnext"
       \ CircularShift(tabpagenr(), v:count1, 1, tabpagenr('$'))<CR>
 nnoremap <silent> [<S-tab> :tabfirst<CR>
 nnoremap <silent> ]<S-tab> :tablast<CR>
@@ -516,8 +516,8 @@ nnoremap 7<Tab> 7gt
 nnoremap 8<Tab> 8gt
 nnoremap 9<Tab> 9gt
 " Tab operations
-nnoremap <silent> <<Tab> :<C-U>exe "tabm -".v:count1<CR>
-nnoremap <silent> ><Tab> :<C-U>exe "tabm +".v:count1<CR>
+nnoremap <silent> <<Tab> :exe "tabm -".v:count1<CR>
+nnoremap <silent> ><Tab> :exe "tabm +".v:count1<CR>
 nnoremap <silent> <<S-Tab> :tabm 0<CR>
 nnoremap <silent> ><S-Tab> :tabm<CR>
 nnoremap <silent> y<Tab> :tabnew \| Startify<CR>
@@ -544,6 +544,7 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
 " Since esc doesn't do anything in normal mode
-nnoremap <silent> <Esc> :nohl<CR>
+" TODO (romeira): Conflictiong with Startify {15/11/15 07:11}
+" nnoremap <silent> <Esc> :nohl<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
