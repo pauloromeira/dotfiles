@@ -127,7 +127,7 @@ set hidden " Allow buffer switching without saving
 set number relativenumber
 set showcmd
 set scrolloff=3 " Scroll so we can always see 3 lines around the cursor
-" set hlsearch
+set hlsearch
 set incsearch
 " Autocmd settings
 if has('autocmd')
@@ -542,5 +542,8 @@ nnoremap <S-Right> <C-w>>
 " Scroll the viewport faster
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
+
+" Since esc doesn't do anything in normal mode
+nnoremap <silent> <Esc> :nohl<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
