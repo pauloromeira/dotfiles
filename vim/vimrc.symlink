@@ -54,6 +54,8 @@ call plug#begin(s:plugdir)
   Plug 'suan/vim-instant-markdown', { 'do': 'npm -g install instant-markdown-d',
         \ 'for': 'markdown' } " Preview markdown files
   Plug 'mhinz/vim-startify' " A fancy start screen for Vim (also session manager)
+  " TODO (romeira): Lazy load {16/11/15 14:39}
+  Plug 'AndrewRadev/splitjoin.vim' " Switch between single-line and a multi-line statement
 
   " Locals
   Plug g:localdir.'/vim-tomorrow-theme'
@@ -77,6 +79,8 @@ call plug#begin(s:plugdir)
   " Plug 'junegunn/limelight.vim', { 'on': 'Limelight' } " Focus tool
 
   " To Test "
+  " Plug 'othree/html5.vim'
+  " Plug 'pangloss/vim-javascript'
   " Plug 'tpope/vim-obsession' " Save editing session
   " Plug 'vim-scripts/sessionman.vim' " Save editing session
   " Plug 'xolox/vim-misc' | Plug 'xolox/vim-session' " Save editing session
@@ -85,7 +89,6 @@ call plug#begin(s:plugdir)
   " Plug 'Shougo/neosnippet'
   " Plug 'Shougo/neosnippet-snippets'
   " Plug 'davidhalter/jedi-vim' " Autocompletion for python. Obs: unset pymode autocompletion: let g:pymode_rope = 0
-  " runtime macros/matchit.vim " (nativo)
   " Plug 'christoomey/vim-tmux-navigator' " Navitate freely between tmux and vim
   " Plug 'benmills/vimux' " Vim plugin to interact with tmux
   " Plug 'vim-scripts/SmartCase'
@@ -94,7 +97,6 @@ call plug#begin(s:plugdir)
   " Plug 'editorconfig/editorconfig-vim'
   " Plug 'Rykka/riv.vim' " Take Notes in rst
   " Plug 'Rykka/InstantRst' " Preview markdown files
-  " Plug 'AndrewRadev/splitjoin.vim' " Switch between single-line and a multi-line statement
   " Plug 'AndrewRadev/switch.vim'
   " Plug 'vim-scripts/ReplaceWithRegister'
   " Plug 'christoomey/vim-titlecase'
