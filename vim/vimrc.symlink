@@ -365,6 +365,7 @@ let g:startify_bookmarks = [
       \ {'c': '~/Estudos/checkpoints.txt'}, 
       \ {'n': '~/notes.txt'},
       \ {'g': '~/.gitconfig'}, 
+      \ {'t': '~/.tmux.conf'},
       \ ]
 let g:startify_files_number = 7
 let g:startify_relative_path = 1
