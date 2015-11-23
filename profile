@@ -32,3 +32,6 @@ export N_PREFIX="$HOME/.n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_P
 
 # Remove duplicates from bash history
 export HISTCONTROL=ignoreboth:erasedups
+
+# Set tmux editor
+export EDITOR=vim
