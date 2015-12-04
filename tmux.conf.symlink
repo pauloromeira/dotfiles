@@ -41,6 +41,8 @@ set-window-option -g pane-base-index 1
 # Key bindings
 # -------------------------------------------------------------------
 
+bind-key c new-window -c "#{pane_current_path}"
+
 # Ensure that we can send Ctrl-A to other apps
 bind-key C-a send-prefix
 
@@ -64,8 +66,8 @@ bind-key -t vi-copy 'y' copy-pipe "pbcopy"
 # bind p paste-buffer
 
 # Splitting panes
-bind-key | split-window -h
-bind-key - split-window -v
+bind-key | split-window -h -c "#{pane_current_path}"
+bind-key - split-window -v -c "#{pane_current_path}"
 
 # Pane resizing
 bind-key -r H resize-pane -L 5
