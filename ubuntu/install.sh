@@ -17,8 +17,9 @@ sudo apt-get update
 info 'Installing apt-get packages...'
 packages_batch "sudo apt-get" "-y install"
 
-info 'Installing python packages...'
-packages_batch pip install
+# TODO (romeira): install virtualenv && virtualenvwrapper locally {06/12/15 05:14}
+# info 'Installing python packages...'
+# packages_batch pip install
 
 # TO DO: put this in a post-install script (for both osx and ubuntu)
 info 'Installing N (node version management)'

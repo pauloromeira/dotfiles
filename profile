@@ -22,7 +22,8 @@ alias today='date "+%Y%m%d"'
 
 # Python virtualenvs
 export WORKON_HOME=$HOME/.virtualenvs
-source /usr/local/bin/virtualenvwrapper_lazy.sh
+[ -f /usr/local/bin/virtualenvwrapper_lazy.sh ] \
+  && source /usr/local/bin/virtualenvwrapper_lazy.sh
 
 # Fuzzy finder (https://github.com/junegunn/fzf)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
