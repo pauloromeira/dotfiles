@@ -16,7 +16,10 @@ info 'Updating apt-get packages...'
 sudo apt-get update
 
 info 'Installing apt-get packages...'
-packages_batch "sudo apt-get" install
+packages_batch "sudo apt-get" "-y install"
+
+info 'Installing python packages...'
+packages_batch pip install
 
 # TO DO: put this in a post-install script (for both osx and ubuntu)
 info 'Installing N (node version management)'
