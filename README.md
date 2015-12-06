@@ -6,7 +6,7 @@ My configuration files for OSX and Ubuntu.
 
 Just copy-paste all and hit enter.
 ```sh
-git clone https://github.com/pauloromeira/dotfiles.git \
+git clone https://pauloromeira@github.com/pauloromeira/dotfiles.git \
 ~/.dotfiles && ~/.dotfiles/bootstrap.sh
 ```
 
