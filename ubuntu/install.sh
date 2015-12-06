@@ -3,8 +3,7 @@ ROOT=$(dirname "$BASE")
 
 source "$ROOT/utils.sh"
 
-# TO DO: install virtualenv/wrapper (maybe in root directory via hook)
-# TO DO: install: cmake, alols/xcape (github), 
+# TO DO: install: alols/xcape (github), 
     # gnome-tweak-tool (try to use xmodmap)
 
 # TO DO: Configure caps lock:

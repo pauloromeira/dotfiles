@@ -1,9 +1,11 @@
 cmake
 git
 curl
-python-pip
 tmux
 tree
 unrar-free
 vim
 zsh
+python-pip
+virtualenv
+virtualenvwrapper
