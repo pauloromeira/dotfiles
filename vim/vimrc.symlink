@@ -64,7 +64,6 @@ call plug#begin(s:plugdir)
   Plug g:localdir.'/vim-custom-snippets'
   Plug g:localdir.'/restore_view.vim'
   " Plug g:localdir.'/vim-startmode'
-  " Plug g:localdir.'/tabline.vim' " using vim-airline's tabline
 
   " Colorschemes
   Plug 'jonathanfilip/vim-lucius'
@@ -417,6 +416,7 @@ endif
 
 " vimwiki
 " TODO (romeira): link to google drive {07/12/15 00:39}
+" TODO (romeira): organize autocmds {07/12/15 01:22}
 au BufNewFile,BufRead *.wiki setlocal ft=vimwiki
 let g:vimwiki_list = [{ 'path': '~/vimwiki' }]
 

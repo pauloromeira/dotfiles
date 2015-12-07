@@ -20,7 +20,6 @@ git clone https://pauloromeira@github.com/pauloromeira/vim-tomorrow-theme
 git clone https://pauloromeira@github.com/pauloromeira/vim-custom-snippets
 git clone https://pauloromeira@github.com/pauloromeira/restore_view.vim
 git clone https://pauloromeira@github.com/pauloromeira/vim-startmode
-git clone https://pauloromeira@github.com/pauloromeira/tabline.vim
 
 # Install plugins
 vim +PlugInstall +qall
