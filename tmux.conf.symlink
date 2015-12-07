@@ -44,7 +44,7 @@ set-window-option -g pane-base-index 1
 bind-key c new-window -c "#{pane_current_path}"
 
 # Ensure that we can send Ctrl-A to other apps
-bind-key C-a send-prefix
+bind-key -r C-a send-prefix
 
 # Reload ~/.tmux.conf
 bind-key R source-file ~/.tmux.conf \; display-message "Reloaded!"
@@ -59,6 +59,7 @@ bind-key btab select-pane -t :.-
 
 # Copy-mode (Vi keys)
 bind-key -t vi-copy 'v' begin-selection
+# TODO (romeira): make it cross-platform (pbcopy is just for osx) {06/12/15 01:38}
 bind-key -t vi-copy 'y' copy-pipe "pbcopy"
 # unbind [
 # bind Escape copy-mode

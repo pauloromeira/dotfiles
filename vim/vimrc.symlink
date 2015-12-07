@@ -57,12 +57,13 @@ call plug#begin(s:plugdir)
   Plug 'mhinz/vim-startify' " A fancy start screen for Vim (also session manager)
   " TODO (romeira): Lazy load {16/11/15 14:39}
   Plug 'AndrewRadev/splitjoin.vim' " Switch between single-line and a multi-line statement
+  Plug 'vimwiki/vimwiki', { 'for': 'vimwiki' } " Notes
 
   " Locals
   Plug g:localdir.'/vim-tomorrow-theme'
   Plug g:localdir.'/vim-custom-snippets'
   Plug g:localdir.'/restore_view.vim'
-  Plug g:localdir.'/vim-startmode'
+  " Plug g:localdir.'/vim-startmode'
   " Plug g:localdir.'/tabline.vim' " using vim-airline's tabline
 
   " Colorschemes
@@ -360,6 +361,7 @@ runtime macros/matchit.vim " (native)
 
 " vim-startify
 let g:startify_session_dir = s:tempdir.'/session'
+" TODO (romeira): change ~ to $HOME {07/12/15 00:22}
 let g:startify_bookmarks = [ 
       \ {'v': '~/.vimrc'}, 
       \ {'p': '~/.dotfiles/profile'}, 
@@ -367,6 +369,7 @@ let g:startify_bookmarks = [
       \ {'n': '~/notes.txt'},
       \ {'g': '~/.gitconfig'}, 
       \ {'t': '~/.tmux.conf'},
+      \ {'w': '~/vimwiki/index.wiki' },
       \ ]
 let g:startify_files_number = 7
 let g:startify_relative_path = 1
@@ -411,6 +414,11 @@ let g:gitgutter_max_signs = 2000
 if executable('ag')
   let g:ackprg = 'ag --vimgrep --silent'
 endif
+
+" vimwiki
+" TODO (romeira): link to google drive {07/12/15 00:39}
+au BufNewFile,BufRead *.wiki setlocal ft=vimwiki
+let g:vimwiki_list = [{ 'path': '~/vimwiki' }]
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           Functions and Commands                       {{{1 "
@@ -550,6 +558,6 @@ nnoremap <C-y> 3<C-y>
 
 " Since esc doesn't do anything in normal mode
 " TODO (romeira): Conflictiong with Startify {15/11/15 07:11}
-" nnoremap <silent> <Esc> <Esc>:nohl<CR>
+nnoremap <silent> <Esc> <Esc>:nohl<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
