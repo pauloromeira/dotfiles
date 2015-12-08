@@ -323,6 +323,7 @@ let g:hopping#keymapping = {
       \ }
 
 " CtrlP (just to lazy load the plugin)
+" TODO (romeira): maybe change to fzf {08/12/15 01:00}
 nmap <silent> <C-p> :CtrlP<CR>
 " TODO (romeira): Ag not working well with .gitignore {08/11/15 22:24}
 " if executable('ag')
@@ -365,6 +366,7 @@ let g:startify_bookmarks = [
       \ {'v': '~/.vimrc'}, 
       \ {'p': '~/.dotfiles/profile'}, 
       \ {'c': '~/Estudos/checkpoints.txt'}, 
+      \ {'s': '~/Estudos/stack.txt'}, 
       \ {'n': '~/notes.txt'},
       \ {'g': '~/.gitconfig'}, 
       \ {'t': '~/.tmux.conf'},
@@ -481,17 +483,6 @@ cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 " Expand %% to the current file path
 cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-" Invert display lines and real lines mappings.
-" noremap k gk
-" noremap gk k
-" noremap j gj
-" noremap gj j
-" noremap 0 g0
-" noremap g0 0
-" noremap $ g$
-" noremap g$ $
-" noremap ^ g^
-" noremap g^ ^
 
 " Leader mappings
 nnoremap <Leader>d "+d
@@ -543,21 +534,22 @@ nnoremap Y y$
 nnoremap Q @q
 
 " Resize windows with arrowkeys
-nnoremap <Up> <C-w>5+
-nnoremap <Down> <C-w>5-
-nnoremap <Left> <C-w>5<
-nnoremap <Right> <C-w>5>
-nnoremap <S-Up> <C-w>+
-nnoremap <S-Down> <C-w>-
-nnoremap <S-Left> <C-w><
-nnoremap <S-Right> <C-w>>
+" TODO (romeira): conflicting with tmux (find better keys) {08/12/15 00:44}
+" nnoremap <Up> <C-w>5+
+" nnoremap <Down> <C-w>5-
+" nnoremap <Left> <C-w>5<
+" nnoremap <Right> <C-w>5>
+" nnoremap <S-Up> <C-w>+
+" nnoremap <S-Down> <C-w>-
+" nnoremap <S-Left> <C-w><
+" nnoremap <S-Right> <C-w>>
 
 " Scroll the viewport faster
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
 " Since esc doesn't do anything in normal mode
-" TODO (romeira): Conflictiong with Startify {15/11/15 07:11}
+" TODO (romeira): conflicting with Startify {15/11/15 07:11}
 nnoremap <silent> <Esc> <Esc>:nohl<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
