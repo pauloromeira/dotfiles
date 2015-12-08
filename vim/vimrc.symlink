@@ -448,20 +448,15 @@ function! s:autosave(enable)
 endfunction
 command! -bang AutoSave call s:autosave(<bang>1)
 
-" Window movement shortcuts (nicknisi/dotfiles)
-" move to the window in the direction shown, or create a new window
-function! WinMove(key)
-    let t:curwin = winnr()
-    exec "wincmd ".a:key
-    if (t:curwin == winnr())
-        if (match(a:key,'[jk]'))
-            wincmd v
-        else
-            wincmd s
-        endif
-        " TO DO: close window/tab when pressing 'q' on Startify
-        exec "wincmd ".a:key." | Startify"
-    endif
+" Based on window movement shortcuts by 'nicknisi/dotfiles'
+function! WinCreate(key)
+  if (match(a:key,'[jk]'))
+    wincmd v
+  else
+    wincmd s
+  endif
+  " TODO (romeira): close window/tab when pressing 'q' on Startify {08/12/15 00:55}
+  exec "wincmd ".a:key." | Startify"
 endfunction
 
 " fugitive
@@ -471,11 +466,16 @@ set diffopt+=vertical " Splits Gdiff vertically
 "                                   Mappings                             {{{1 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Simplify shortcut for changing/create window
-nnoremap <silent> <C-h> :call WinMove('h')<CR>
-nnoremap <silent> <C-j> :call WinMove('j')<CR>
-nnoremap <silent> <C-k> :call WinMove('k')<CR>
-nnoremap <silent> <C-l> :call WinMove('l')<CR>
+" Simplify shortcut for creating windows
+nnoremap <silent> c<C-h> :call WinCreate('h')<CR>
+nnoremap <silent> c<C-j> :call WinCreate('j')<CR>
+nnoremap <silent> c<C-k> :call WinCreate('k')<CR>
+nnoremap <silent> c<C-l> :call WinCreate('l')<CR>
+" Simplify shortcut for changing windows
+nnoremap <silent> <C-h> <C-w>h
+nnoremap <silent> <C-j> <C-w>j
+nnoremap <silent> <C-k> <C-w>k
+nnoremap <silent> <C-l> <C-w>l
 " Change <C-p> and <C-n> behave to filter the history
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
@@ -533,7 +533,7 @@ nnoremap <silent> <<Tab> :exe "tabm -".v:count1<CR>
 nnoremap <silent> ><Tab> :exe "tabm +".v:count1<CR>
 nnoremap <silent> <<S-Tab> :tabm 0<CR>
 nnoremap <silent> ><S-Tab> :tabm<CR>
-nnoremap <silent> y<Tab> :tabnew \| Startify<CR>
+nnoremap <silent> c<Tab> :tabnew \| Startify<CR>
 nnoremap <silent> d<Tab> :tabclose<CR>
 nnoremap <silent> t<Tab> :tabonly<CR>
 
