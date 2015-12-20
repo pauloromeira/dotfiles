@@ -461,7 +461,7 @@ function! WinCreate(key)
     exec "wincmd ".a:key
   endif
   " TODO (romeira): close window/tab when pressing 'q' on Startify {08/12/15 00:55}
-  exec "Startify"
+  Startify
 endfunction
 
 " fugitive
@@ -472,10 +472,10 @@ set diffopt+=vertical " Splits Gdiff vertically
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Simplify shortcut for creating windows
-nnoremap <silent> y<C-h> :call WinCreate('h')<CR>
-nnoremap <silent> y<C-j> :call WinCreate('j')<CR>
-nnoremap <silent> y<C-k> :call WinCreate('k')<CR>
-nnoremap <silent> y<C-l> :call WinCreate('l')<CR>
+nnoremap <silent> c<C-h> :call WinCreate('h')<CR>
+nnoremap <silent> c<C-j> :call WinCreate('j')<CR>
+nnoremap <silent> c<C-k> :call WinCreate('k')<CR>
+nnoremap <silent> c<C-l> :call WinCreate('l')<CR>
 " Simplify shortcut for changing windows
 nnoremap <silent> <C-h> <C-w>h
 nnoremap <silent> <C-j> <C-w>j
@@ -527,7 +527,7 @@ nnoremap <silent> <<Tab> :exe "tabm -".v:count1<CR>
 nnoremap <silent> ><Tab> :exe "tabm +".v:count1<CR>
 nnoremap <silent> <<S-Tab> :tabm 0<CR>
 nnoremap <silent> ><S-Tab> :tabm<CR>
-nnoremap <silent> y<Tab> :tabnew \| Startify<CR>
+nnoremap <silent> c<Tab> :tabnew \| Startify<CR>
 nnoremap <silent> d<Tab> :tabclose<CR>
 nnoremap <silent> t<Tab> :tabonly<CR>
 
