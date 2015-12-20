@@ -329,6 +329,9 @@ nmap <silent> <C-p> :CtrlP<CR>
 " if executable('ag')
 "     " Use ag in CtrlP for listing files, lightning fast and respects .gitignore
 "     let g:ctrlp_user_command = "ag %s -l --hidden -g '' --ignore '\.git/' --silent"
+"
+"     " ag is fast enough that CtrlP doesn't need to cache
+"     let g:ctrlp_use_caching = 0
 " else
     " Exclude .gitignore files (https://github.com/kien/ctrlp.vim/issues/273)
     let g:ctrlp_user_command = ['.git/',
@@ -402,6 +405,7 @@ let g:startify_custom_header = [
       \ '',
       \ ''
       \ ]
+autocmd User Startified nnoremap <silent> <buffer> q :confirm q<CR>
 
 " TO DO: single mapping to preview files based on extension
 " vim-instant-markdown
@@ -460,7 +464,6 @@ function! WinCreate(key)
   if (match(a:key,'[kh]'))
     exec "wincmd ".a:key
   endif
-  " TODO (romeira): close window/tab when pressing 'q' on Startify {08/12/15 00:55}
   Startify
 endfunction
 
