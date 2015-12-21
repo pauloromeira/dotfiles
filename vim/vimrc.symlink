@@ -273,6 +273,7 @@ nmap <silent> U :UndotreeToggle<CR>
 " Follows the 'toggle' convention
 nmap <silent> <Leader>tu :UndotreeToggle<CR>
 let g:undotree_WindowLayout = 4
+let g:undotree_SetFocusWhenToggle = 1
 
 " UltiSnipets
 let g:UltiSnipsEditSplit="vertical"
