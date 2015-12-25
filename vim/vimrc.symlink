@@ -58,6 +58,8 @@ call plug#begin(s:plugdir)
   " TODO (romeira): Lazy load {16/11/15 14:39}
   Plug 'AndrewRadev/splitjoin.vim' " Switch between single-line and a multi-line statement
   Plug 'vimwiki/vimwiki', { 'for': 'vimwiki' } " Notes
+  " TODO (romeira): Lazy load {25/12/15 14:08}
+  Plug 'kana/vim-textobj-user' | Plug 'kana/vim-textobj-lastpat' " Text object for search matches (i/)
 
   " Locals
   Plug g:localdir.'/vim-tomorrow-theme'
