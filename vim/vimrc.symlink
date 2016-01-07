@@ -110,7 +110,6 @@ call plug#begin(s:plugdir)
   " Plug 'terryma/vim-multiple-cursors' " is it working properly?
   " Plug 'vim-scripts/ZoomWin' " Zoom into and out of a window (BUG)
   " Plug 'nathanaelkane/vim-indent-guides' " Visually displays indent levels
-  " Plug 'kana/vim-textobj-user' " Create your own text objects without pain
   " Plug 'tmhedberg/SimpylFold' " Python folding (depend upon restore_view)
   " Plug 'jeetsukumaran/vim-indentwise' " Indent motions
   " Plug 'flazz/vim-colorschemes'
