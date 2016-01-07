@@ -28,3 +28,5 @@
 	conflictstyle = diff3
 [mergetool]
 	prompt = false
+[credential]
+	helper = cache
