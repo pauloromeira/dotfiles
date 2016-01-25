@@ -60,6 +60,8 @@ call plug#begin(s:plugdir)
   Plug 'vimwiki/vimwiki', { 'for': 'vimwiki' } " Notes
   " TODO (romeira): Lazy load {25/12/15 14:08}
   Plug 'kana/vim-textobj-user' | Plug 'kana/vim-textobj-lastpat' " Text object for search matches (i/)
+  " TODO (romeira): Lazy load {08/01/16 16:35}
+  Plug 'nelstrom/vim-visual-star-search' " use * to search current visual selection
 
   " Locals
   Plug g:localdir.'/vim-tomorrow-theme'

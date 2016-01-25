@@ -15,7 +15,8 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias lsvirtualenv='lsvirtualenv -b' # Shortens the output
 alias yt-mp3='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
-alias rsync-mv='rsync -rvhz --progress --size-only --remove-source-files --partial-dir=.rsync-partial'
+alias rsync-cp='rsync -rvhz --progress --size-only --partial-dir=.rsync-partial'
+alias rsync-mv='rsync-cp --remove-source-files'
 alias ds='du -s .[!.]* * | sort -rn | cut -f2 | tr "\n" "\0" | xargs -0 du -hsc'
 alias sudo='sudo ' # Allows running sudo with aliases
 alias today='date "+%Y%m%d"'
