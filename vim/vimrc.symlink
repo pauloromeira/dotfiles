@@ -17,7 +17,7 @@ let g:localdir = s:vimhome."/local"
 
 call plug#begin(s:plugdir)
   " TO DO: find a way to install this plugin automatically
-  Plug 'Valloric/YouCompleteMe'
+  " Plug 'Valloric/YouCompleteMe'
 
   Plug 'powerline/fonts', { 'do': './install.sh' }
   Plug 'bling/vim-airline' " Status tabline
@@ -62,6 +62,7 @@ call plug#begin(s:plugdir)
   Plug 'kana/vim-textobj-user' | Plug 'kana/vim-textobj-lastpat' " Text object for search matches (i/)
   " TODO (romeira): Lazy load {08/01/16 16:35}
   Plug 'nelstrom/vim-visual-star-search' " use * to search current visual selection
+  Plug 'junegunn/gv.vim' " A git commit browser
 
   " Locals
   Plug g:localdir.'/vim-tomorrow-theme'
@@ -206,7 +207,7 @@ endif
 set nolist
 set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 " set showbreak=…
-let &showbreak="↪\ "
+" let &showbreak="↪\ "
 set noshowmode " Don't output mode
 set title " Set terminal title
 
