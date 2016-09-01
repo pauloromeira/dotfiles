@@ -17,14 +17,10 @@ alias lsvirtualenv='lsvirtualenv -b' # Shortens the output
 alias yt-mp3='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 alias rsync-cp='rsync -avhz --progress'
 alias rsync-mv='rsync-cp --remove-source-files'
+alias rsync-no='rsync-mv --ignore-existing'
 alias ds='du -s .[!.]* * | sort -rn | cut -f2 | tr "\n" "\0" | xargs -0 du -hsc'
 alias sudo='sudo ' # Allows running sudo with aliases
 alias today='date "+%Y%m%d"'
-
-# Python virtualenvs
-export WORKON_HOME=$HOME/.virtualenvs
-[ -f /usr/local/bin/virtualenvwrapper_lazy.sh ] \
-  && source /usr/local/bin/virtualenvwrapper_lazy.sh
 
 # Fuzzy finder (https://github.com/junegunn/fzf)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -37,3 +33,7 @@ export HISTCONTROL=ignoreboth:erasedups
 
 # Set tmux editor
 export EDITOR=vim
+
+# Pyenv / Pyenv-virtualenv autocompletion
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi

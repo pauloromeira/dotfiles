@@ -2,8 +2,8 @@ ack
 cmake
 ctags
 git
-python
-python3
+pyenv
+pyenv-virtualenv
 ruby
 caskroom/cask/brew-cask
 lua
