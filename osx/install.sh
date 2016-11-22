@@ -24,9 +24,6 @@ packages_batch brew install
 # info 'Installing brew cask formulae... '
 # packages_batch "brew cask" install
 
-info 'Installing python packages...'
-packages_batch pip install
-
 info 'Installing lua packages...'
 packages_batch luarocks install
 
