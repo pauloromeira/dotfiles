@@ -21,6 +21,7 @@ alias rsync-no='rsync-mv --ignore-existing'
 alias ds='du -s .[!.]* * | sort -rn | cut -f2 | tr "\n" "\0" | xargs -0 du -hsc'
 alias sudo='sudo ' # Allows running sudo with aliases
 alias today='date "+%Y%m%d"'
+alias manage='python $VIRTUAL_ENV/../manage.py' # Django alias
 
 # Fuzzy finder (https://github.com/junegunn/fzf)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
