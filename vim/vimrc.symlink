@@ -16,8 +16,7 @@ let g:localdir = s:vimhome."/local"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call plug#begin(s:plugdir)
-  " TO DO: find a way to install this plugin automatically
-  " Plug 'Valloric/YouCompleteMe'
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
   Plug 'powerline/fonts', { 'do': './install.sh' }
   Plug 'bling/vim-airline' " Status tabline
@@ -57,7 +56,7 @@ call plug#begin(s:plugdir)
   Plug 'mhinz/vim-startify' " A fancy start screen for Vim (also session manager)
   " TODO (romeira): Lazy load {16/11/15 14:39}
   Plug 'AndrewRadev/splitjoin.vim' " Switch between single-line and a multi-line statement
-  Plug 'vimwiki/vimwiki', { 'for': 'vimwiki' } " Notes
+  Plug 'vimwiki/vimwiki' ", { 'for': 'vimwiki' }  Notes
   " TODO (romeira): Lazy load {25/12/15 14:08}
   Plug 'kana/vim-textobj-user' | Plug 'kana/vim-textobj-lastpat' " Text object for search matches (i/)
   " TODO (romeira): Lazy load {08/01/16 16:35}
@@ -78,6 +77,9 @@ call plug#begin(s:plugdir)
   " Plug 'w0ng/vim-hybrid'
   " Plug 'nanotech/jellybeans.vim'
   " Plug 'tomasr/molokai'
+
+  " Airline Themes
+  Plug 'vim-airline/vim-airline-themes'
 
   " Fun
   " Plug 'natw/keyboard_cat.vim', { 'on': 'PlayMeOff' } " Pretend you can type fast
@@ -379,6 +381,7 @@ let g:startify_bookmarks = [
       \ {'g': '~/.gitconfig'}, 
       \ {'t': '~/.tmux.conf'},
       \ {'w': '~/vimwiki/index.wiki' },
+      \ {'d': 'diary' },
       \ ]
 let g:startify_files_number = 7
 let g:startify_relative_path = 1
@@ -411,6 +414,7 @@ let g:startify_custom_header = [
       \ ''
       \ ]
 autocmd User Startified nnoremap <silent> <buffer> q :confirm q<CR>
+autocmd User Startified nnoremap <silent> <buffer> d :VimwikiMakeDiaryNote<CR>
 
 " TO DO: single mapping to preview files based on extension
 " vim-instant-markdown
@@ -426,7 +430,6 @@ if executable('ag')
 endif
 
 " vimwiki
-" TODO (romeira): link to google drive {07/12/15 00:39}
 " TODO (romeira): organize autocmds {07/12/15 01:22}
 au BufNewFile,BufRead *.wiki setlocal ft=vimwiki
 let g:vimwiki_list = [{ 'path': '~/vimwiki' }]
