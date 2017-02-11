@@ -167,6 +167,7 @@ set ignorecase smartcase
 set virtualedit=block " Allow cursor to be anywhere in Visual block mode.
 set autoread " Reload a file when changed outside Vim
 set ttyfast " Faster redrawing
+set completeopt=menuone " prevent YouCompleteMe to open preview
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Appearance                            {{{1 "
@@ -297,6 +298,12 @@ let g:ycm_complete_in_comments = 1 " Completion in comments
 let g:ycm_complete_in_strings = 1 " Completion in string
 " let g:ycm_add_preview_to_completeopt = 1
 " let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_python_binary_path = 'python' " relative search - to work with pyenv
+let g:ycm_semantic_triggers =  {
+      \   'python' : ['.', 'from ', 'import '],  
+      \ } " match python identifiers
+
 
 " EasyMotion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
