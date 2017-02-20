@@ -367,6 +367,8 @@ nmap ga <Plug>(EasyAlign)
 " vim-commentary (just to lazy load the plugin)
 map gc <Plug>Commentary
 nmap gcc <Plug>CommentaryLine
+autocmd FileType markdown setlocal commentstring=[comment]:\ #\ (%s)
+autocmd FileType markdown setlocal comments=s:[comment]:\ #\ (,m:\ ,e:)
 
 " vim-exchange (just to lazy load the plugin)
 nmap cx <Plug>(Exchange)
