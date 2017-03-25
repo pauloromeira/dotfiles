@@ -14,7 +14,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias lsvirtualenv='lsvirtualenv -b' # Shortens the output
-alias yt-mp3='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
+alias yt-mp3='youtube-dl -x --audio-format mp3 -o "%(title)s.%(ext)s"'
 alias rsync-cp='rsync -avhz --progress'
 alias rsync-mv='rsync-cp --remove-source-files'
 alias rsync-no='rsync-mv --ignore-existing'
@@ -23,6 +23,8 @@ alias sudo='sudo ' # Allows running sudo with aliases
 alias today='date "+%Y%m%d"'
 alias manage='python $VIRTUAL_ENV/../manage.py' # Django alias
 alias workon='pyenv activate'
+alias deactivate='pyenv deactivate'
+alias week='~/Estudos/horas/hours.py'
 
 # Fuzzy finder (https://github.com/junegunn/fzf)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

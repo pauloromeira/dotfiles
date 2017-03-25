@@ -62,6 +62,8 @@ call plug#begin(s:plugdir)
   " TODO (romeira): Lazy load {08/01/16 16:35}
   Plug 'nelstrom/vim-visual-star-search' " use * to search current visual selection
   Plug 'junegunn/gv.vim' " A git commit browser
+  Plug 'dhruvasagar/vim-table-mode' " Create neat tables as you type
+  Plug 'tpope/vim-jdaddy' " mapping for working with JSON
 
   " Locals
   Plug g:localdir.'/vim-tomorrow-theme'
