@@ -62,8 +62,9 @@ call plug#begin(s:plugdir)
   " TODO (romeira): Lazy load {08/01/16 16:35}
   Plug 'nelstrom/vim-visual-star-search' " use * to search current visual selection
   Plug 'junegunn/gv.vim' " A git commit browser
-  Plug 'dhruvasagar/vim-table-mode' " Create neat tables as you type
   Plug 'tpope/vim-jdaddy' " mapping for working with JSON
+  Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " Distraction-free writing
+  Plug 'chrisbra/csv.vim' " A Filetype plugin for csv files
 
   " Locals
   Plug g:localdir.'/vim-tomorrow-theme'
@@ -85,7 +86,6 @@ call plug#begin(s:plugdir)
 
   " Fun
   " Plug 'natw/keyboard_cat.vim', { 'on': 'PlayMeOff' } " Pretend you can type fast
-  " Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " Distraction-free writing
   " Plug 'junegunn/limelight.vim', { 'on': 'Limelight' } " Focus tool
 
   " To Test "
@@ -124,6 +124,7 @@ call plug#begin(s:plugdir)
   " Plug 'rking/ag.vim' " alternative to ack.vim
   " Plug 'godlygeek/tabular' " Align text (using junegunn/vim-easy-align)
   " Plug 'justinmk/vim-gtfo' " Go to Terminal or File manager (gof, got)
+  " Plug 'dhruvasagar/vim-table-mode' " Create neat tables as you type
 
 call plug#end()
 
@@ -275,6 +276,7 @@ nmap <silent> <Leader>tt :TagbarToggle<CR>
 
 " NERDTree
 nmap <silent> <Leader>tn :NERDTreeToggle<CR>
+let g:NERDTreeIgnore = ['\.pyc$']
 
 " Undotree
 " Native 'U' is a weird command
@@ -371,6 +373,7 @@ map gc <Plug>Commentary
 nmap gcc <Plug>CommentaryLine
 autocmd FileType markdown setlocal commentstring=[comment]:\ #\ (%s)
 autocmd FileType markdown setlocal comments=s:[comment]:\ #\ (,m:\ ,e:)
+autocmd FileType csv setlocal commentstring=#%s
 
 " vim-exchange (just to lazy load the plugin)
 nmap cx <Plug>(Exchange)
