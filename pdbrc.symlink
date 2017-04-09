@@ -1,0 +1,1 @@
+alias dump with open('.dump', 'w') as f: f.write(%1)

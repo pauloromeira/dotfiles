@@ -17,6 +17,7 @@
 	pth = log --oneline --graph --decorate
 [core]
 	editor = vim
+	excludesfile = /Users/pauloromeira/.gitignore
 [color]
 	status = always
 [filter "lfs"]
