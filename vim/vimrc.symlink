@@ -386,15 +386,12 @@ runtime macros/matchit.vim " (native)
 " vim-startify
 let g:startify_session_dir = s:tempdir.'/session'
 " TODO (romeira): change ~ to $HOME {07/12/15 00:22}
+" TODO [romeira]: create system-specific vimrc {21/04/17 21:08}
 let g:startify_bookmarks = [ 
       \ {'v': '~/.vimrc'}, 
       \ {'p': '~/.dotfiles/profile'}, 
-      \ {'c': '~/Estudos/checkpoints.txt'}, 
-      \ {'s': '~/Estudos/stack.txt'}, 
-      \ {'n': '~/notes.txt'},
       \ {'g': '~/.gitconfig'}, 
       \ {'t': '~/.tmux.conf'},
-      \ {'w': '~/vimwiki/index.wiki' },
       \ {'d': 'diary' },
       \ ]
 let g:startify_files_number = 7
