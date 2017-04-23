@@ -12,6 +12,7 @@ libssl-dev
 llvm
 make
 python-pip
+silversearcher-ag
 tk-dev
 tmux
 tree
