@@ -64,7 +64,7 @@ call plug#begin(s:plugdir)
   Plug 'junegunn/gv.vim' " A git commit browser
   Plug 'tpope/vim-jdaddy' " mapping for working with JSON
   Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " Distraction-free writing
-  Plug 'chrisbra/csv.vim' " A Filetype plugin for csv files
+  Plug 'mattn/gist-vim' | Plug 'mattn/webapi-vim' " vimscript for gist
 
   " Locals
   Plug g:localdir.'/vim-tomorrow-theme'

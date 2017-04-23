@@ -5,6 +5,8 @@
 [user]
 	name = Paulo Romeira
 	email = paulo@pauloromeira.com
+[github]
+	user = pauloromeira
 [diff]
 	tool = vimdiff
 [alias]
