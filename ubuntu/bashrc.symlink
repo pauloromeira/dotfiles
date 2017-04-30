@@ -108,6 +108,7 @@ fi
 # TODO [romeira]: move to file {21/04/17 21:04}
 # Aliases
 alias upg='sudo apt-get update && sudo apt-get -y upgrade'
+alias opn='xdg-open'
 
 # Enable a 256-color Terminal. This conditional statement ensures that
 # the TERM variable is only set outside of tmux,
