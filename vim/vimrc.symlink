@@ -584,4 +584,17 @@ nnoremap <C-y> 3<C-y>
 " TODO (romeira): conflicting with Startify {15/11/15 07:11}
 nnoremap <silent> <Esc> <Esc>:nohl<CR>
 
+
+" FZF
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+nnoremap <silent> <expr> <Leader><Leader>
+      \ (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
+
+nnoremap <silent> <Leader><Enter>  :Buffers<CR>
+nnoremap <silent> <Leader>`        :Marks<CR>
+
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
