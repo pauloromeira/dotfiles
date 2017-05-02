@@ -23,7 +23,3 @@ packages_batch "sudo apt-get" "-y install"
 # TODO (romeira): install virtualenv && virtualenvwrapper locally {06/12/15 05:14}
 # info 'Installing python packages...'
 # packages_batch pip install
-
-# TO DO: put this in a post-install script (for both osx and ubuntu)
-info 'Installing N (node version management)'
-curl -L http://git.io/n-install | N_PREFIX="$HOME/.n" bash -s -- -y
