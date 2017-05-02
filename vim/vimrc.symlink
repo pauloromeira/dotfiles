@@ -459,20 +459,6 @@ function! CircularShift(pos, shift, first_pos, last_pos)
   return new_pos
 endfunction
 
-" AutoSave (junegunn/dotfiles)
-function! s:autosave(enable)
-  augroup autosave
-    autocmd!
-    if a:enable
-      autocmd TextChanged,InsertLeave <buffer>
-            \  if empty(&buftype) && !empty(bufname(''))
-            \|   update
-            \| endif
-    endif
-  augroup END
-endfunction
-command! -bang AutoSave call s:autosave(<bang>1)
-
 " Based on window movement shortcuts by 'nicknisi/dotfiles'
 function! WinCreate(key)
   if (match(a:key,'[jk]'))
