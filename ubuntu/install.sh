@@ -11,6 +11,9 @@ source "$ROOT/utils.sh"
 # xcape -e '#66=Escape' # if gnome-tweak-tool
 # xcape -e 'Control_L=Escape' # else
 
+# Vim PPA
+sudo add-apt-repository -y ppa:jonathonf/vim
+
 info 'Updating apt-get packages...'
 sudo apt-get update
 
