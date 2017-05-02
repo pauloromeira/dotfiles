@@ -24,7 +24,6 @@ call plug#begin(s:plugdir)
   Plug 'scrooloose/nerdtree' " , { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   Plug 'scrooloose/syntastic'
-  Plug 'easymotion/vim-easymotion' , { 'on': '<Plug>(easymotion-s)' }
   Plug 'kien/ctrlp.vim', { 'on': 'CtrlP' }
   Plug 'tpope/vim-fugitive' " Gateway to git
   Plug 'tpope/vim-repeat'
@@ -125,6 +124,7 @@ call plug#begin(s:plugdir)
   " Plug 'godlygeek/tabular' " Align text (using junegunn/vim-easy-align)
   " Plug 'justinmk/vim-gtfo' " Go to Terminal or File manager (gof, got)
   " Plug 'dhruvasagar/vim-table-mode' " Create neat tables as you type
+  " Plug 'easymotion/vim-easymotion' , { 'on': '<Plug>(easymotion-s)' }
 
 call plug#end()
 
