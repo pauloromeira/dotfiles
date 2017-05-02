@@ -17,6 +17,7 @@
 	br = branch
 	ci = commit
 	pth = log --oneline --graph --decorate
+	root = rev-parse --show-toplevel
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore
