@@ -399,14 +399,14 @@ hi StartifyNumber  ctermfg=144
 hi StartifyPath    ctermfg=245
 hi StartifySlash   ctermfg=240
 hi StartifySpecial ctermfg=240
+
 let g:startify_custom_header = [
-      \ '              _',
-      \ '       _   __('.v:version[0].')___ ___',
-      \ '      | | / / / __ `__ \',
-      \ '      | |/ / / / / / / /',
-      \ '      |___/_/_/ /_/ /_/ ',
-      \ ''
-      \ ]
+      \ '    ┌────┬─────────────┐ ',
+      \ '    │ '.strftime("%d").' │   ╦  ╦╦╔╦╗  │ ',
+      \ '    │ '.strftime("%b").'│   ╚╗╔╝║║║║  │ ',
+      \ '    ├────┘    ╚╝ ╩╩ ╩╝ │ ',
+      \ '    └─────────── '. v:version[0].'.'. v:version[1].' ──┘',
+      \ '']
 
 autocmd User Startified nnoremap <silent> <buffer> q :confirm q<CR>
 autocmd User Startified nnoremap <silent> <buffer> d :VimwikiMakeDiaryNote<CR>
