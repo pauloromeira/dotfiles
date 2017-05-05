@@ -10,6 +10,7 @@ alias ipy='ipython'
 alias ty='$(which python3) ~/type.py'
 alias peekd='dirs -l +1' # Complement to pushd and popd (see without popping)
 alias vi='vim'
+alias v='vim'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'

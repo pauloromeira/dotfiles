@@ -309,12 +309,6 @@ let g:ycm_semantic_triggers =  {
       \ } " match python identifiers
 
 
-" EasyMotion
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-nmap s <Plug>(easymotion-s)
-let g:EasyMotion_smartcase = 1
-let g:EasyMotion_enter_jump_first = 1
-
 " restore_view
 set viewoptions=cursor,folds,slash,unix
 
@@ -591,6 +585,7 @@ nnoremap <silent> <expr> <Leader><Leader>
 nnoremap <silent> <Leader><Enter>  :Buffers<CR>
 nnoremap <silent> <Leader>`        :Marks<CR>
 
+" TODO [romeira]: mapear ctrl+p/ctrl+n para scroll do preview {03/05/17 10:06}
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>,
   \                    fzf#vim#with_preview('right:50%:hidden', '?'),
