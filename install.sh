@@ -9,3 +9,6 @@ sh -c "$($COMMAND https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/maste
 
 # Pyenv
 sh -c "$($COMMAND https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer)"
+
+# nvm
+sh -c "$($COMMAND https://raw.githubusercontent.com/creationix/nvm/master/install.sh)"
