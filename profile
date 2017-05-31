@@ -30,9 +30,6 @@ alias week='~/Estudos/horas/hours.py'
 # Fuzzy finder (https://github.com/junegunn/fzf)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# N (node version management) (https://github.com/tj/n).
-export N_PREFIX="$HOME/.n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
-
 # Remove duplicates from bash history
 export HISTCONTROL=ignoreboth:erasedups
 
