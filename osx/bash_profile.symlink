@@ -10,8 +10,6 @@ alias mvi='mvim'
 alias ip='ifconfig|grep broadcast'
 alias top='top -o cpu'
 
-### Added by the Heroku Toolbelt
-PATH="/usr/local/heroku/bin:$PATH"
 # PostgreSQL
 PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:${PATH}"
 

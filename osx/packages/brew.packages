@@ -4,7 +4,6 @@ cmake
 ctags
 git
 lua
-node
 readline
 ruby
 sqlite
