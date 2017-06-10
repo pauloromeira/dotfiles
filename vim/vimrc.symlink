@@ -579,9 +579,8 @@ nnoremap <Right> <C-w>5>
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
-" Since esc doesn't do anything in normal mode
-" TODO (romeira): conflicting with Startify {15/11/15 07:11}
-" nnoremap <silent> <Esc> <Esc>:nohl<CR>
+" Since clear highlighting with <C-l>
+nnoremap <silent> <C-l> :<C-u>nohl<CR><C-l>
 
 " FZF
 nnoremap <silent> <expr> <Leader><Leader>
