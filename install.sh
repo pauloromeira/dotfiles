@@ -14,4 +14,5 @@ sh -c "$($COMMAND https://raw.githubusercontent.com/pyenv/pyenv-installer/master
 sh -c "$($COMMAND https://raw.githubusercontent.com/creationix/nvm/master/install.sh)"
 
 # Tmux plugin manager
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm &&
+  sh -c "~/.tmux/plugins/tpm/bin/install_plugins"
