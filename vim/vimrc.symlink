@@ -550,6 +550,12 @@ nnoremap 6<Tab> 6gt
 nnoremap 7<Tab> 7gt
 nnoremap 8<Tab> 8gt
 nnoremap 9<Tab> 9gt
+
+" Last tab
+let g:lasttab = 1
+nmap <silent> <Tab><Tab> :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+
 " Tab operations
 nnoremap <silent> <<Tab> :exe "tabm -".v:count1<CR>
 nnoremap <silent> ><Tab> :exe "tabm +".v:count1<CR>
