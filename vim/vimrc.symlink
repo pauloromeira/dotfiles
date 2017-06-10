@@ -573,13 +573,18 @@ nnoremap Q @q
 " nnoremap <Down> <C-w>5-
 " nnoremap <Left> <C-w>5<
 " nnoremap <Right> <C-w>5>
+" nnoremap <S-Up> <C-w>+
+" nnoremap <S-Down> <C-w>-
+" nnoremap <S-Left> <C-w><
+" nnoremap <S-Right> <C-w>>
 
 " Scroll the viewport faster
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
 " Clear highlighting with <Esc>
-nnoremap <silent> <Esc> :<C-u>nohl<CR><Esc>
+nnoremap <silent> <Esc> :<C-u>noh<CR><Esc>
+" nnoremap <Esc>^[ <Esc>^[
 
 " FZF
 nnoremap <silent> <expr> <Leader><Leader>
