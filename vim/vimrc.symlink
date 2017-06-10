@@ -569,10 +569,10 @@ nnoremap Y y$
 nnoremap Q @q
 
 " Resize windows with arrowkeys
-nnoremap <Up> <C-w>5+
-nnoremap <Down> <C-w>5-
-nnoremap <Left> <C-w>5<
-nnoremap <Right> <C-w>5>
+" nnoremap <Up> <C-w>5+
+" nnoremap <Down> <C-w>5-
+" nnoremap <Left> <C-w>5<
+" nnoremap <Right> <C-w>5>
 
 " Scroll the viewport faster
 nnoremap <C-e> 3<C-e>
