@@ -64,6 +64,8 @@ call plug#begin(s:plugdir)
   Plug 'tpope/vim-jdaddy' " mapping for working with JSON
   Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " Distraction-free writing
   Plug 'mattn/gist-vim' | Plug 'mattn/webapi-vim' " vimscript for gist
+  Plug 'tmux-plugins/vim-tmux-focus-events' " Make terminal vim and tmux work better together.
+
 
   " Locals
   Plug g:localdir.'/vim-tomorrow-theme'
@@ -72,8 +74,8 @@ call plug#begin(s:plugdir)
   " Plug g:localdir.'/vim-startmode'
 
   " Colorschemes
-  Plug 'jonathanfilip/vim-lucius'
-  Plug 'morhetz/gruvbox'
+  " Plug 'jonathanfilip/vim-lucius'
+  " Plug 'morhetz/gruvbox'
   " Plug 'kristijanhusak/vim-hybrid-material'
   " Plug 'altercation/vim-colors-solarized'
   " Plug 'w0ng/vim-hybrid'
@@ -579,7 +581,7 @@ nnoremap <C-y> 3<C-y>
 
 " Since esc doesn't do anything in normal mode
 " TODO (romeira): conflicting with Startify {15/11/15 07:11}
-nnoremap <silent> <Esc> <Esc>:nohl<CR>
+" nnoremap <silent> <Esc> <Esc>:nohl<CR>
 
 " FZF
 nnoremap <silent> <expr> <Leader><Leader>
