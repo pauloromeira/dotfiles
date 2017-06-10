@@ -25,6 +25,13 @@ set-option -g mouse off
 set-option -g status-interval 60
 
 # -------------------------------------------------------------------
+# Plugins
+# -------------------------------------------------------------------
+
+# Tmux plugin for copying to system clipboard.
+set -g @plugin 'tmux-plugins/tmux-yank'
+
+# -------------------------------------------------------------------
 # Window options
 # -------------------------------------------------------------------
 
@@ -59,12 +66,6 @@ bind-key btab select-pane -t :.-
 
 # Copy-mode (Vi keys)
 bind-key -t vi-copy 'v' begin-selection
-# TODO (romeira): make it cross-platform (pbcopy is just for osx) {06/12/15 01:38}
-bind-key -t vi-copy 'y' copy-pipe "pbcopy"
-# unbind [
-# bind Escape copy-mode
-# unbind p
-# bind p paste-buffer
 
 # Splitting panes
 bind-key | split-window -h -c "#{pane_current_path}"
@@ -75,3 +76,6 @@ bind-key -r H resize-pane -L 5
 bind-key -r J resize-pane -D 5
 bind-key -r K resize-pane -U 5
 bind-key -r L resize-pane -R 5
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
