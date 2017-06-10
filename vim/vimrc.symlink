@@ -64,7 +64,6 @@ call plug#begin(s:plugdir)
   Plug 'tpope/vim-jdaddy' " mapping for working with JSON
   Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " Distraction-free writing
   Plug 'mattn/gist-vim' | Plug 'mattn/webapi-vim' " vimscript for gist
-  Plug 'tmux-plugins/vim-tmux-focus-events' " Make terminal vim and tmux work better together.
 
 
   " Locals
@@ -579,8 +578,8 @@ nnoremap <Right> <C-w>5>
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
-" Since clear highlighting with <C-l>
-nnoremap <silent> <C-l> :<C-u>nohl<CR><C-l>
+" Clear highlighting with <Esc>
+nnoremap <silent> <Esc> :<C-u>nohl<CR><Esc>
 
 " FZF
 nnoremap <silent> <expr> <Leader><Leader>
