@@ -6,10 +6,9 @@ source "$ROOT/utils.sh"
 # TO DO: install: alols/xcape (github), 
     # gnome-tweak-tool (try to use xmodmap)
 
-# TO DO: Configure caps lock:
-# 1. swap caps and ctrl with gnome-tweak-tool or any other tool
-# xcape -e '#66=Escape' # if gnome-tweak-tool
-# xcape -e 'Control_L=Escape' # else
+# Swap ctrl and caps
+gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:swapcaps']"
+
 
 info 'Updating apt-get packages...'
 sudo apt-get update
