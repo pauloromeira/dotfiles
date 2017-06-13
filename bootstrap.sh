@@ -36,7 +36,7 @@ esac
 # TO DO: dinamically construct packages array
 # TO DO: optionally pass specific packages by argument
 # TO DO: allow subpackages
-PACKAGES=(vim)
+PACKAGES=(vim tmux)
 
 # set -e
 

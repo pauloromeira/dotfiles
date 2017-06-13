@@ -58,7 +58,7 @@ bind-key -t vi-copy 'v' begin-selection
 # Appearance
 # -------------------------------------------------------------------
 
-set -g status-right '#{prefix_highlight} CPU#{cpu_percentage} B #{battery_graph} | %a %d-%m %H:%M '
+set -g status-right '#{prefix_highlight} CPU #{cpu_percentage} B #{battery_graph} | %a %d-%m %H:%M '
 
 # -------------------------------------------------------------------
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
