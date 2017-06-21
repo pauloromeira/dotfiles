@@ -59,7 +59,7 @@ bind-key -t vi-copy 'v' begin-selection
 # Appearance
 # -------------------------------------------------------------------
 
-set -g status-right "#{prefix_highlight}#[fg=colour109,bg=colour236] UP #(uptime | awk '{print $3, $4}'|sed 's/,.*//') B #{battery_graph} | #[fg=colour240]%a %d/%m %H:%M "
+set -g status-right "#{prefix_highlight}#[fg=colour109,bg=colour236] ■ #(uptime | awk '{print $3, $4}'|sed 's/,.*//') » #{battery_graph} | #[fg=colour240]%a %d/%m %H:%M "
 set-option -g status-position top
 set -g status-right-length 40
 
