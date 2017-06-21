@@ -39,11 +39,10 @@ set -g @plugin 'seebi/tmux-colors-solarized'
 # set -g @colors-solarized 'dark'
 
 # Status bar
-set -g @plugin 'tmux-plugins/tmux-cpu'
 set -g @plugin 'tmux-plugins/tmux-battery'
 set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
 set -g @prefix_highlight_show_copy_mode 'on'
-set -g @prefix_highlight_copy_mode_attr 'fg=black,bg=yellow,bold'
+set -g @prefix_highlight_copy_mode_attr 'fg=black,bg=colour143,bold'
 
 # -------------------------------------------------------------------
 # Key bindings
@@ -58,7 +57,9 @@ bind-key -t vi-copy 'v' begin-selection
 # Appearance
 # -------------------------------------------------------------------
 
-set -g status-right '#{prefix_highlight} CPU #{cpu_percentage} B #{battery_graph} | %a %d-%m %H:%M '
+set -g status-right "#{prefix_highlight}#[fg=colour144,bg=colour236] UP #(uptime | awk '{print $3}'|sed 's/,.*//') B #{battery_graph} | #[fg=colour240]%a %d/%m %H:%M "
+set-option -g status-position top
+set -g status-right-length 40
 
 # -------------------------------------------------------------------
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
