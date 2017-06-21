@@ -44,6 +44,8 @@ set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
 set -g @prefix_highlight_show_copy_mode 'on'
 set -g @prefix_highlight_copy_mode_attr 'fg=black,bg=colour143,bold'
 
+set -g @prefix_highlight_bg 'colour109'
+set -g @prefix_highlight_fg 'black,bold'
 # -------------------------------------------------------------------
 # Key bindings
 # -------------------------------------------------------------------
@@ -57,7 +59,7 @@ bind-key -t vi-copy 'v' begin-selection
 # Appearance
 # -------------------------------------------------------------------
 
-set -g status-right "#{prefix_highlight}#[fg=colour144,bg=colour236] UP #(uptime | awk '{print $3}'|sed 's/,.*//') B #{battery_graph} | #[fg=colour240]%a %d/%m %H:%M "
+set -g status-right "#{prefix_highlight}#[fg=colour109,bg=colour236] UP #(uptime | awk '{print $3}'|sed 's/,.*//') B #{battery_graph} | #[fg=colour240]%a %d/%m %H:%M "
 set-option -g status-position top
 set -g status-right-length 40
 
