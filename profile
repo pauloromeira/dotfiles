@@ -4,7 +4,6 @@ DOT=$(cd "$(dirname "$BASH_SOURCE")" && pwd)
 alias l='ls -lGh'
 alias la='l -A'
 alias tree='tree -C'
-alias rm='rm -i'
 alias py='python'
 alias ipy='ipython'
 alias ty='$(which python3) ~/type.py'
