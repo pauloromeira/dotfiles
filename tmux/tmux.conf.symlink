@@ -49,11 +49,10 @@ set -g @prefix_highlight_fg 'black,bold'
 # -------------------------------------------------------------------
 # Key bindings
 # -------------------------------------------------------------------
-# Copy-mode
-set-window-option -g mode-keys vi
 
 # Copy-mode (Vi keys)
-bind-key -t vi-copy 'v' begin-selection
+bind-key -T copy-mode-vi 'v' send -X begin-selection
+bind-key -T copy-mode-vi 'y' send -X copy-selection
 
 # Toggle visibility
 bind-key v set-option -g status
@@ -67,5 +66,10 @@ set-option -g status-position top
 set -g status-right-length 40
 
 # -------------------------------------------------------------------
-# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+# Initialize TMUX plugin manager
+
+# install tpm if not already installed
+if "test ! -d ~/.tmux/plugins/tpm" \
+     "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'"
+
 run '~/.tmux/plugins/tpm/tpm'
