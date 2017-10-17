@@ -277,6 +277,7 @@ nmap <silent> <Leader>tt :TagbarToggle<CR>
 
 " NERDTree
 nmap <silent> <Leader>tn :NERDTreeToggle<CR>
+nmap <silent> <Leader>tf :NERDTreeFind<CR>
 let g:NERDTreeIgnore = ['\.pyc$']
 
 " Undotree
