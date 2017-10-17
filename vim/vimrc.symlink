@@ -276,15 +276,16 @@ let g:airline#extensions#tabline#right_alt_sep = ''
 nmap <silent> <Leader>tt :TagbarToggle<CR>
 
 " NERDTree
-nmap <silent> <Leader>tn :NERDTreeToggle<CR>
-nmap <silent> <Leader>tf :NERDTreeFind<CR>
+nmap <silent> <Leader>nt :NERDTreeToggle<CR>
+nmap <silent> <Leader>nf :NERDTreeFocus<CR>
+nmap <silent> <Leader>nF :NERDTreeFind<CR>
 let g:NERDTreeIgnore = ['\.pyc$']
 
 " Undotree
 " Native 'U' is a weird command
 nmap <silent> U :UndotreeToggle<CR>
 " Follows the 'toggle' convention
-nmap <silent> <Leader>tu :UndotreeToggle<CR>
+nmap <silent> <Leader>ut :UndotreeToggle<CR>
 let g:undotree_WindowLayout = 4
 let g:undotree_SetFocusWhenToggle = 1
 
