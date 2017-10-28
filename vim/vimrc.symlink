@@ -24,7 +24,6 @@ call plug#begin(s:plugdir)
   Plug 'scrooloose/nerdtree' " , { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   Plug 'scrooloose/syntastic'
-  Plug 'kien/ctrlp.vim', { 'on': 'CtrlP' }
   Plug 'tpope/vim-fugitive' " Gateway to git
   Plug 'tpope/vim-repeat'
         \ | Plug 'vim-scripts/visualrepeat' " Visual mode repetition
@@ -34,14 +33,12 @@ call plug#begin(s:plugdir)
   Plug 'tpope/vim-rsi' " Readline style insertion
   Plug 'vim-scripts/IndexedSearch'
   Plug 'michaeljsmith/vim-indent-object' " ii / ai
-  " Plug 'klen/python-mode', { 'for': 'python' }
   Plug 'tommcdo/vim-exchange', { 'on': ['<Plug>(Exchange)',
         \ '<Plug>(ExchangeLine)'] } " Easy text exchange
   Plug 'bling/vim-bufferline' " Show the list of buffers in the command bar
   Plug 'airblade/vim-gitgutter' " Shows a git diff in the 'gutter' (sign column)
   Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
   Plug 'osyo-manga/vim-hopping', { 'on': '<Plug>(hopping-start)' } " Search and replace
-  Plug 'mileszs/ack.vim'
   " TO DO: install fzf at dotfiles bootstrap
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
@@ -55,16 +52,15 @@ call plug#begin(s:plugdir)
   Plug 'mhinz/vim-startify' " A fancy start screen for Vim (also session manager)
   " TODO (romeira): Lazy load {16/11/15 14:39}
   Plug 'AndrewRadev/splitjoin.vim' " Switch between single-line and a multi-line statement
-  Plug 'vimwiki/vimwiki' ", { 'for': 'vimwiki' }  Notes
   " TODO (romeira): Lazy load {25/12/15 14:08}
   Plug 'kana/vim-textobj-user' | Plug 'kana/vim-textobj-lastpat' " Text object for search matches (i/)
   " TODO (romeira): Lazy load {08/01/16 16:35}
   Plug 'nelstrom/vim-visual-star-search' " use * to search current visual selection
-  Plug 'junegunn/gv.vim' " A git commit browser
   Plug 'tpope/vim-jdaddy' " mapping for working with JSON
   Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " Distraction-free writing
   Plug 'mattn/gist-vim' | Plug 'mattn/webapi-vim' " vimscript for gist
   Plug 'gregsexton/gitv', {'on': 'Gitv'}
+  Plug 'junegunn/gv.vim' " A git commit browser
 
   " Locals
   Plug g:localdir.'/vim-tomorrow-theme'
@@ -126,6 +122,10 @@ call plug#begin(s:plugdir)
   " Plug 'justinmk/vim-gtfo' " Go to Terminal or File manager (gof, got)
   " Plug 'dhruvasagar/vim-table-mode' " Create neat tables as you type
   " Plug 'easymotion/vim-easymotion' , { 'on': '<Plug>(easymotion-s)' }
+  " Plug 'kien/ctrlp.vim', { 'on': 'CtrlP' }
+  " Plug 'klen/python-mode', { 'for': 'python' }
+  " Plug 'mileszs/ack.vim'
+  " Plug 'vimwiki/vimwiki' ", { 'for': 'vimwiki' }  Notes
 
 call plug#end()
 
