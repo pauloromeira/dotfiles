@@ -307,6 +307,7 @@ let g:ycm_complete_in_strings = 1 " Completion in string
 " let g:ycm_autoclose_preview_window_after_completion = 1
 " let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_python_binary_path = 'python' " relative search - to work with pyenv
+" let g:ycm_python_binary_path = $HOME.'.pyenv/shims/python' " to work with pyenv
 let g:ycm_semantic_triggers =  {
       \   'python' : ['.', 'from ', 'import '],  
       \ } " match python identifiers
