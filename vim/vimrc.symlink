@@ -559,6 +559,7 @@ nnoremap <silent> ><Tab> :exe "tabm +".v:count1<CR>
 nnoremap <silent> <<S-Tab> :tabm 0<CR>
 nnoremap <silent> ><S-Tab> :tabm<CR>
 nnoremap <silent> c<Tab> :tabnew \| Startify<CR>
+nnoremap <silent> c<S-Tab> :-tabnew \| Startify<CR>
 nnoremap <silent> d<Tab> :tabclose<CR>
 nnoremap <silent> t<Tab> :tabonly<CR>
 
