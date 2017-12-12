@@ -24,6 +24,8 @@ alias manage='python $VIRTUAL_ENV/../manage.py' # Django alias
 alias workon='pyenv activate'
 alias deactivate='pyenv deactivate'
 alias week='~/Estudos/horas/hours.py'
+alias taill='tail -f $(ls | sort | tail -1)'
+alias cpwd='pwd | xsel -ib' # Copy pwd
 
 # Fuzzy finder (https://github.com/junegunn/fzf)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
