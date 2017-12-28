@@ -17,6 +17,7 @@
 	br = branch
 	ci = commit
 	pth = log --oneline --graph --decorate
+	pthf = log --oneline --graph --decorate --pretty=format:'%h %ad %an  %s' --date=short
 	root = rev-parse --show-toplevel
 [core]
 	editor = vim
