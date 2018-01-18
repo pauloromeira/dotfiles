@@ -13,7 +13,6 @@
 	co = checkout
 	st = status
 	unstage = reset HEAD --
-	last = log -1 HEAD
 	br = branch
 	ci = commit
 	pth = log --oneline --graph --decorate
