@@ -55,12 +55,12 @@ call plug#begin(s:plugdir)
   " TODO (romeira): Lazy load {25/12/15 14:08}
   Plug 'kana/vim-textobj-user' | Plug 'kana/vim-textobj-lastpat' " Text object for search matches (i/)
   " TODO (romeira): Lazy load {08/01/16 16:35}
-  Plug 'nelstrom/vim-visual-star-search' " use * to search current visual selection
   Plug 'tpope/vim-jdaddy' " mapping for working with JSON
   Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " Distraction-free writing
   Plug 'mattn/gist-vim' | Plug 'mattn/webapi-vim' " vimscript for gist
   Plug 'gregsexton/gitv', {'on': 'Gitv'}
   Plug 'junegunn/gv.vim' " A git commit browser
+  Plug 'pgdouyon/vim-evanesco' " Disables search highlighting when you are done + visual star search
 
   " Locals
   Plug g:localdir.'/vim-tomorrow-theme'
@@ -126,6 +126,8 @@ call plug#begin(s:plugdir)
   " Plug 'klen/python-mode', { 'for': 'python' }
   " Plug 'mileszs/ack.vim'
   " Plug 'vimwiki/vimwiki' ", { 'for': 'vimwiki' }  Notes
+  " Plug 'nelstrom/vim-visual-star-search' " use * to search current visual selection (vim-evanesco does that too)
+  " Plug 'romainl/vim-cool' " Disables search highlighting when you are done (simpler than vim-evanesco)
 
 call plug#end()
 
@@ -522,6 +524,15 @@ nnoremap <Leader>d "+d
 nnoremap <Leader>P "+P
 nnoremap <Leader>p "+p
 nnoremap <Leader>y "+y
+
+" TODO [romeira]: remap: (c)lipboard + (...) {06/11/17 03:13}
+" problema: visual remappings
+" nnoremap cd "+d
+" nnoremap cD "+D
+" nnoremap cp "+p
+" nnoremap cP "+P
+" nnoremap cy "+y
+
 vnoremap <Leader>d "+d
 vnoremap <Leader>P "+P
 vnoremap <Leader>p "+p
@@ -583,7 +594,8 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
 " Clear highlighting with <Esc>
-nnoremap <silent> <Esc> :<C-u>noh<CR><Esc>
+" nnoremap <silent> <Esc> :<C-u>noh<CR><Esc>
+" nnoremap <silent> <C-l> :<C-u>noh<CR><C-l>
 " nnoremap <Esc>^[ <Esc>^[
 
 " FZF
