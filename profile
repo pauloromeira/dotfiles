@@ -26,6 +26,7 @@ alias deactivate='pyenv deactivate'
 alias week='~/Estudos/horas/hours.py'
 alias taill='tail -f $(ls | sort | tail -1)'
 alias cpwd='pwd | xsel -ib' # Copy pwd
+alias rmpyc='find . -name \*.pyc -delete'
 
 # Fuzzy finder (https://github.com/junegunn/fzf)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
