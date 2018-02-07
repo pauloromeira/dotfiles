@@ -60,7 +60,8 @@ call plug#begin(s:plugdir)
   Plug 'mattn/gist-vim' | Plug 'mattn/webapi-vim' " vimscript for gist
   Plug 'gregsexton/gitv', {'on': 'Gitv'}
   Plug 'junegunn/gv.vim' " A git commit browser
-  Plug 'pgdouyon/vim-evanesco' " Disables search highlighting when you are done + visual star search
+  Plug 'nelstrom/vim-visual-star-search' " use * to search current visual selection (vim-evanesco does that too)
+  Plug 'romainl/vim-cool' " Disables search highlighting when you are done (simpler than vim-evanesco)
 
   " Locals
   Plug g:localdir.'/vim-tomorrow-theme'
@@ -126,8 +127,7 @@ call plug#begin(s:plugdir)
   " Plug 'klen/python-mode', { 'for': 'python' }
   " Plug 'mileszs/ack.vim'
   " Plug 'vimwiki/vimwiki' ", { 'for': 'vimwiki' }  Notes
-  " Plug 'nelstrom/vim-visual-star-search' " use * to search current visual selection (vim-evanesco does that too)
-  " Plug 'romainl/vim-cool' " Disables search highlighting when you are done (simpler than vim-evanesco)
+  " Plug 'pgdouyon/vim-evanesco' " Disables search highlighting when you are done + visual star search
 
 call plug#end()
 
