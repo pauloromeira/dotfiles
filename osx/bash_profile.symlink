@@ -10,6 +10,8 @@ alias mvi='mvim'
 alias ip='ifconfig|grep broadcast'
 alias top='top -o cpu'
 
+export PATH="/usr/local/sbin:$PATH"
+
 # PostgreSQL
 PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:${PATH}"
 
