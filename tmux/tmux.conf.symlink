@@ -12,6 +12,9 @@ set-option -g history-limit 102400
 # Mouse off
 set-option -g mouse off
 
+# Focus events on
+set -g focus-events on
+
 # -------------------------------------------------------------------
 # Plugins
 # -------------------------------------------------------------------
