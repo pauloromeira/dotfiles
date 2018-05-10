@@ -63,6 +63,8 @@ call plug#begin(s:plugdir)
   Plug 'nelstrom/vim-visual-star-search' " use * to search current visual selection (vim-evanesco does that too)
   Plug 'romainl/vim-cool' " Disables search highlighting when you are done (simpler than vim-evanesco)
   Plug 'vimwiki/vimwiki' ", { 'for': 'vimwiki' }  Notes
+  Plug 'vim-python/python-syntax' " Python syntax highlighting for Vim
+  Plug 'ludovicchabant/vim-gutentags' " A Vim plugin that manages your tag files
 
   " Locals
   Plug g:localdir.'/vim-tomorrow-theme'
@@ -474,6 +476,10 @@ let g:fzf_colors =
 
 " Gist
 let g:gist_post_private = 1
+
+" Gutentags
+let g:gutentags_cache_dir = s:tempdir.'/tags/'
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           Functions and Commands                       {{{1 "
