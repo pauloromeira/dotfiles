@@ -65,12 +65,10 @@ call plug#begin(s:plugdir)
   Plug 'vimwiki/vimwiki' ", { 'for': 'vimwiki' }  Notes
   Plug 'vim-python/python-syntax' " Python syntax highlighting for Vim
   Plug 'ludovicchabant/vim-gutentags' " A Vim plugin that manages your tag files
+  Plug 'metakirby5/codi.vim', {'on': 'Codi'} " The interactive scratchpad for hackers.
 
   " Experimenting
-  Plug 'sjl/vitality.vim' " Restores FocusLost and FocusGained autocommands (tmux)
   Plug 'janko-m/vim-test' | Plug 'tpope/vim-dispatch'
-  Plug 'metakirby5/codi.vim', {'on': 'Codi'} " The interactive scratchpad for hackers.
-  Plug 'junegunn/vim-peekaboo' " Extends \" and @ in normal mode and <CTRL-R> in insert mode so you can see the contents of the registers.
 
   " Locals
   Plug g:localdir.'/vim-tomorrow-theme'
@@ -136,6 +134,8 @@ call plug#begin(s:plugdir)
   " Plug 'klen/python-mode', { 'for': 'python' }
   " Plug 'mileszs/ack.vim'
   " Plug 'pgdouyon/vim-evanesco' " Disables search highlighting when you are done + visual star search
+  " Plug 'junegunn/vim-peekaboo'  Extends " and @ in normal mode and <CTRL-R> in insert mode so you can see the contents of the registers. - sometomes annoying
+  " Plug 'sjl/vitality.vim' " Restores FocusLost and FocusGained autocommands (tmux)
 
 call plug#end()
 
