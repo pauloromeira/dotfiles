@@ -66,6 +66,12 @@ call plug#begin(s:plugdir)
   Plug 'vim-python/python-syntax' " Python syntax highlighting for Vim
   Plug 'ludovicchabant/vim-gutentags' " A Vim plugin that manages your tag files
 
+  " Experimenting
+  Plug 'sjl/vitality.vim' " Restores FocusLost and FocusGained autocommands (tmux)
+  Plug 'janko-m/vim-test' | Plug 'tpope/vim-dispatch'
+  Plug 'metakirby5/codi.vim', {'on': 'Codi'} " The interactive scratchpad for hackers.
+  Plug 'junegunn/vim-peekaboo' " Extends \" and @ in normal mode and <CTRL-R> in insert mode so you can see the contents of the registers.
+
   " Locals
   Plug g:localdir.'/vim-tomorrow-theme'
   Plug g:localdir.'/vim-custom-snippets'
@@ -532,6 +538,9 @@ command! Todo call s:todo()
 " fugitive
 set diffopt+=vertical " Splits Gdiff vertically
 
+" make test commands execute using dispatch.vim
+let test#strategy = "dispatch"
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Mappings                             {{{1 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -650,5 +659,12 @@ command! -bang -nargs=* Ag
   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
   \                 <bang>0)
 
+
+" Vim-test
+nmap <silent> t<C-n> :TestNearest<CR> " t Ctrl+n
+nmap <silent> t<C-f> :TestFile<CR>    " t Ctrl+f
+nmap <silent> t<C-s> :TestSuite<CR>   " t Ctrl+s
+nmap <silent> t<C-l> :TestLast<CR>    " t Ctrl+l
+nmap <silent> t<C-g> :TestVisit<CR>   " t Ctrl+g
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
