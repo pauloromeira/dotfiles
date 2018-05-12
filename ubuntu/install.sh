@@ -10,6 +10,9 @@ source "$ROOT/utils.sh"
 gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:swapcaps']"
 
 
+info 'Adding PPAs...'
+sudo add-apt-repository ppa:neovim-ppa/stable
+
 info 'Updating apt-get packages...'
 sudo apt-get update
 
