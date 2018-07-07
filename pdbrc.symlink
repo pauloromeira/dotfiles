@@ -1,1 +1,3 @@
 alias dump with open('.dump', 'w') as f: f.write(%1)
+alias ipython import IPython; IPython.embed()
+alias ipy ipython
