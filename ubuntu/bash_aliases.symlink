@@ -1,0 +1,2 @@
+alias upg='sudo apt-get update && sudo apt-get -y upgrade'
+alias opn='xdg-open'
