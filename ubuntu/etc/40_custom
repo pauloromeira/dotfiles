@@ -25,3 +25,13 @@ menuentry "Arch-install" {
   linux (loop)/arch/boot/x86_64/vmlinuz $bootoptions
   initrd (loop)/arch/boot/x86_64/archiso.img
 }
+
+menuentry "Ubuntu-install" {
+  isofile="/ubuntu-18.04.1-desktop-amd64.iso"
+  bootoptions="iso-scan/filename=$isofile file=/cdrom/preseed/ubuntu.seed boot=casper quiet splash only-ubiquity"
+
+  loopback loop (hd1,2)$isofile
+  linux (loop)/casper/vmlinuz $bootoptions
+  initrd (loop)/casper/initrd.lz
+}
+
