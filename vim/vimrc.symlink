@@ -23,7 +23,6 @@ call plug#begin(s:plugdir)
   Plug 'majutsushi/tagbar'
   Plug 'scrooloose/nerdtree' " , { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-  Plug 'scrooloose/syntastic'
   Plug 'tpope/vim-fugitive' " Gateway to git
   Plug 'tpope/vim-repeat'
         \ | Plug 'vim-scripts/visualrepeat' " Visual mode repetition
@@ -63,9 +62,9 @@ call plug#begin(s:plugdir)
   Plug 'nelstrom/vim-visual-star-search' " use * to search current visual selection (vim-evanesco does that too)
   Plug 'romainl/vim-cool' " Disables search highlighting when you are done (simpler than vim-evanesco)
   Plug 'vimwiki/vimwiki' ", { 'for': 'vimwiki' }  Notes
-  Plug 'vim-python/python-syntax' " Python syntax highlighting for Vim
   Plug 'ludovicchabant/vim-gutentags' " A Vim plugin that manages your tag files
   Plug 'metakirby5/codi.vim', {'on': 'Codi'} " The interactive scratchpad for hackers.
+  Plug 'Asheq/close-buffers.vim'
 
   " Experimenting
   Plug 'janko-m/vim-test' | Plug 'tpope/vim-dispatch'
@@ -115,6 +114,8 @@ call plug#begin(s:plugdir)
   " Plug 'vim-scripts/ReplaceWithRegister'
   " Plug 'christoomey/vim-titlecase'
   " Plug 'tpope/vim-vinegar' " http://vimcasts.org/blog/2013/01/oil-and-vinegar-split-windows-and-project-drawer/
+  " Plug 'w0rp/ale' " Asynchronous Lint Engine
+  " Plug 'ambv/black'
 
   " Deactivated but still cool "
   " Plug 'osyo-manga/vim-over' " Preview in the command line
@@ -136,6 +137,8 @@ call plug#begin(s:plugdir)
   " Plug 'pgdouyon/vim-evanesco' " Disables search highlighting when you are done + visual star search
   " Plug 'junegunn/vim-peekaboo'  Extends " and @ in normal mode and <CTRL-R> in insert mode so you can see the contents of the registers. - sometomes annoying
   " Plug 'sjl/vitality.vim' " Restores FocusLost and FocusGained autocommands (tmux)
+  " Plug 'vim-python/python-syntax' " Python syntax highlighting for Vim
+  " Plug 'scrooloose/syntastic'
 
 call plug#end()
 
@@ -327,10 +330,11 @@ let g:ycm_semantic_triggers =  {
 set viewoptions=cursor,folds,slash,unix
 
 " Syntastic
-" let g:pymode_lint_write = 0 " :h syntastic-pymode
-let g:syntastic_mode_map = {
-      \ "mode": "active",
-      \ "passive_filetypes": ["python"] } " redundant because of python mode
+let g:syntastic_check_on_wq = 0
+" let g:syntastic_mode_map = {
+"       \ "mode": "active",
+"       \ "passive_filetypes": ["python"] } " if python mode
+
 
 " bufferline
 let g:bufferline_echo = 0 " Do not echo to the command bar
