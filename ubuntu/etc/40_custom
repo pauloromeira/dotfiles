@@ -1,0 +1,27 @@
+#!/bin/sh
+exec tail -n +3 $0
+
+# dir: /etc/grub.d/40_custom
+
+# This file provides an easy way to add custom menu entries.  Simply type the
+# menu entries you want to add after this comment.  Be careful not to change
+# the 'exec tail' line above.
+
+
+menuentry "GParted" {
+  isofile="/gparted-live-0.30.0-1-amd64.iso"
+  bootoptions="boot=live config union=overlay username=paulo components noswap noeject vga=788 ip= net.ifnames=0 toram=filesystem.squashfs findiso=$isofile"
+
+  loopback loop (hd1,2)$isofile
+  linux (loop)/live/vmlinuz $bootoptions
+  initrd (loop)/live/initrd.img
+}
+
+menuentry "Arch-install" {
+  isofile="/archlinux-2017.10.01-x86_64.iso"
+  bootoptions="img_dev=/dev/disk/by-label/ISOs img_loop=$isofile earlymodules=loop"
+
+  loopback loop (hd1,2)$isofile
+  linux (loop)/arch/boot/x86_64/vmlinuz $bootoptions
+  initrd (loop)/arch/boot/x86_64/archiso.img
+}
