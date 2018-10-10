@@ -12,6 +12,7 @@ libsqlite3-dev
 libssl-dev
 llvm
 make
+python
 python-pip
 silversearcher-ag
 tk-dev
