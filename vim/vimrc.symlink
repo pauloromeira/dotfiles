@@ -45,9 +45,6 @@ call plug#begin(s:plugdir)
   Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)',
         \ 'EasyAlign'] } " Align text
   Plug 'kshenoy/vim-signature' " Place, toggle and display marks
-  " TO DO: install node/npm on ubuntu
-  Plug 'suan/vim-instant-markdown', { 'do': 'npm -g install instant-markdown-d',
-        \ 'for': 'markdown' } " Preview markdown files
   Plug 'mhinz/vim-startify' " A fancy start screen for Vim (also session manager)
   " TODO (romeira): Lazy load {16/11/15 14:39}
   Plug 'AndrewRadev/splitjoin.vim' " Switch between single-line and a multi-line statement
@@ -68,6 +65,7 @@ call plug#begin(s:plugdir)
 
   " Experimenting
   Plug 'janko-m/vim-test' | Plug 'tpope/vim-dispatch'
+  Plug 'dhruvasagar/vim-table-mode'
 
   " Locals
   Plug g:localdir.'/vim-tomorrow-theme'
@@ -139,6 +137,7 @@ call plug#begin(s:plugdir)
   " Plug 'sjl/vitality.vim' " Restores FocusLost and FocusGained autocommands (tmux)
   " Plug 'vim-python/python-syntax' " Python syntax highlighting for Vim
   " Plug 'scrooloose/syntastic'
+  " Plug 'suan/vim-instant-markdown', { 'do': 'npm -g install instant-markdown-d', 'for': 'markdown' } " Preview markdown files
 
 call plug#end()
 
