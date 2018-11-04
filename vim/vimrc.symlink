@@ -19,31 +19,26 @@ call plug#begin(s:plugdir)
   Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
   Plug 'powerline/fonts', { 'do': './install.sh' }
-  Plug 'bling/vim-airline' " Status tabline
+  Plug 'bling/vim-airline' | Plug 'vim-airline/vim-airline-themes' " Status tabline
   Plug 'majutsushi/tagbar'
   Plug 'scrooloose/nerdtree' " , { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   Plug 'tpope/vim-fugitive' " Gateway to git
-  Plug 'tpope/vim-repeat'
-        \ | Plug 'vim-scripts/visualrepeat' " Visual mode repetition
+  Plug 'tpope/vim-repeat' | Plug 'vim-scripts/visualrepeat' " Visual mode repetition
   Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-rsi' " Readline style insertion
   Plug 'vim-scripts/IndexedSearch'
   Plug 'michaeljsmith/vim-indent-object' " ii / ai
-  Plug 'tommcdo/vim-exchange', { 'on': ['<Plug>(Exchange)',
-        \ '<Plug>(ExchangeLine)'] } " Easy text exchange
+  Plug 'tommcdo/vim-exchange', { 'on': ['<Plug>(Exchange)', '<Plug>(ExchangeLine)'] } " Easy text exchange
   Plug 'bling/vim-bufferline' " Show the list of buffers in the command bar
-  Plug 'airblade/vim-gitgutter' " Shows a git diff in the 'gutter' (sign column)
   Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
   Plug 'osyo-manga/vim-hopping', { 'on': '<Plug>(hopping-start)' } " Search and replace
-  " TO DO: install fzf at dotfiles bootstrap
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   Plug 'airblade/vim-rooter', { 'on': '<Plug>RooterChangeToRootDirectory' }
-  Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)',
-        \ 'EasyAlign'] } " Align text
+  Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] } " Align text
   Plug 'kshenoy/vim-signature' " Place, toggle and display marks
   Plug 'mhinz/vim-startify' " A fancy start screen for Vim (also session manager)
   " TODO (romeira): Lazy load {16/11/15 14:39}
@@ -61,7 +56,9 @@ call plug#begin(s:plugdir)
   Plug 'vimwiki/vimwiki' ", { 'for': 'vimwiki' }  Notes
   Plug 'ludovicchabant/vim-gutentags' " A Vim plugin that manages your tag files
   Plug 'metakirby5/codi.vim', {'on': 'Codi'} " The interactive scratchpad for hackers.
-  Plug 'Asheq/close-buffers.vim'
+  Plug 'Asheq/close-buffers.vim' " Ads functionalities like close hiden buffers
+  Plug 'tpope/vim-eunuch' " Vim sugar for the UNIX shell commands that need it the most
+  Plug 'mhinz/vim-signify' " Shows VCS (not only git) diff in the sign column
 
   " Experimenting
   Plug 'janko-m/vim-test' | Plug 'tpope/vim-dispatch'
@@ -81,9 +78,6 @@ call plug#begin(s:plugdir)
   " Plug 'w0ng/vim-hybrid'
   " Plug 'nanotech/jellybeans.vim'
   " Plug 'tomasr/molokai'
-
-  " Airline Themes
-  Plug 'vim-airline/vim-airline-themes'
 
   " Fun
   " Plug 'natw/keyboard_cat.vim', { 'on': 'PlayMeOff' } " Pretend you can type fast
@@ -123,7 +117,6 @@ call plug#begin(s:plugdir)
   " Plug 'tmhedberg/SimpylFold' " Python folding (depend upon restore_view)
   " Plug 'jeetsukumaran/vim-indentwise' " Indent motions
   " Plug 'flazz/vim-colorschemes'
-  " Plug 'mhinz/vim-signify' " Shows VCS (not only git) diff in the sign column
   " Plug 'rking/ag.vim' " alternative to ack.vim
   " Plug 'godlygeek/tabular' " Align text (using junegunn/vim-easy-align)
   " Plug 'justinmk/vim-gtfo' " Go to Terminal or File manager (gof, got)
@@ -138,6 +131,9 @@ call plug#begin(s:plugdir)
   " Plug 'vim-python/python-syntax' " Python syntax highlighting for Vim
   " Plug 'scrooloose/syntastic'
   " Plug 'suan/vim-instant-markdown', { 'do': 'npm -g install instant-markdown-d', 'for': 'markdown' } " Preview markdown files
+  " Plug 'mattn/emmet-vim' " provides support for expanding html abbreviations
+  " Plug 'itchyny/lightline.vim' " Light status tabline
+  " Plug 'airblade/vim-gitgutter' " Shows a git diff in the 'gutter' (sign column)
 
 call plug#end()
 
@@ -427,11 +423,22 @@ autocmd User Startified nnoremap <silent> <buffer> w :VimwikiIndex<CR>
 " vim-instant-markdown
 let g:instant_markdown_autostart = 0
 
-" vim-gitgutter
-let g:gitgutter_max_signs = 2000
+" signify
+let g:signify_sign_change = '~'
+let g:signify_vcs_list = [ 'git']
+
+omap ic <plug>(signify-motion-inner-pending)
+xmap ic <plug>(signify-motion-inner-visual)
+omap ac <plug>(signify-motion-outer-pending)
+xmap ac <plug>(signify-motion-outer-visual)
+
+highlight SignifySignAdd             ctermfg=119
+highlight SignifySignChange          ctermfg=214
+highlight SignifySignDelete          ctermfg=167
+highlight SignifySignChangeDelete    ctermfg=202
+
 
 " ack.vim
-" TODO (romeira): Ag not working well with .gitignore {08/11/15 22:24}
 if executable('ag')
   let g:ackprg = 'ag --vimgrep --silent'
 endif
