@@ -17,6 +17,7 @@ Useful commands:
   - `xrandr --listmonitors`: list monitors
   - `gtf x y fr`: Modeline generator
   - `cvt x y fr`: similar to gtf
+  - `xrandr --output HDMI-3 --same-as DP-2`: duplicate outputs (without scaling)
 
 #### Modeline example test
 ```sh
@@ -34,6 +35,7 @@ xrandr --addmode HDMI-2 2560x1080_55.00
 xrandr --output HDMI-2 --mode 2560x1080_55.00
 ```
 To persist changes modify 90-monitor.conf
+
 
 ## Tilda
 Tilda config file  
