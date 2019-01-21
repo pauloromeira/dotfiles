@@ -3,6 +3,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nocompatible " Use Vim settings, rather than Vi settings.
+set encoding=utf-8
 filetype off
 let mapleader = "\<Space>"
 let g:mapleader = "\<Space>"

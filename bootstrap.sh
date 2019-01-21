@@ -92,9 +92,4 @@ for package in ${PACKAGES[@]}; do
   boot_package "$package"
 done
 
-# Clear installation garbage
-pushd "$BASE"
-git checkout -f
-popd
-
 printf '\ndone.\n'
