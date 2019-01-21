@@ -21,8 +21,8 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 info 'Installing brew formulae...'
 packages_batch brew install
 
-# info 'Installing brew cask formulae... '
-# packages_batch "brew cask" install
+info 'Installing brew cask formulae... '
+packages_batch "brew cask" install
 
 info 'Installing lua packages...'
 packages_batch luarocks install
