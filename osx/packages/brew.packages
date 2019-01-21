@@ -2,6 +2,8 @@ cmake
 ctags
 git
 lua
+luarocks
+pipenv
 readline
 reattach-to-user-namespace
 sqlite
@@ -9,7 +11,6 @@ the_silver_searcher
 tmux
 tree
 unrar
-pipenv
 vim
 xz
 youtube-dl
