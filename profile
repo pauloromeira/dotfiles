@@ -19,7 +19,7 @@ alias ds='du -s .[!.]* * | sort -rn | cut -f2 | tr "\n" "\0" | xargs -0 du -hsc'
 alias sudo='sudo ' # Allows running sudo with aliases
 alias today='date "+%Y-%m-%d"'
 alias week='~/Estudos/horas/hours.py'
-alias taill='tail -f $(ls | sort | tail -1)'
+alias taill='tail -f $(ls -p | grep -v / | sort | tail -1)'
 alias cpwd='pwd | xsel -ib' # Copy pwd
 alias rmpyc='find . -name \*.pyc -delete'
 
