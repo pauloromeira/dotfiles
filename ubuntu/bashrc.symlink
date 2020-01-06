@@ -8,8 +8,8 @@ case $- in
       *) return;;
 esac
 
-DOT_UBUNTU=$(cd "$(dirname "$(readlink "$BASH_SOURCE")")" && pwd)
-DOT=$(dirname "$DOT_UBUNTU")
+DOT_OS=$(cd "$(dirname "$(readlink "$BASH_SOURCE")")" && pwd)
+DOT=$(dirname "$DOT_OS")
 
 # Run cross-platform profile
 [ -f "$DOT/profile" ] && source "$DOT/profile"

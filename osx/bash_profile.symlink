@@ -1,5 +1,5 @@
-DOT_OSX=$(cd "$(dirname "$(readlink "$BASH_SOURCE")")" && pwd)
-DOT=$(dirname "$DOT_OSX")
+DOT_OS=$(cd "$(dirname "$(readlink "$BASH_SOURCE")")" && pwd)
+DOT=$(dirname "$DOT_OS")
 
 # Run cross-platform profile
 [ -f "$DOT/profile" ] && source "$DOT/profile"
@@ -13,9 +13,7 @@ alias top='top -o cpu'
 export PATH="/usr/local/sbin:$PATH"
 
 # PostgreSQL
-PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:${PATH}"
-
-export PATH
+export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
 # Run system specific profile
 [ -f "$HOME/.bash_profile.local" ] && source "$HOME/.bash_profile.local"
