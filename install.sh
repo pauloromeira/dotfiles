@@ -11,4 +11,4 @@ fi
 sh -c "$($COMMAND https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer)"
 
 # nvm
-sh -c "$($COMMAND https://raw.githubusercontent.com/creationix/nvm/master/install.sh)"
+sh -c "PROFILE=/dev/null; $($COMMAND https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh)"
