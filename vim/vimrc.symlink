@@ -154,9 +154,6 @@ set incsearch
 if has('autocmd')
   au InsertEnter * :set norelativenumber
   au InsertLeave * :set relativenumber
-  " Enable Spell Checking for markdown files
-  au BufRead,BufNewFile *.md setlocal spell
-  au BufRead,BufNewFile *.markdown setlocal spell
 endif
 " Ex command autocomplete options
 set wildmenu
