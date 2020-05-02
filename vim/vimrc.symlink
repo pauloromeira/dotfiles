@@ -57,12 +57,10 @@ call plug#begin(s:plugdir)
   Plug 'ludovicchabant/vim-gutentags' " A Vim plugin that manages your tag files
   Plug 'metakirby5/codi.vim', {'on': 'Codi'} " The interactive scratchpad for hackers.
   Plug 'Asheq/close-buffers.vim' " Ads functionalities like close hiden buffers
-  Plug 'tpope/vim-eunuch' " Vim sugar for the UNIX shell commands that need it the most
   Plug 'mhinz/vim-signify' " Shows VCS (not only git) diff in the sign column
 
   " Experimenting
-  Plug 'janko-m/vim-test' | Plug 'tpope/vim-dispatch'
-  Plug 'dhruvasagar/vim-table-mode'
+  " Plug 'janko-m/vim-test' | Plug 'tpope/vim-dispatch'
 
   " Locals
   Plug g:localdir.'/vim-tomorrow-theme'
@@ -128,12 +126,13 @@ call plug#begin(s:plugdir)
   " Plug 'pgdouyon/vim-evanesco' " Disables search highlighting when you are done + visual star search
   " Plug 'junegunn/vim-peekaboo'  Extends " and @ in normal mode and <CTRL-R> in insert mode so you can see the contents of the registers. - sometomes annoying
   " Plug 'sjl/vitality.vim' " Restores FocusLost and FocusGained autocommands (tmux)
-  " Plug 'vim-python/python-syntax' " Python syntax highlighting for Vim
   " Plug 'scrooloose/syntastic'
   " Plug 'suan/vim-instant-markdown', { 'do': 'npm -g install instant-markdown-d', 'for': 'markdown' } " Preview markdown files
   " Plug 'mattn/emmet-vim' " provides support for expanding html abbreviations
   " Plug 'itchyny/lightline.vim' " Light status tabline
   " Plug 'airblade/vim-gitgutter' " Shows a git diff in the 'gutter' (sign column)
+  " Plug 'vim-python/python-syntax' " Python syntax highlighting for Vim
+  " Plug 'tpope/vim-eunuch' " Vim sugar for the UNIX shell commands that need it the most
 
 call plug#end()
 
