@@ -2,7 +2,8 @@ VIM_HOME="$HOME/.vim"
 
 # Create directories
 mkdir -p "$VIM_HOME/"{autoload,local} \
-  "$VIM_HOME/temp/"{undo,backup,swap,view,session}
+  "$VIM_HOME/temp/"{undo,backup,swap,view,session} \
+  "$VIM_HOME/files/info"
 
 # Download Plug Manager
 PLUG_FILE="$VIM_HOME/autoload/plug.vim"

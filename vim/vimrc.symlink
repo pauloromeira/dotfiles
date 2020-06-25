@@ -370,6 +370,7 @@ xmap X <Plug>(Exchange)
 runtime macros/matchit.vim " (native)
 
 " vim-startify
+set viminfo='100,n$HOME/.vim/files/info/viminfo
 let g:startify_session_dir = s:tempdir.'/session'
 " TODO (romeira): change ~ to $HOME {07/12/15 00:22}
 " TODO [romeira]: create system-specific vimrc {21/04/17 21:08}
