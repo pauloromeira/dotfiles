@@ -58,6 +58,7 @@ call plug#begin(s:plugdir)
   Plug 'metakirby5/codi.vim', {'on': 'Codi'} " The interactive scratchpad for hackers.
   Plug 'Asheq/close-buffers.vim' " Ads functionalities like close hiden buffers
   Plug 'mhinz/vim-signify' " Shows VCS (not only git) diff in the sign column
+  Plug 'Vimjas/vim-python-pep8-indent'
 
   " Experimenting
   " Plug 'janko-m/vim-test' | Plug 'tpope/vim-dispatch'
