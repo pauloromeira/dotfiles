@@ -16,14 +16,16 @@ DOT="$BASE"
 case "$(uname -a)" in
   *[Dd]arwin* ) OS="osx" ;;
   *[Uu]buntu* ) OS="ubuntu" ;;
+  *MANJARO* ) OS="manjaro" ;;
   * )
     user "unknown operating system. use configurations from:\n\
-         [o]sx, [u]buntu, [s]kip, [a]bort: "
+         [o]sx, [u]buntu, [m]anjaro, [s]kip, [a]bort: "
     read -n 1 action
     printf "\n"
     case "$action" in
       o ) OS="osx" ;;
       u ) OS="ubuntu" ;;
+      m ) OS="manjaro" ;;
       s ) OS= ;;
       a ) warning "bootstrap aborted"; exit ;;
       * ) fail "no operating system was setted" ;;
@@ -83,7 +85,7 @@ boot_package() {
   run_installation "$package"
 }
 
-printf 'bootstrapping...\n'
+printf "bootstrapping "$OS"...\n"
 
 boot_package "$DOT"
 [ -n "$OS" ] && boot_package "$OS"
