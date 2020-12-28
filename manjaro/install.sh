@@ -16,6 +16,7 @@ ln -s "$BASE/config/xfce4-keyboard-shortcuts.xml" \
 
 info 'Installing packages...'
 sudo pacman --needed --noconfirm -Sy \
+  bat \
   cmake \
   ctags \
   curl \
