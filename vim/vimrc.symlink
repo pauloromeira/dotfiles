@@ -410,7 +410,7 @@ let g:startify_custom_header = [
       \ '    │ '.strftime("%d").' │   ╦  ╦╦╔╦╗  │ ',
       \ '    │ '.strftime("%b").'│   ╚╗╔╝║║║║  │ ',
       \ '    ├────┘    ╚╝ ╩╩ ╩╝ │ ',
-      \ '    └─────────── '. v:version[0].'.'. v:version[1].' ──┘',
+      \ '    └─────────── '. v:version[0].'.'. v:version[2].' ──┘',
       \ '']
 
 autocmd User Startified nnoremap <silent> <buffer> q :confirm q<CR>
