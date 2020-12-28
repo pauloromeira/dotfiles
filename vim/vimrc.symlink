@@ -488,6 +488,12 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+" Vim8 terminal: https://github.com/junegunn/fzf/issues/1860#issuecomment-584522269
+let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.4, 'yoffset': 1, 'border': 'horizontal' } }
+
+" " Older vim versions
+" let g:fzf_layout = { 'window': 'bot'.float2nr(&lines * 0.4).'new' }
+
 " Gist
 let g:gist_post_private = 1
 
