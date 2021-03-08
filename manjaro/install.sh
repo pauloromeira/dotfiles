@@ -31,4 +31,6 @@ sudo pacman --needed --noconfirm -Sy \
   unrar \
   vim \
   xclip \
+  docker \
+  docker-compose \
   && echo "finish"
