@@ -8,6 +8,7 @@ gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:swapcaps']"
 
 # Install packages
 info 'Adding PPAs...'
+sudo add-apt-repository ppa:jonathonf/vim
 sudo add-apt-repository ppa:neovim-ppa/stable
 
 info 'Updating apt-get packages...'
