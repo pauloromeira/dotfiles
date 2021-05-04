@@ -1,3 +1,1 @@
 xrandr --output DP-3 --primary --auto
-xrandr --output HDMI-2 --same-as DP-3
-pacmd set-card-profile 0 output:hdmi-stereo-extra1
