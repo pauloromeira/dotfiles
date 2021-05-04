@@ -22,6 +22,7 @@ alias week='~/Estudos/horas/hours.py'
 alias taill='tail -f $(ls -p | grep -v / | sort | tail -1)'
 alias cpwd='pwd | xsel -ib' # Copy pwd
 alias rmpyc='find . -name \*.pyc -delete'
+alias docker-prune-all='docker container prune -f && docker image prune -f && docker volume prune -f && docker network prune'
 
 # Fuzzy finder (https://github.com/junegunn/fzf)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
