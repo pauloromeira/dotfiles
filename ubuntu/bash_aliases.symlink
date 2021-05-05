@@ -1,2 +1,2 @@
-alias upg='sudo apt-get update && sudo apt-get -y upgrade'
+alias full-upgrade='sudo apt update && sudo apt -y upgrade && sudo apt dist-upgrade && sudo apt autoremove && sudo apt autoclean'
 alias opn='xdg-open'
