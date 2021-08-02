@@ -23,6 +23,7 @@ alias taill='tail -f $(ls -p | grep -v / | sort | tail -1)'
 alias cpwd='pwd | xsel -ib' # Copy pwd
 alias rmpyc='find . -name \*.pyc -delete'
 alias docker-prune-all='docker container prune -f && docker image prune -f && docker volume prune -f && docker network prune'
+alias t='tmux'
 
 # Fuzzy finder (https://github.com/junegunn/fzf)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -34,24 +35,25 @@ export HISTCONTROL=ignoreboth:erasedups
 export EDITOR=vim
 
 if [ -d "$DOT/bin" ] ; then
-  PATH="$DOT/bin:$PATH"
+  export PATH="$DOT/bin:$PATH"
 fi
 
 if [ -d "$DOT_OS/bin" ] ; then
-  PATH="$DOT_OS/bin:$PATH"
+  export PATH="$DOT_OS/bin:$PATH"
 fi
 
 if [ -d "$HOME/bin" ] ; then
-  PATH="$HOME/bin:$PATH"
+  export PATH="$HOME/bin:$PATH"
 fi
 
 if [ -d "$HOME/.local/bin" ] ; then
-  PATH="$HOME/.local/bin:$PATH"
+  export PATH="$HOME/.local/bin:$PATH"
 fi
 
 # Pyenv / Pyenv-virtualenv autocompletion
 export PYENV_ROOT="$HOME/.pyenv"
-PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="$PYENV_ROOT/bin:${PATH}"
+export PATH="$PYENV_ROOT/shims:${PATH}"
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 # if which pyenv > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
@@ -60,11 +62,9 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
 # GOPATH
 export GOPATH="$HOME/.go"
-PATH="$GOPATH/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export PATH
