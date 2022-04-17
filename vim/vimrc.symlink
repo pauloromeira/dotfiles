@@ -17,10 +17,11 @@ let g:localdir = s:vimhome."/local"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call plug#begin(s:plugdir)
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-
-  Plug 'powerline/fonts', { 'do': './install.sh' }
   Plug 'bling/vim-airline' | Plug 'vim-airline/vim-airline-themes' " Status tabline
+
+  Plug 'mhinz/vim-startify' " A fancy start screen for Vim (also session manager)
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+  Plug 'powerline/fonts', { 'do': './install.sh' }
   Plug 'majutsushi/tagbar'
   Plug 'scrooloose/nerdtree' " , { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -40,16 +41,15 @@ call plug#begin(s:plugdir)
   Plug 'airblade/vim-rooter', { 'on': '<Plug>RooterChangeToRootDirectory' }
   Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] } " Align text
   Plug 'kshenoy/vim-signature' " Place, toggle and display marks
-  Plug 'mhinz/vim-startify' " A fancy start screen for Vim (also session manager)
-  " TODO (romeira): Lazy load {16/11/15 14:39}
-  Plug 'AndrewRadev/splitjoin.vim' " Switch between single-line and a multi-line statement
+  " " TODO (romeira): Lazy load {16/11/15 14:39}
+  " Plug 'AndrewRadev/splitjoin.vim' " Switch between single-line and a multi-line statement
   " TODO (romeira): Lazy load {25/12/15 14:08}
   Plug 'kana/vim-textobj-user' | Plug 'kana/vim-textobj-lastpat' " Text object for search matches (i/)
   " TODO (romeira): Lazy load {08/01/16 16:35}
   Plug 'tpope/vim-jdaddy' " mapping for working with JSON
   Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " Distraction-free writing
   Plug 'mattn/gist-vim' | Plug 'mattn/webapi-vim' " vimscript for gist
-  Plug 'gregsexton/gitv', {'on': 'Gitv'}
+  " Plug 'gregsexton/gitv', {'on': 'Gitv'}
   Plug 'junegunn/gv.vim' " A git commit browser
   Plug 'nelstrom/vim-visual-star-search' " use * to search current visual selection (vim-evanesco does that too)
   Plug 'romainl/vim-cool' " Disables search highlighting when you are done (simpler than vim-evanesco)
@@ -70,6 +70,7 @@ call plug#begin(s:plugdir)
   " Plug g:localdir.'/vim-startmode'
 
   " Colorschemes
+  " Plug 'chriskempson/base16-vim' " Tomorrow-theme
   " Plug 'jonathanfilip/vim-lucius'
   " Plug 'morhetz/gruvbox'
   " Plug 'kristijanhusak/vim-hybrid-material'
@@ -77,6 +78,8 @@ call plug#begin(s:plugdir)
   " Plug 'w0ng/vim-hybrid'
   " Plug 'nanotech/jellybeans.vim'
   " Plug 'tomasr/molokai'
+  " Plug 'dracula/vim', { 'as': 'dracula' }
+  " Plug 'arcticicestudio/nord-vim'
 
   " Fun
   " Plug 'natw/keyboard_cat.vim', { 'on': 'PlayMeOff' } " Pretend you can type fast
@@ -111,7 +114,6 @@ call plug#begin(s:plugdir)
   " Deactivated but still cool "
   " Plug 'osyo-manga/vim-over' " Preview in the command line
   " Plug 'terryma/vim-multiple-cursors' " is it working properly?
-  " Plug 'vim-scripts/ZoomWin' " Zoom into and out of a window (BUG)
   " Plug 'nathanaelkane/vim-indent-guides' " Visually displays indent levels
   " Plug 'tmhedberg/SimpylFold' " Python folding (depend upon restore_view)
   " Plug 'jeetsukumaran/vim-indentwise' " Indent motions
@@ -184,13 +186,15 @@ set completeopt=menuone " prevent YouCompleteMe to open preview
 
 syntax enable
 set t_Co=256 " 256 colors in terminal
-set background=dark
+" set background=dark
 set shortmess=I " Don’t show the intro message when starting Vim
 
 " Use the first available colorscheme in this list
 for scheme in [
+      \ 'Tomorrow',
       \ 'Tomorrow-Night',
       \ 'lucius',
+      \ 'nord',
       \ 'gruvbox',
       \ 'solarized',
       \ 'hybrid',
@@ -265,17 +269,17 @@ let g:airline_mode_map = {
     \ 'S'  : 'S',
     \ '' : 'S',
     \ }
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
-let g:airline#extensions#tabline#show_tab_type = 0
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline#extensions#tabline#tab_min_count = 2
-let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = ''
-let g:airline#extensions#tabline#right_sep = ''
-let g:airline#extensions#tabline#right_alt_sep = ''
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#show_buffers = 0
+" let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
+" let g:airline#extensions#tabline#show_tab_type = 0
+" let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+" let g:airline#extensions#tabline#tab_min_count = 2
+" let g:airline#extensions#tabline#show_close_button = 0
+" let g:airline#extensions#tabline#left_sep = ''
+" let g:airline#extensions#tabline#left_alt_sep = ''
+" let g:airline#extensions#tabline#right_sep = ''
+" let g:airline#extensions#tabline#right_alt_sep = ''
 
 " Tagbar
 nmap <silent> <Leader>tt :TagbarToggle<CR>
@@ -308,6 +312,7 @@ let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
 let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
 let g:ycm_complete_in_comments = 1 " Completion in comments
 let g:ycm_complete_in_strings = 1 " Completion in string
+let g:ycm_auto_hover = '' " Disable documentation popup
 " let g:ycm_add_preview_to_completeopt = 1
 " let g:ycm_autoclose_preview_window_after_completion = 1
 " let g:ycm_autoclose_preview_window_after_insertion = 1
@@ -474,6 +479,7 @@ endfunction
 
 " FZF
 " Customize fzf colors to match color scheme
+let $BAT_THEME='GitHub' " Tomorrow
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -487,6 +493,7 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+
 
 " Vim8 terminal: https://github.com/junegunn/fzf/issues/1860#issuecomment-584522269
 let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.4, 'yoffset': 1, 'border': 'horizontal' } }
