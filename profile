@@ -18,12 +18,9 @@ alias rsync-no='rsync-mv --ignore-existing'
 alias ds='du -s .[!.]* * | sort -rn | cut -f2 | tr "\n" "\0" | xargs -0 du -hsc'
 alias sudo='sudo ' # Allows running sudo with aliases
 alias today='date "+%Y-%m-%d"'
-alias week='~/Estudos/horas/hours.py'
 alias taill='tail -f $(ls -p | grep -v / | sort | tail -1)'
-alias cpwd='pwd | xsel -ib' # Copy pwd
 alias rmpyc='find . -name \*.pyc -delete'
 alias docker-prune-all='docker container prune -f && docker image prune -f && docker volume prune -f && docker network prune'
-alias t='tmux'
 
 # Fuzzy finder (https://github.com/junegunn/fzf)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -52,19 +49,9 @@ fi
 
 # Pyenv / Pyenv-virtualenv autocompletion
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:${PATH}"
-export PATH="$PYENV_ROOT/shims:${PATH}"
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-# if which pyenv > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
-# Pipenv
-# eval "$(pipenv --completion)"
-
-# GOPATH
-export GOPATH="$HOME/.go"
-export PATH="$GOPATH/bin:$PATH"
-
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+if [ -d "$PYENV_ROOT" ] ; then
+  export PATH="$PYENV_ROOT/bin:${PATH}"
+  export PATH="$PYENV_ROOT/shims:${PATH}"
+  if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+  # if which pyenv > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+fi
