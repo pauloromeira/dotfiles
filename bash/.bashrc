@@ -120,6 +120,7 @@ if [ -d "${PYENV_ROOT}" ] ; then
   command -v pyenv > /dev/null && eval "$(pyenv init -)"
 fi
 
+# Local bashrc (not tracked by VCS)
 if [ -f ~/.bashrc_local ]; then
     . ~/.bashrc_local
 fi
