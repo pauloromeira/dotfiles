@@ -112,6 +112,9 @@ fi
 # Fuzzy finder (https://github.com/junegunn/fzf)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+# Asdf (https://github.com/asdf-vm/asdf)
+[ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
+
 # Pyenv / Pyenv-virtualenv autocompletion
 PYENV_ROOT="${HOME}/.pyenv"
 if [ -d "${PYENV_ROOT}" ] ; then
@@ -121,6 +124,4 @@ if [ -d "${PYENV_ROOT}" ] ; then
 fi
 
 # Local bashrc (not tracked by VCS)
-if [ -f ~/.bashrc_local ]; then
-    . ~/.bashrc_local
-fi
+[ -f ~/.bashrc_local ] && source ~/.bashrc_local
