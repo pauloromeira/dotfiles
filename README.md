@@ -1,3 +1,5 @@
+⚠️ This branch is no longer used. Default branch is now [main](https://github.com/pauloromeira/dotfiles/tree/main)
+
 # Dotfiles
 
 My configuration files for OSX and Ubuntu.
