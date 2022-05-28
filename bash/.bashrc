@@ -8,9 +8,11 @@ case $- in
       *) return;;
 esac
 
+export EDITOR=vim
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+HISTCONTROL=ignoreboth:erasedups
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -114,4 +116,21 @@ if ! shopt -oq posix; then
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
   fi
+fi
+
+# Fuzzy finder (https://github.com/junegunn/fzf)
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Pyenv / Pyenv-virtualenv autocompletion
+PYENV_ROOT="${HOME}/.pyenv"
+if [ -d "${PYENV_ROOT}" ] ; then
+  export PYENV_ROOT
+  export PATH="${PYENV_ROOT}/bin:${PATH}"
+  export PATH="${PYENV_ROOT}/shims:${PATH}"
+  if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+  # if which pyenv > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+fi
+
+if [ -f ~/.bashrc_local ]; then
+    . ~/.bashrc_local
 fi
