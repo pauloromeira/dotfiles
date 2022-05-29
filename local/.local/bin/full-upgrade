@@ -1,0 +1,12 @@
+#!/bin/bash
+command -v apt && sudo apt update \
+  && sudo apt -y upgrade \
+  && sudo apt full-upgrade \
+  && sudo apt autoremove \
+  && sudo apt autoclean
+
+command -v asdf && asdf update
+command -v pyenv && pyenv update
+command -v pipx && pipx upgrade-all --include-injected
+command -v vim && vim +PlugUpgrade +PlugUpdate +qall
+command -v flatpak && flatpak update -y
