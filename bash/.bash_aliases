@@ -16,6 +16,7 @@ alias rsync-cp='rsync -avhz --progress'
 alias rsync-mv='rsync-cp --remove-source-files'
 alias rsync-no='rsync-mv --ignore-existing'
 alias sudo='sudo ' # Allows running sudo with aliases
+alias t='tmux'
 alias taill='tail -f $(ls -p | grep -v / | sort | tail -1)'
 alias today='date "+%Y-%m-%d"'
 alias v='vim'
