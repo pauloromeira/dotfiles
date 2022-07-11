@@ -1,4 +1,6 @@
 #!/bin/bash
+set -x
+
 command -v apt \
   && sudo apt update \
   && sudo apt -y upgrade \
