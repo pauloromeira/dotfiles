@@ -382,8 +382,8 @@ let g:startify_session_dir = s:tempdir.'/session'
 " TODO [romeira]: create system-specific vimrc {21/04/17 21:08}
 let g:startify_bookmarks = [ 
       \ {'v': '~/.vimrc'}, 
-      \ {'p': '~/.dotfiles/profile'}, 
-      \ {'g': '~/.gitconfig'}, 
+      \ {'p': '~/.dotfiles/bash/.bashrc'},
+      \ {'g': '~/.gitconfig'},
       \ {'t': '~/.tmux.conf'},
       \ {'d': 'diary' },
       \ ]
