@@ -115,12 +115,16 @@ fi
 # Asdf (https://github.com/asdf-vm/asdf)
 [ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
 
-# Pyenv / Pyenv-virtualenv autocompletion
+# Pyenv / pipx
 PYENV_ROOT="${HOME}/.pyenv"
 if [ -d "${PYENV_ROOT}" ] ; then
   export PYENV_ROOT
   command -v pyenv > /dev/null || export PATH="${PYENV_ROOT}/bin:${PATH}"
-  command -v pyenv > /dev/null && eval "$(pyenv init -)"
+  # Pyenv autocompletion
+  eval "$(pyenv init -)"
+  # Pipx default python from pipx_default_python venv
+  PYENV_PIPX_VENV="$(pyenv prefix pipx_default_python 2> /dev/null)" \
+    && export PIPX_DEFAULT_PYTHON="${PYENV_PIPX_VENV}/bin/python"
 fi
 
 # Local bashrc (not tracked by VCS)
