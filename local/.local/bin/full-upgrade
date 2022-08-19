@@ -14,8 +14,17 @@ command -v asdf \
   && asdf plugin list | xargs -I{} asdf install {} latest \
   && asdf plugin list | xargs -I{} asdf global {} latest
 
-command -v pyenv \
-  && pyenv update
+if command -v pyenv; then
+  pyenv update
+  pyenv latest install --skip-existing 2> /dev/null
+  PYTHON_LATEST="$(pyenv latest prefix 2> /dev/null | tail -1)"
+  PYTHON_PIPX="$(pyenv virtualenv-prefix pipx_default_python 2> /dev/null)"
+  if [ -n "${PYTHON_LATEST}" ] && [ "${PYTHON_LATEST}" != "${PYTHON_PIPX}" ]; then
+    PIPX_UPGRADED_PYTHON="$(pyenv latest -P)"
+    pyenv virtualenv-delete -f pipx_default_python
+    pyenv virtualenv "${PIPX_UPGRADED_PYTHON}" pipx_default_python
+  fi
+fi
 
 command -v pipx \
   && pipx upgrade-all --include-injected
