@@ -23,6 +23,7 @@ alias v='vim'
 alias vi='vim'
 alias yt-mp3='youtube-dl -x --audio-format mp3 -o "%(title)s.%(ext)s"'
 alias aws2='docker run --rm -it -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli'
+alias json-format='python3 -m json.tool'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
