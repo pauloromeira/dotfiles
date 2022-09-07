@@ -27,7 +27,7 @@ if command -v pyenv; then
 fi
 
 command -v pipx \
-  && ([ -n "${PIPX_UPGRADED_PYTHON}" ] && pipx reinstall-all --python "${PIPX_UPGRADED_PYTHON}" || pipx upgrade-all --include-injected)
+  && ([ -n "${PIPX_UPGRADED_PYTHON}" ] && pipx reinstall-all --python "$(pyenv prefix pipx_default_python)/bin/python" || pipx upgrade-all --include-injected)
 
 command -v vim \
   && vim +PlugUpgrade +PlugUpdate +qall
