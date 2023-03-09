@@ -1,6 +1,7 @@
 #!/bin/bash
 set -x
 
+
 command -v apt \
   && sudo apt update \
   && sudo apt -y upgrade \
@@ -14,13 +15,14 @@ command -v asdf \
   && asdf plugin list | xargs -I{} asdf install {} latest \
   && asdf plugin list | xargs -I{} asdf global {} latest
 
+PYTHON_VERSION_PREFIX=3
 if command -v pyenv; then
   pyenv update
-  pyenv latest install --skip-existing 2> /dev/null
-  PYTHON_LATEST="$(pyenv latest prefix 2> /dev/null | tail -1)"
+  pyenv install --skip-existing ${PYTHON_VERSION_PREFIX}
+  PYTHON_LATEST="$(pyenv prefix ${PYTHON_VERSION_PREFIX} 2> /dev/null)"
   PYTHON_PIPX="$(pyenv virtualenv-prefix pipx_default_python 2> /dev/null)"
   if [ -n "${PYTHON_LATEST}" ] && [ "${PYTHON_LATEST}" != "${PYTHON_PIPX}" ]; then
-    PIPX_UPGRADED_PYTHON="$(pyenv latest -P)"
+    PIPX_UPGRADED_PYTHON="$(pyenv latest ${PYTHON_VERSION_PREFIX})"
     pyenv virtualenv-delete -f pipx_default_python
     pyenv virtualenv "${PIPX_UPGRADED_PYTHON}" pipx_default_python
   fi
