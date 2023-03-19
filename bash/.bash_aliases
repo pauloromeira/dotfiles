@@ -28,4 +28,4 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # ----------------------------- Docker ------------------------------ #
 alias docker-aws-cli='docker run --network host --rm -it -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli:latest'
 alias docker-portainer-up='docker volume create portainer_data && docker run -d -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest'
-alias docker-prune-all='docker container prune -f && docker image prune -f && docker volume prune -f && docker network prune'
+alias docker-prune-all='docker container prune -f && docker image prune -f && docker volume prune -f && docker builder prune -f && docker network prune'
