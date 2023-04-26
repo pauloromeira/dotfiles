@@ -24,6 +24,7 @@ alias yt-mp3='yt-dlp -x --audio-format mp3 -o "%(title)s.%(ext)s"'
 alias json-format='python3 -m json.tool'
 alias http-server='python3 -m http.server'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias ip-public='wget -qO - https://httpbin.org/ip | grep -oP --color=never "(?<=\"origin\": \").*?(?=\")"'
 
 # ----------------------------- Docker ------------------------------ #
 alias docker-aws-cli='docker run --network host --rm -it -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli:latest'
