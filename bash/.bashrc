@@ -140,5 +140,8 @@ if [ -d "${GOROOT}/bin" ] ; then
   fi
 fi
 
+# Vim-style command-line editing
+# set -o vi
+
 # Local bashrc (not tracked by VCS)
 [ -f ~/.bashrc_local ] && source ~/.bashrc_local
