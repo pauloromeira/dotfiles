@@ -6,7 +6,8 @@ if [ -d ~/.bashrc.d ]; then
         fi
     done
 fi
-unset rc
 
 # Local bashrc (not tracked by VCS)
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
+
+unset rc
