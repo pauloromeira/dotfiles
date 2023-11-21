@@ -15,11 +15,4 @@ export PATH
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
-if [ -d ~/.bashrc.d ]; then
-    for rc in ~/.bashrc.d/*; do
-        if [ -f "$rc" ]; then
-            . "$rc"
-        fi
-    done
-fi
-unset rc
+[ -f ~/.bashrc.init ] && source ~/.bashrc.init
