@@ -9,4 +9,4 @@ fi
 unset rc
 
 # Local bashrc (not tracked by VCS)
-[ -f ~/.bashrc_local ] && source ~/.bashrc_local
+[ -f ~/.bashrc.local ] && source ~/.bashrc.local
