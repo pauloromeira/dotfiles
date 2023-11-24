@@ -9,6 +9,9 @@ command -v apt \
   && sudo apt autoremove \
   && sudo apt autoclean
 
+command -v dnf \
+  && sudo dnf up
+
 command -v asdf \
   && asdf update \
   && asdf plugin update --all \
