@@ -12,12 +12,6 @@ command -v apt \
 command -v dnf \
   && sudo dnf up
 
-command -v asdf \
-  && asdf update \
-  && asdf plugin update --all \
-  && asdf plugin list | xargs -I{} asdf install {} latest \
-  && asdf plugin list | xargs -I{} asdf global {} latest
-
 PYTHON_VERSION_PREFIX=3
 if command -v pyenv; then
   pyenv update
