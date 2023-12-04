@@ -33,3 +33,4 @@ alias docker-aws-cli='docker run --network host --rm -it -v ~/.aws:/root/.aws -v
 alias docker-dive="docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive:latest"
 alias docker-portainer-up='docker volume create portainer_data && docker run -d -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest'
 alias docker-prune-all='docker container prune -f && docker image prune -f && docker volume prune -f && docker builder prune -f && docker network prune'
+alias docker-rclone='docker run --rm -it --volume ~/.config/rclone:/config/rclone --user $(id -u):$(id -g) rclone/rclone'
