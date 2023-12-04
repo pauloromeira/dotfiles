@@ -33,3 +33,8 @@ command -v vim \
 
 command -v flatpak \
   && flatpak update -y
+
+
+command -v fwupdmgr \
+  && fwupdmgr get-updates > /dev/null \
+  && echo "Consider upgrading firmware: 'fwupdmgr get-updates && fwupdmgr update'"
