@@ -1,19 +1,23 @@
 #!/bin/bash
-set -x
 
+has_command() {
+  command -v $1 > /dev/null \
+    && printf "\r${2-\n}\033[2K[ \033[00;32m$1\033[0m ]\n" && return 0 \
+    || printf "\r${2-\n}[ \033[00;34m$1 (skipped)\033[0m ]\n" && return 1
+}
 
-command -v apt \
+has_command apt '' \
   && sudo apt update \
   && sudo apt -y upgrade \
   && sudo apt full-upgrade \
   && sudo apt autoremove \
-  && sudo apt autoclean
+  && sudo apt autoclean \
 
-command -v dnf \
-  && sudo dnf up
+has_command dnf \
+  && sudo dnf up \
 
 PYTHON_VERSION_PREFIX=3
-if command -v pyenv; then
+if has_command pyenv; then
   pyenv update
   pyenv install --skip-existing ${PYTHON_VERSION_PREFIX}
   PYTHON_LATEST="$(pyenv prefix ${PYTHON_VERSION_PREFIX} 2> /dev/null)"
@@ -25,16 +29,15 @@ if command -v pyenv; then
   fi
 fi
 
-command -v pipx \
+has_command pipx \
   && ([ -n "${PIPX_UPGRADED_PYTHON}" ] && pipx reinstall-all --python "$(pyenv prefix pipx_default_python)/bin/python" || pipx upgrade-all --include-injected)
 
-command -v vim \
+has_command vim \
   && vim +PlugUpgrade +PlugUpdate +qall
 
-command -v flatpak \
+has_command flatpak \
   && flatpak update -y
 
-
-command -v fwupdmgr \
+has_command fwupdmgr \
   && fwupdmgr get-updates > /dev/null \
   && echo "Consider upgrading firmware: 'fwupdmgr get-updates && fwupdmgr update'"
