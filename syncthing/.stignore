@@ -1,9 +1,17 @@
+!/.local/share/Trash
+!/.var/app/org.chromium.Chromium/config/chromium/Default/Bookmarks
 (?i).cache
 (?i)cache
 /.BitwigStudio
 /.ansible
 /.config/syncthing
+/.fzf
+/.local
+/.pyenv
+/.tmux/plugins
 /.var/app
+/.vim/plugged
+/.vim/temp/swap
 /Sync
 /VirtualBox VMs
 /mnt
