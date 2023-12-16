@@ -4,6 +4,7 @@
 (?i)cache
 /.BitwigStudio
 /.ansible
+/.config/Insync
 /.config/syncthing
 /.fzf
 /.local
