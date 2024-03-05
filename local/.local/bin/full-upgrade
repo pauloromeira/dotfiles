@@ -11,10 +11,10 @@ has_command apt '' \
   && sudo apt -y upgrade \
   && sudo apt full-upgrade \
   && sudo apt autoremove \
-  && sudo apt autoclean \
+  && sudo apt autoclean
 
 has_command dnf \
-  && sudo dnf up \
+  && sudo dnf up
 
 PYTHON_VERSION_PREFIX=3
 if has_command pyenv; then
@@ -35,9 +35,12 @@ has_command pipx \
 has_command vim \
   && vim +PlugUpgrade +PlugUpdate +qall
 
+has_command rclone \
+  && rclone selfupdate
+
 has_command flatpak \
   && flatpak update -y
 
 has_command fwupdmgr \
-  && fwupdmgr get-updates > /dev/null \
+  && fwupdmgr get-updates -y > /dev/null \
   && echo "Consider upgrading firmware: 'fwupdmgr get-updates && fwupdmgr update'"
