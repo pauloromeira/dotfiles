@@ -36,7 +36,7 @@ has_command vim \
   && vim +PlugUpgrade +PlugUpdate +qall
 
 has_command rclone \
-  && rclone selfupdate
+  && sudo rclone selfupdate
 
 has_command flatpak \
   && flatpak update -y
