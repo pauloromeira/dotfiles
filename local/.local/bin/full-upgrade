@@ -14,7 +14,8 @@ has_command apt '' \
   && sudo apt autoclean
 
 has_command dnf \
-  && sudo dnf up
+  && sudo dnf upgrade \
+  && sudo dnf autoremove
 
 PYTHON_VERSION_PREFIX=3
 if has_command pyenv; then
