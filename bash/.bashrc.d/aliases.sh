@@ -31,6 +31,8 @@ alias wg-import='nmcli connection import type wireguard file'
 # ----------------------------- Docker ------------------------------ #
 alias docker-aws-cli='docker run --network host --rm -it -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli:latest'
 alias docker-dive="docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive:latest"
-alias docker-portainer-up='docker volume create portainer_data && docker run -d -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest'
 alias docker-prune-all='docker container prune -f && docker image prune -f && docker volume prune -f && docker builder prune -f && docker network prune'
 alias docker-rclone='docker run --rm -it --volume ~/.config/rclone:/config/rclone -p 53682:53682 --user $(id -u):$(id -g) rclone/rclone'
+
+alias mqtt_sub='docker run --rm eclipse-mosquitto mosquitto_sub'
+alias mqtt_pub='docker run --rm eclipse-mosquitto mosquitto_pub'
