@@ -34,5 +34,6 @@ alias docker-dive="docker run --rm -it -v /var/run/docker.sock:/var/run/docker.s
 alias docker-prune-all='docker container prune -f && docker image prune -f && docker volume prune -f && docker builder prune -f && docker network prune'
 alias docker-rclone='docker run --rm -it --volume ~/.config/rclone:/config/rclone -p 53682:53682 --user $(id -u):$(id -g) rclone/rclone'
 
-alias mqtt_sub='docker run --rm eclipse-mosquitto mosquitto_sub'
-alias mqtt_pub='docker run --rm eclipse-mosquitto mosquitto_pub'
+alias mqtt='docker run --rm eclipse-mosquitto'
+alias mqtt-sub='docker run --rm eclipse-mosquitto mosquitto_sub'
+alias mqtt-pub='docker run --rm eclipse-mosquitto mosquitto_pub'
