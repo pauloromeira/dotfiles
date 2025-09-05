@@ -18,5 +18,8 @@ Any files under this directory will only be applied to its related OS.
 ### Ignoring files
 Place a `.stow-local-ignore` under the dotfiles dir
 
+### TODO
+- [ ] Add stow action for `@etc` and other non-home config files
+
 ## References
 - [Stow manual](https://www.gnu.org/software/stow/manual/stow.html)
