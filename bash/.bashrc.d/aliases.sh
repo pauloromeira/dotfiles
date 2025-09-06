@@ -27,6 +27,7 @@ alias vi='vim'
 alias yt-mp3='yt-dlp -x --audio-format mp3 -o "%(title)s.%(ext)s"'
 alias eject-device="udisksctl power-off -b"
 alias wg-import='nmcli connection import type wireguard file'
+alias bkp='sudo btrbk --progress run'
 
 # ----------------------------- Docker ------------------------------ #
 alias docker-aws-cli='docker run --network host --rm -it -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli:latest'
